@@ -7,8 +7,6 @@
 <title>CPE '26 | Admin Console</title>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap');
-
 * {
     box-sizing: border-box;
     margin: 0;
@@ -16,44 +14,138 @@
 }
 
 body {
-    font-family: Inter, Arial, sans-serif;
-    background:
-        radial-gradient(circle at 20% 20%, rgba(0,229,255,.08), transparent 25%),
-        #050b14;
+    font-family: Arial, sans-serif;
+    background: #050b14;
     color: #eaf7ff;
     min-height: 100vh;
-    padding: 15px;
+}
+
+button,
+input,
+textarea,
+select {
+    font: inherit;
+}
+
+.login-screen {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.login-box {
+    width: 100%;
+    max-width: 420px;
+    background: #091422;
+    border: 1px solid #20394b;
+    border-radius: 18px;
+    padding: 30px;
+    box-shadow: 0 20px 60px rgba(0,0,0,.4);
+}
+
+.logo {
+    color: #00e5ff;
+    font-family: monospace;
+    text-align: center;
+    letter-spacing: 2px;
+    margin-bottom: 15px;
+}
+
+.login-box h1 {
+    text-align: center;
+    margin-bottom: 8px;
+}
+
+.login-box p {
+    text-align: center;
+    color: #8298a7;
+    font-size: 13px;
+    margin-bottom: 25px;
+}
+
+.field {
+    margin-bottom: 15px;
+}
+
+.field label {
+    display: block;
+    font-size: 12px;
+    color: #a9bbc7;
+    margin-bottom: 7px;
+}
+
+.field input {
+    width: 100%;
+    padding: 13px;
+    border-radius: 8px;
+    border: 1px solid #294253;
+    background: #07111d;
+    color: white;
+    outline: none;
+}
+
+.field input:focus {
+    border-color: #00e5ff;
+}
+
+.login-button {
+    width: 100%;
+    padding: 14px;
+    border: 0;
+    border-radius: 8px;
+    background: #00bcd4;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.login-error {
+    display: none;
+    background: #3d1010;
+    color: #ffaaaa;
+    padding: 11px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    font-size: 13px;
+}
+
+#dashboard {
+    display: none;
+    padding: 20px;
 }
 
 .container {
-    max-width: 1200px;
+    max-width: 1250px;
     margin: auto;
 }
 
 .header {
-    padding: 20px 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: 15px;
+    margin-bottom: 25px;
 }
 
-.logo {
-    font-family: "Space Mono", monospace;
+.header-logo {
     color: #00e5ff;
-    font-size: 14px;
+    font-family: monospace;
+    font-size: 13px;
 }
 
 .header h1 {
-    font-size: 24px;
+    margin-top: 5px;
+    font-size: 25px;
 }
 
 .logout {
+    padding: 9px 15px;
     background: transparent;
-    border: 1px solid #263c4d;
-    color: #9db1bf;
-    padding: 9px 14px;
-    border-radius: 8px;
+    color: #a9bbc7;
+    border: 1px solid #294253;
+    border-radius: 7px;
     cursor: pointer;
 }
 
@@ -66,58 +158,49 @@ body {
 
 .stat {
     background: #091422;
-    border: 1px solid #1b3040;
+    border: 1px solid #1d3546;
     border-radius: 12px;
     padding: 18px;
 }
 
-.stat-label {
-    color: #8298a7;
+.stat-title {
+    color: #8095a3;
     font-size: 11px;
     text-transform: uppercase;
 }
 
-.stat-number {
+.stat-value {
     font-size: 28px;
-    font-weight: 800;
-    margin-top: 5px;
+    font-weight: bold;
     color: #00e5ff;
+    margin-top: 5px;
 }
 
 .card {
-    background: rgba(9,20,34,.92);
-    border: 1px solid #1b3040;
-    border-radius: 15px;
+    background: #091422;
+    border: 1px solid #1d3546;
+    border-radius: 14px;
     padding: 20px;
 }
 
 .toolbar {
     display: flex;
     gap: 10px;
-    margin-bottom: 15px;
-    flex-wrap: wrap;
-}
-
-input,
-select,
-textarea {
-    background: #07111d;
-    color: white;
-    border: 1px solid #263c4d;
-    border-radius: 8px;
-    padding: 11px;
-    outline: none;
-}
-
-input:focus,
-select:focus,
-textarea:focus {
-    border-color: #00e5ff;
+    margin-bottom: 18px;
 }
 
 .search {
     flex: 1;
-    min-width: 220px;
+}
+
+.search,
+.filter {
+    padding: 11px;
+    background: #07111d;
+    border: 1px solid #294253;
+    border-radius: 8px;
+    color: white;
+    outline: none;
 }
 
 .table-wrapper {
@@ -132,174 +215,206 @@ table {
 
 th {
     text-align: left;
+    padding: 12px;
     color: #718795;
     font-size: 11px;
-    padding: 12px;
-    border-bottom: 1px solid #1b3040;
+    border-bottom: 1px solid #20394b;
 }
 
 td {
     padding: 13px 12px;
-    border-bottom: 1px solid #132535;
+    border-bottom: 1px solid #162a39;
     font-size: 13px;
 }
 
-.status {
+.badge {
+    display: inline-block;
     padding: 5px 9px;
     border-radius: 20px;
     font-size: 10px;
-    font-weight: 800;
+    font-weight: bold;
 }
 
-.status.Pending {
-    background: #422d05;
+.pending {
     color: #facc15;
+    background: #3d2d06;
 }
 
-.status.Approved {
-    background: #06351d;
+.approved {
     color: #4ade80;
+    background: #06351d;
 }
 
-.status.Rejected {
-    background: #400d0d;
+.rejected {
     color: #f87171;
+    background: #400d0d;
 }
 
-.review-btn {
-    border: 1px solid #00e5ff;
+.review {
     background: transparent;
     color: #00e5ff;
+    border: 1px solid #00e5ff;
+    border-radius: 6px;
     padding: 7px 10px;
-    border-radius: 7px;
     cursor: pointer;
 }
+
+.loading {
+    text-align: center;
+    padding: 30px;
+    color: #8095a3;
+}
+
+.empty {
+    text-align: center;
+    padding: 30px;
+    color: #8095a3;
+}
+
+.message {
+    display: none;
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    font-size: 13px;
+}
+
+.message.success {
+    display: block;
+    background: #06351d;
+    color: #86efac;
+}
+
+.message.error {
+    display: block;
+    background: #400d0d;
+    color: #fca5a5;
+}
+
+/* MODAL */
 
 .modal {
     display: none;
     position: fixed;
     inset: 0;
-    background: rgba(0,0,0,.78);
-    z-index: 10;
+    background: rgba(0,0,0,.8);
     padding: 20px;
     overflow-y: auto;
+    z-index: 100;
 }
 
-.modal-content {
-    max-width: 750px;
+.modal-box {
+    max-width: 800px;
     margin: 30px auto;
     background: #091422;
-    border: 1px solid #263c4d;
+    border: 1px solid #294253;
     border-radius: 15px;
     padding: 25px;
 }
 
-.modal-title {
+.modal-header {
     display: flex;
     justify-content: space-between;
     margin-bottom: 20px;
 }
 
 .close {
-    cursor: pointer;
+    font-size: 25px;
     color: #8298a7;
-    font-size: 22px;
+    cursor: pointer;
 }
 
 .details {
     display: grid;
-    grid-template-columns: repeat(2,1fr);
-    gap: 10px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 9px;
     margin-bottom: 25px;
 }
 
 .detail {
     background: #07111d;
-    padding: 12px;
+    padding: 11px;
     border-radius: 7px;
 }
 
 .detail small {
     display: block;
-    color: #6f8796;
+    color: #718795;
     font-size: 10px;
-    margin-bottom: 4px;
+    margin-bottom: 5px;
 }
 
 .detail strong {
     font-size: 13px;
 }
 
+.reason-title {
+    margin-bottom: 10px;
+}
+
 .reason-grid {
     display: grid;
-    grid-template-columns: repeat(2,1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 8px;
-    margin: 12px 0;
+    margin-bottom: 18px;
 }
 
 .reason {
     background: #07111d;
-    border: 1px solid #1c3444;
-    border-radius: 7px;
+    border: 1px solid #20394b;
     padding: 10px;
+    border-radius: 7px;
     font-size: 12px;
 }
 
 .reason input {
-    margin-right: 7px;
+    margin-right: 6px;
+}
+
+.comment-label {
+    display: block;
+    color: #a9bbc7;
+    font-size: 12px;
+    margin-bottom: 7px;
 }
 
 textarea {
     width: 100%;
-    min-height: 90px;
+    min-height: 100px;
+    padding: 12px;
+    background: #07111d;
+    color: white;
+    border: 1px solid #294253;
+    border-radius: 8px;
     resize: vertical;
 }
 
-.action-buttons {
+.actions {
     display: flex;
     gap: 10px;
     margin-top: 15px;
 }
 
-.approve,
-.reject {
+.actions button {
     flex: 1;
-    border: none;
     padding: 13px;
+    border: 0;
     border-radius: 8px;
     color: white;
-    font-weight: 800;
+    font-weight: bold;
     cursor: pointer;
 }
 
-.approve {
+.approve-button {
     background: #16a34a;
 }
 
-.reject {
+.reject-button {
     background: #dc2626;
 }
 
-.message {
-    margin: 15px 0;
-    padding: 12px;
-    border-radius: 8px;
-    display: none;
-}
-
-.success {
-    display: block;
-    background: #06351d;
-    color: #86efac;
-}
-
-.error {
-    display: block;
-    background: #400d0d;
-    color: #fca5a5;
-}
-
 @media(max-width:700px) {
+
     .stats {
         grid-template-columns: repeat(2,1fr);
     }
@@ -313,48 +428,123 @@ textarea {
         align-items: flex-start;
         flex-direction: column;
     }
+
+    .toolbar {
+        flex-direction: column;
+    }
 }
 </style>
 </head>
 
 <body>
 
-<div class="container">
 
-<header class="header">
+<!-- LOGIN -->
 
-<div>
-<div class="logo">&lt; CPE_26 / ADMIN_CONSOLE &gt;</div>
-<h1>NYSC Mobilization Review</h1>
+<div id="loginScreen" class="login-screen">
+
+<div class="login-box">
+
+<div class="logo">
+&lt; CPE_26 / ADMIN &gt;
 </div>
 
-<button class="logout" onclick="logout()">
+<h1>Admin Login</h1>
+
+<p>
+NYSC Mobilization • Computer Engineering
+</p>
+
+<div id="loginError" class="login-error">
+Invalid username or password.
+</div>
+
+<div class="field">
+
+<label>Username</label>
+
+<input
+id="username"
+type="text"
+placeholder="Enter username"
+autocomplete="username"
+>
+
+</div>
+
+<div class="field">
+
+<label>Password</label>
+
+<input
+id="password"
+type="password"
+placeholder="Enter password"
+autocomplete="current-password"
+>
+
+</div>
+
+<button
+class="login-button"
+onclick="login()"
+>
+LOGIN TO ADMIN CONSOLE
+</button>
+
+</div>
+
+</div>
+
+
+<!-- DASHBOARD -->
+
+<div id="dashboard">
+
+<div class="container">
+
+<div class="header">
+
+<div>
+
+<div class="header-logo">
+&lt; CPE_26 / ADMIN_CONSOLE &gt;
+</div>
+
+<h1>NYSC Mobilization Review</h1>
+
+</div>
+
+<button
+class="logout"
+onclick="logout()"
+>
 LOGOUT
 </button>
 
-</header>
+</div>
 
 
 <div class="stats">
 
 <div class="stat">
-<div class="stat-label">Total</div>
-<div id="total" class="stat-number">0</div>
+<div class="stat-title">Total</div>
+<div id="total" class="stat-value">0</div>
 </div>
 
 <div class="stat">
-<div class="stat-label">Pending</div>
-<div id="pending" class="stat-number">0</div>
+<div class="stat-title">Pending</div>
+<div id="pending" class="stat-value">0</div>
 </div>
 
 <div class="stat">
-<div class="stat-label">Approved</div>
-<div id="approved" class="stat-number">0</div>
+<div class="stat-title">Approved</div>
+<div id="approved" class="stat-value">0</div>
 </div>
 
 <div class="stat">
-<div class="stat-label">Rejected</div>
-<div id="rejected" class="stat-number">0</div>
+<div class="stat-title">Rejected</div>
+<div id="rejected" class="stat-value">0</div>
 </div>
 
 </div>
@@ -367,21 +557,49 @@ LOGOUT
 <input
 id="search"
 class="search"
-placeholder="Search name, matric number or Submission ID..."
+placeholder="Search name, matric number or submission ID..."
 oninput="renderTable()"
 >
 
-<select id="filter" onchange="renderTable()">
-<option value="All">All</option>
-<option value="Pending">Pending</option>
-<option value="Approved">Approved</option>
-<option value="Rejected">Rejected</option>
+<select
+id="filter"
+class="filter"
+onchange="renderTable()"
+>
+
+<option value="All">
+All
+</option>
+
+<option value="Pending">
+Pending
+</option>
+
+<option value="Approved">
+Approved
+</option>
+
+<option value="Rejected">
+Rejected
+</option>
+
 </select>
 
 </div>
 
 
-<div id="message" class="message"></div>
+<div
+id="message"
+class="message"
+></div>
+
+
+<div
+id="loading"
+class="loading"
+>
+Loading submissions...
+</div>
 
 
 <div class="table-wrapper">
@@ -391,12 +609,14 @@ oninput="renderTable()"
 <thead>
 
 <tr>
+
 <th>Submission ID</th>
 <th>Name</th>
 <th>Matric No.</th>
 <th>Course</th>
 <th>Status</th>
 <th>Action</th>
+
 </tr>
 
 </thead>
@@ -411,16 +631,23 @@ oninput="renderTable()"
 
 </div>
 
+</div>
+
 
 <!-- REVIEW MODAL -->
 
-<div id="modal" class="modal">
+<div
+id="modal"
+class="modal"
+>
 
-<div class="modal-content">
+<div class="modal-box">
 
-<div class="modal-title">
+<div class="modal-header">
 
-<h2>Review Submission</h2>
+<h2>
+Review Submission
+</h2>
 
 <span
 class="close"
@@ -432,82 +659,101 @@ onclick="closeModal()"
 </div>
 
 
-<div id="details" class="details"></div>
+<div
+id="details"
+class="details"
+></div>
 
 
-<h3>Rejection Reason(s)</h3>
+<h3 class="reason-title">
+Select incorrect information
+</h3>
+
 
 <div class="reason-grid">
 
 <label class="reason">
-<input type="checkbox" value="Matriculation number is incorrect">
+<input type="checkbox"
+value="Matriculation number is incorrect">
 Matric No. incorrect
 </label>
 
 <label class="reason">
-<input type="checkbox" value="First name is incorrect">
+<input type="checkbox"
+value="First name is incorrect">
 First Name incorrect
 </label>
 
 <label class="reason">
-<input type="checkbox" value="Middle name is incorrect">
+<input type="checkbox"
+value="Middle name is incorrect">
 Middle Name incorrect
 </label>
 
 <label class="reason">
-<input type="checkbox" value="Surname is incorrect">
+<input type="checkbox"
+value="Surname is incorrect">
 Surname incorrect
 </label>
 
 <label class="reason">
-<input type="checkbox" value="GSM number is incorrect">
+<input type="checkbox"
+value="GSM number is incorrect">
 GSM No. incorrect
 </label>
 
 <label class="reason">
-<input type="checkbox" value="State of origin is incorrect">
+<input type="checkbox"
+value="State of origin is incorrect">
 State of Origin incorrect
 </label>
 
 <label class="reason">
-<input type="checkbox" value="Class of degree is incorrect">
+<input type="checkbox"
+value="Class of degree is incorrect">
 Class of Degree incorrect
 </label>
 
 <label class="reason">
-<input type="checkbox" value="Date of graduation is incorrect">
+<input type="checkbox"
+value="Date of graduation is incorrect">
 Graduation Date incorrect
 </label>
 
 <label class="reason">
-<input type="checkbox" value="Gender is incorrect">
+<input type="checkbox"
+value="Gender is incorrect">
 Gender incorrect
 </label>
 
 <label class="reason">
-<input type="checkbox" value="Marital status is incorrect">
+<input type="checkbox"
+value="Marital status is incorrect">
 Marital Status incorrect
 </label>
 
 <label class="reason">
-<input type="checkbox" value="JAMB registration number is incorrect">
+<input type="checkbox"
+value="JAMB registration number is incorrect">
 JAMB Reg. No. incorrect
 </label>
 
 <label class="reason">
-<input type="checkbox" value="Course of study is incorrect">
+<input type="checkbox"
+value="Course of study is incorrect">
 Course of Study incorrect
 </label>
 
 <label class="reason">
-<input type="checkbox" value="Other information is incorrect">
+<input type="checkbox"
+value="Other information is incorrect">
 Other
 </label>
 
 </div>
 
 
-<label>
+<label class="comment-label">
 Additional administrator comment
 </label>
 
@@ -517,18 +763,18 @@ placeholder="Explain what the student needs to correct..."
 ></textarea>
 
 
-<div class="action-buttons">
+<div class="actions">
 
 <button
-class="approve"
-onclick="approve()"
+class="approve-button"
+onclick="approveSubmission()"
 >
 ✓ APPROVE
 </button>
 
 <button
-class="reject"
-onclick="reject()"
+class="reject-button"
+onclick="rejectSubmission()"
 >
 × REJECT
 </button>
@@ -542,26 +788,25 @@ onclick="reject()"
 
 <script>
 
+/*
+================================================
+YOUR GOOGLE APPS SCRIPT WEB APP URL
+================================================
+*/
+
 const GOOGLE_SCRIPT_URL =
-"PASTE_YOUR_APPS_SCRIPT_URL_HERE";
+"https://script.google.com/macros/s/AKfycbyu5ZMcfGyWk7tXGthr6J9B88HV9G3jGGr3hPCtty4grDXQ86BiYETLXDcJ3JZxUOGg/exec";
 
 
 /*
-==========================================
-IMPORTANT
-
-For the first version, enter your
-Apps Script URL above.
-
-The admin password is NOT stored in
-Google Sheets.
-
-Change this password before use.
-==========================================
+================================================
+ADMIN LOGIN
+================================================
 */
 
-const ADMIN_PASSWORD =
-"Admin2026p";
+const ADMIN_USERNAME = "admin";
+
+const ADMIN_PASSWORD = "Admin2026IOK";
 
 
 let submissions = [];
@@ -569,11 +814,130 @@ let submissions = [];
 let currentSubmission = null;
 
 
-// ---------------------------------------
-// LOAD DATA
-// ---------------------------------------
+/*
+================================================
+LOGIN
+================================================
+*/
+
+function login() {
+
+    const username =
+        document
+        .getElementById("username")
+        .value
+        .trim();
+
+    const password =
+        document
+        .getElementById("password")
+        .value;
+
+
+    if (
+        username === ADMIN_USERNAME &&
+        password === ADMIN_PASSWORD
+    ) {
+
+        sessionStorage.setItem(
+            "cpe26_admin_logged_in",
+            "true"
+        );
+
+        showDashboard();
+
+    } else {
+
+        document
+        .getElementById("loginError")
+        .style
+        .display = "block";
+
+    }
+
+}
+
+
+/*
+================================================
+CHECK LOGIN
+================================================
+*/
+
+function checkLogin() {
+
+    const loggedIn =
+        sessionStorage.getItem(
+            "cpe26_admin_logged_in"
+        );
+
+
+    if (
+        loggedIn === "true"
+    ) {
+
+        showDashboard();
+
+    }
+
+}
+
+
+/*
+================================================
+SHOW DASHBOARD
+================================================
+*/
+
+function showDashboard() {
+
+    document
+    .getElementById("loginScreen")
+    .style
+    .display = "none";
+
+
+    document
+    .getElementById("dashboard")
+    .style
+    .display = "block";
+
+
+    loadSubmissions();
+
+}
+
+
+/*
+================================================
+LOGOUT
+================================================
+*/
+
+function logout() {
+
+    sessionStorage.removeItem(
+        "cpe26_admin_logged_in"
+    );
+
+    location.reload();
+
+}
+
+
+/*
+================================================
+LOAD GOOGLE SHEET DATA
+================================================
+*/
 
 async function loadSubmissions() {
+
+    document
+    .getElementById("loading")
+    .style
+    .display = "block";
+
 
     try {
 
@@ -594,7 +958,8 @@ async function loadSubmissions() {
         if (!data.success) {
 
             throw new Error(
-                data.message
+                data.message ||
+                "Unable to load submissions."
             );
 
         }
@@ -604,13 +969,12 @@ async function loadSubmissions() {
             data.submissions || [];
 
 
-        updateStats();
+        updateStatistics();
 
         renderTable();
 
-    }
 
-    catch(error) {
+    } catch(error) {
 
         showMessage(
             error.message,
@@ -619,11 +983,26 @@ async function loadSubmissions() {
 
     }
 
+
+    document
+    .getElementById("loading")
+    .style
+    .display = "none";
+
 }
-    function updateStats() {
+
+
+/*
+================================================
+STATISTICS
+================================================
+*/
+
+function updateStatistics() {
 
     const total =
         submissions.length;
+
 
     const pending =
         submissions.filter(
@@ -631,11 +1010,13 @@ async function loadSubmissions() {
                 row.status === "Pending"
         ).length;
 
+
     const approved =
         submissions.filter(
             row =>
                 row.status === "Approved"
         ).length;
+
 
     const rejected =
         submissions.filter(
@@ -645,44 +1026,51 @@ async function loadSubmissions() {
 
 
     document
-        .getElementById("total")
-        .innerText = total;
+    .getElementById("total")
+    .innerText = total;
+
 
     document
-        .getElementById("pending")
-        .innerText = pending;
+    .getElementById("pending")
+    .innerText = pending;
+
 
     document
-        .getElementById("approved")
-        .innerText = approved;
+    .getElementById("approved")
+    .innerText = approved;
+
 
     document
-        .getElementById("rejected")
-        .innerText = rejected;
+    .getElementById("rejected")
+    .innerText = rejected;
 
 }
 
-// ---------------------------------------
-// TABLE
-// ---------------------------------------
+
+/*
+================================================
+TABLE
+================================================
+*/
 
 function renderTable() {
 
     const body =
-        document.getElementById(
-            "tableBody"
-        );
+        document
+        .getElementById("tableBody");
+
 
     const search =
-        document.getElementById(
-            "search"
-        ).value
-         .toLowerCase();
+        document
+        .getElementById("search")
+        .value
+        .toLowerCase();
+
 
     const filter =
-        document.getElementById(
-            "filter"
-        ).value;
+        document
+        .getElementById("filter")
+        .value;
 
 
     body.innerHTML = "";
@@ -692,64 +1080,115 @@ function renderTable() {
         submissions.filter(
             row => {
 
-                const matchesSearch =
+                const text =
                     (
                         row.submissionID +
                         " " +
-                        row.name +
+                        row.firstName +
+                        " " +
+                        row.surname +
                         " " +
                         row.matricNo
                     )
-                    .toLowerCase()
-                    .includes(search);
+                    .toLowerCase();
 
 
-                const matchesStatus =
+                const matchesSearch =
+                    text.includes(search);
+
+
+                const matchesFilter =
                     filter === "All" ||
                     row.status === filter;
 
 
                 return (
                     matchesSearch &&
-                    matchesStatus
+                    matchesFilter
                 );
 
             }
         );
 
 
+    if (
+        filtered.length === 0
+    ) {
+
+        body.innerHTML =
+            `
+            <tr>
+                <td colspan="6" class="empty">
+                    No submissions found.
+                </td>
+            </tr>
+            `;
+
+        return;
+
+    }
+
+
     filtered.forEach(
         row => {
 
             const tr =
-                document.createElement(
-                    "tr"
-                );
+                document
+                .createElement("tr");
+
+
+            const fullName =
+                [
+                    row.firstName,
+                    row.middlename,
+                    row.surname
+                ]
+                .filter(Boolean)
+                .join(" ");
+
+
+            const statusClass =
+                row.status
+                .toLowerCase();
 
 
             tr.innerHTML = `
 
-                <td>${escapeHTML(row.submissionID)}</td>
-
-                <td>${escapeHTML(row.name)}</td>
-
-                <td>${escapeHTML(row.matricNo)}</td>
-
-                <td>${escapeHTML(row.courseOfStudy)}</td>
-
                 <td>
-                    <span class="status ${escapeHTML(row.status)}">
-                        ${escapeHTML(row.status)}
-                    </span>
+                    ${escapeHTML(row.submissionID)}
                 </td>
 
                 <td>
-                    <button
-                        class="review-btn"
-                        onclick="openReview('${escapeHTML(row.submissionID)}')"
+                    ${escapeHTML(fullName)}
+                </td>
+
+                <td>
+                    ${escapeHTML(row.matricNo)}
+                </td>
+
+                <td>
+                    ${escapeHTML(row.courseOfStudy)}
+                </td>
+
+                <td>
+
+                    <span
+                    class="badge ${statusClass}"
                     >
-                        REVIEW
+                    ${escapeHTML(row.status)}
+                    </span>
+
+                </td>
+
+                <td>
+
+                    <button
+                    class="review"
+                    onclick="openReview('${escapeHTML(row.submissionID)}')"
+                    >
+                    REVIEW
                     </button>
+
                 </td>
 
             `;
@@ -763,9 +1202,11 @@ function renderTable() {
 }
 
 
-// ---------------------------------------
-// REVIEW
-// ---------------------------------------
+/*
+================================================
+OPEN REVIEW
+================================================
+*/
 
 function openReview(id) {
 
@@ -782,107 +1223,138 @@ function openReview(id) {
 
 
     const details =
-        document.getElementById(
-            "details"
-        );
+        document
+        .getElementById("details");
 
 
     details.innerHTML = `
 
-        <div class="detail">
-            <small>Submission ID</small>
-            <strong>${escapeHTML(currentSubmission.submissionID)}</strong>
-        </div>
+        ${detail(
+            "Submission ID",
+            currentSubmission.submissionID
+        )}
 
-        <div class="detail">
-            <small>Matric No.</small>
-            <strong>${escapeHTML(currentSubmission.matricNo)}</strong>
-        </div>
+        ${detail(
+            "Matric No.",
+            currentSubmission.matricNo
+        )}
 
-        <div class="detail">
-            <small>First Name</small>
-            <strong>${escapeHTML(currentSubmission.firstName)}</strong>
-        </div>
+        ${detail(
+            "First Name",
+            currentSubmission.firstName
+        )}
 
-        <div class="detail">
-            <small>Middle Name</small>
-            <strong>${escapeHTML(currentSubmission.middlename)}</strong>
-        </div>
+        ${detail(
+            "Middle Name",
+            currentSubmission.middlename
+        )}
 
-        <div class="detail">
-            <small>Surname</small>
-            <strong>${escapeHTML(currentSubmission.surname)}</strong>
-        </div>
+        ${detail(
+            "Surname",
+            currentSubmission.surname
+        )}
 
-        <div class="detail">
-            <small>GSM No.</small>
-            <strong>${escapeHTML(currentSubmission.gsmNo)}</strong>
-        </div>
+        ${detail(
+            "GSM No.",
+            currentSubmission.gsmNo
+        )}
 
-        <div class="detail">
-            <small>State of Origin</small>
-            <strong>${escapeHTML(currentSubmission.stateOfOrigin)}</strong>
-        </div>
+        ${detail(
+            "State of Origin",
+            currentSubmission.stateOfOrigin
+        )}
 
-        <div class="detail">
-            <small>Class of Degree</small>
-            <strong>${escapeHTML(currentSubmission.classOfDegree)}</strong>
-        </div>
+        ${detail(
+            "Class of Degree",
+            currentSubmission.classOfDegree
+        )}
 
-        <div class="detail">
-            <small>Date of Graduation</small>
-            <strong>${escapeHTML(currentSubmission.dateOfGraduation)}</strong>
-        </div>
+        ${detail(
+            "Date of Graduation",
+            currentSubmission.dateOfGraduation
+        )}
 
-        <div class="detail">
-            <small>Gender</small>
-            <strong>${escapeHTML(currentSubmission.gender)}</strong>
-        </div>
+        ${detail(
+            "Gender",
+            currentSubmission.gender
+        )}
 
-        <div class="detail">
-            <small>Marital Status</small>
-            <strong>${escapeHTML(currentSubmission.maritalStatus)}</strong>
-        </div>
+        ${detail(
+            "Marital Status",
+            currentSubmission.maritalStatus
+        )}
 
-        <div class="detail">
-            <small>JAMB Reg. No.</small>
-            <strong>${escapeHTML(currentSubmission.jambRegNo)}</strong>
-        </div>
+        ${detail(
+            "JAMB Reg. No.",
+            currentSubmission.jambRegNo
+        )}
 
-        <div class="detail">
-            <small>Course</small>
-            <strong>${escapeHTML(currentSubmission.courseOfStudy)}</strong>
-        </div>
+        ${detail(
+            "Course of Study",
+            currentSubmission.courseOfStudy
+        )}
 
-        <div class="detail">
-            <small>Current Status</small>
-            <strong>${escapeHTML(currentSubmission.status)}</strong>
-        </div>
+        ${detail(
+            "Status",
+            currentSubmission.status
+        )}
 
     `;
 
 
     document
-        .getElementById("modal")
-        .style.display = "block";
+    .querySelectorAll(
+        ".reason input"
+    )
+    .forEach(
+        checkbox =>
+            checkbox.checked = false
+    );
 
-}
-
-
-function closeModal() {
 
     document
-        .getElementById("modal")
-        .style.display = "none";
+    .getElementById(
+        "adminComment"
+    )
+    .value = "";
+
+
+    document
+    .getElementById("modal")
+    .style
+    .display = "block";
 
 }
 
 
-// ---------------------------------------
-// APPROVE
-// ---------------------------------------
+function detail(label, value) {
 
-async function approve() {
+    return `
+
+        <div class="detail">
+
+            <small>
+            ${escapeHTML(label)}
+            </small>
+
+            <strong>
+                ${escapeHTML(value || "-")}
+            </strong>
+
+        </div>
+
+    `;
+
+}
+
+
+/*
+================================================
+APPROVE
+================================================
+*/
+
+async function approveSubmission() {
 
     if (!currentSubmission) {
         return;
@@ -912,20 +1384,20 @@ async function approve() {
                     },
 
                     body:
-                        JSON.stringify({
+                    JSON.stringify({
 
-                            action:
-                                "approve",
+                        action:
+                        "approve",
 
-                            submissionID:
-                                currentSubmission.submissionID,
+                        submissionID:
+                        currentSubmission.submissionID,
 
-                            reviewedBy:
-                                "CPE26 Admin"
+                        reviewedBy:
+                        "CPE26 Admin"
 
-                        })
+                    })
 
-                    }
+                }
             );
 
 
@@ -934,10 +1406,15 @@ async function approve() {
 
 
         if (!result.success) {
+
             throw new Error(
                 result.message
             );
+
         }
+
+
+        closeModal();
 
 
         showMessage(
@@ -946,9 +1423,7 @@ async function approve() {
         );
 
 
-        closeModal();
-
-        loadSubmissions();
+        await loadSubmissions();
 
     }
 
@@ -964,20 +1439,23 @@ async function approve() {
 }
 
 
-// ---------------------------------------
-// REJECT
-// ---------------------------------------
+/*
+================================================
+REJECT
+================================================
+*/
 
-async function reject() {
+async function rejectSubmission() {
 
     if (!currentSubmission) {
         return;
     }
 
 
-    const checked =
+    const reasons =
         [
-            ...document
+            ...
+            document
             .querySelectorAll(
                 ".reason input:checked"
             )
@@ -988,10 +1466,12 @@ async function reject() {
         );
 
 
-    if (checked.length === 0) {
+    if (
+        reasons.length === 0
+    ) {
 
         alert(
-            "Please select at least one rejection reason."
+            "Select at least one incorrect field."
         );
 
         return;
@@ -1031,24 +1511,24 @@ async function reject() {
                     },
 
                     body:
-                        JSON.stringify({
+                    JSON.stringify({
 
-                            action:
-                                "reject",
+                        action:
+                        "reject",
 
-                            submissionID:
-                                currentSubmission.submissionID,
+                        submissionID:
+                        currentSubmission.submissionID,
 
-                            rejectionReasons:
-                                checked,
+                        rejectionReasons:
+                        reasons,
 
-                            adminComment:
-                                comment,
+                        adminComment:
+                        comment,
 
-                            reviewedBy:
-                                "CPE26 Admin"
+                        reviewedBy:
+                        "CPE26 Admin"
 
-                        })
+                    })
 
                 }
             );
@@ -1059,10 +1539,15 @@ async function reject() {
 
 
         if (!result.success) {
+
             throw new Error(
                 result.message
             );
+
         }
+
+
+        closeModal();
 
 
         showMessage(
@@ -1071,9 +1556,7 @@ async function reject() {
         );
 
 
-        closeModal();
-
-        loadSubmissions();
+        await loadSubmissions();
 
     }
 
@@ -1089,9 +1572,27 @@ async function reject() {
 }
 
 
-// ---------------------------------------
-// UTILITIES
-// ---------------------------------------
+/*
+================================================
+CLOSE MODAL
+================================================
+*/
+
+function closeModal() {
+
+    document
+    .getElementById("modal")
+    .style
+    .display = "none";
+
+}
+
+
+/*
+================================================
+MESSAGE
+================================================
+*/
 
 function showMessage(
     text,
@@ -1100,9 +1601,7 @@ function showMessage(
 
     const message =
         document
-        .getElementById(
-            "message"
-        );
+        .getElementById("message");
 
 
     message.innerText =
@@ -1116,9 +1615,11 @@ function showMessage(
 
 
     setTimeout(
-        () => {
+        function() {
+
             message.style.display =
                 "none";
+
         },
         4000
     );
@@ -1126,16 +1627,11 @@ function showMessage(
 }
 
 
-function logout() {
-
-    sessionStorage.removeItem(
-        "cpe26_admin"
-    );
-
-    location.reload();
-
-}
-
+/*
+================================================
+ESCAPE HTML
+================================================
+*/
 
 function escapeHTML(value) {
 
@@ -1168,7 +1664,14 @@ function escapeHTML(value) {
 
 }
 
-    loadSubmissions();
+
+/*
+================================================
+START
+================================================
+*/
+
+checkLogin();
 
 </script>
 
