@@ -7,6 +7,7 @@
 <title>CPE '26 | NYSC Mobilization Portal</title>
 
 <style>
+
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap');
 
 * {
@@ -17,10 +18,20 @@
 
 body {
     font-family: Inter, Arial, sans-serif;
+
     background:
-        radial-gradient(circle at 20% 20%, rgba(0, 229, 255, .12), transparent 25%),
-        radial-gradient(circle at 80% 80%, rgba(0, 100, 255, .12), transparent 25%),
+        radial-gradient(
+            circle at 20% 20%,
+            rgba(0, 229, 255, .12),
+            transparent 25%
+        ),
+        radial-gradient(
+            circle at 80% 80%,
+            rgba(0, 100, 255, .12),
+            transparent 25%
+        ),
         #050b14;
+
     color: #eaf7ff;
     min-height: 100vh;
     padding: 20px;
@@ -32,9 +43,18 @@ body::before {
     inset: 0;
     pointer-events: none;
     opacity: .12;
+
     background-image:
-        linear-gradient(rgba(0,229,255,.3) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0,229,255,.3) 1px, transparent 1px);
+        linear-gradient(
+            rgba(0,229,255,.3) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(0,229,255,.3) 1px,
+            transparent 1px
+        );
+
     background-size: 40px 40px;
 }
 
@@ -147,6 +167,12 @@ select:focus {
     box-shadow: 0 0 0 3px rgba(0,229,255,.08);
 }
 
+input:disabled,
+select:disabled {
+    opacity: .65;
+    cursor: not-allowed;
+}
+
 select option {
     background: #07111d;
 }
@@ -157,7 +183,14 @@ select option {
     margin-top: 28px;
     padding: 16px;
     border-radius: 10px;
-    background: linear-gradient(90deg, #00bcd4, #007bff);
+
+    background:
+        linear-gradient(
+            90deg,
+            #00bcd4,
+            #007bff
+        );
+
     color: white;
     font-size: 15px;
     font-weight: 800;
@@ -175,6 +208,23 @@ select option {
     cursor: not-allowed;
 }
 
+.secondary-button {
+    width: 100%;
+    border: 1px solid rgba(0,229,255,.3);
+    margin-top: 12px;
+    padding: 13px;
+    border-radius: 9px;
+    background: rgba(0,229,255,.05);
+    color: #00e5ff;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.secondary-button:hover {
+    background: rgba(0,229,255,.1);
+}
+
 .status-link {
     text-align: center;
     margin-top: 18px;
@@ -185,6 +235,175 @@ select option {
     text-decoration: none;
     font-size: 13px;
 }
+
+/* ==========================================
+   RESUBMISSION PANEL
+========================================== */
+
+.resubmit-panel {
+    margin-top: 25px;
+    margin-bottom: 25px;
+
+    padding: 20px;
+
+    border-radius: 14px;
+
+    border:
+        1px solid
+        rgba(0,229,255,.25);
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(0,229,255,.06),
+            rgba(0,80,255,.04)
+        );
+}
+
+.resubmit-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 15px;
+}
+
+.resubmit-icon {
+    width: 38px;
+    height: 38px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 9px;
+
+    background: rgba(0,229,255,.1);
+
+    color: #00e5ff;
+
+    font-size: 18px;
+
+    flex-shrink: 0;
+}
+
+.resubmit-header h2 {
+    font-size: 15px;
+    margin-bottom: 5px;
+}
+
+.resubmit-header p {
+    color: #91a7b8;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.lookup-row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 10px;
+}
+
+.lookup-button {
+    padding: 0 20px;
+    border: none;
+    border-radius: 9px;
+
+    background: #00bcd4;
+
+    color: #031019;
+
+    font-weight: 800;
+
+    cursor: pointer;
+
+    min-height: 45px;
+}
+
+.lookup-button:hover {
+    background: #00e5ff;
+}
+
+.lookup-button:disabled {
+    opacity: .5;
+    cursor: not-allowed;
+}
+
+/* ==========================================
+   REJECTION BOX
+========================================== */
+
+.rejection-box {
+    display: none;
+
+    margin-top: 18px;
+
+    padding: 16px;
+
+    border-radius: 10px;
+
+    background:
+        rgba(239,68,68,.08);
+
+    border:
+        1px solid
+        rgba(239,68,68,.3);
+
+    color: #fca5a5;
+
+    font-size: 13px;
+
+    line-height: 1.6;
+}
+
+.rejection-box strong {
+    color: #ff7b7b;
+}
+
+.rejection-reason {
+    margin-top: 8px;
+    padding-left: 5px;
+}
+
+.admin-comment {
+    margin-top: 12px;
+
+    padding-top: 12px;
+
+    border-top:
+        1px solid
+        rgba(239,68,68,.15);
+}
+
+/* ==========================================
+   LOADED RECORD
+========================================== */
+
+.record-box {
+    display: none;
+
+    margin-top: 18px;
+
+    padding: 14px;
+
+    border-radius: 10px;
+
+    background:
+        rgba(0,229,255,.05);
+
+    border:
+        1px solid
+        rgba(0,229,255,.15);
+
+    font-size: 13px;
+}
+
+.record-box strong {
+    color: #00e5ff;
+}
+
+/* ==========================================
+   MESSAGES
+========================================== */
 
 .message {
     display: none;
@@ -197,26 +416,66 @@ select option {
 
 .success {
     display: block;
-    background: rgba(34,197,94,.1);
-    border: 1px solid rgba(34,197,94,.3);
+
+    background:
+        rgba(34,197,94,.1);
+
+    border:
+        1px solid
+        rgba(34,197,94,.3);
+
     color: #86efac;
 }
 
 .error {
     display: block;
-    background: rgba(239,68,68,.1);
-    border: 1px solid rgba(239,68,68,.3);
+
+    background:
+        rgba(239,68,68,.1);
+
+    border:
+        1px solid
+        rgba(239,68,68,.3);
+
     color: #fca5a5;
 }
 
+.warning {
+    display: block;
+
+    background:
+        rgba(245,158,11,.1);
+
+    border:
+        1px solid
+        rgba(245,158,11,.3);
+
+    color: #fcd34d;
+}
+
+/* ==========================================
+   LOADING
+========================================== */
+
 .loading {
     display: none;
+
     text-align: center;
+
     margin-top: 15px;
+
     color: #00e5ff;
-    font-family: "Space Mono", monospace;
+
+    font-family:
+        "Space Mono",
+        monospace;
+
     font-size: 12px;
 }
+
+/* ==========================================
+   FOOTER
+========================================== */
 
 .footer {
     text-align: center;
@@ -224,6 +483,10 @@ select option {
     color: #637887;
     font-size: 11px;
 }
+
+/* ==========================================
+   MOBILE
+========================================== */
 
 @media(max-width:650px) {
 
@@ -246,7 +509,17 @@ select option {
     .header {
         padding-top: 20px;
     }
+
+    .lookup-row {
+        grid-template-columns: 1fr;
+    }
+
+    .lookup-button {
+        padding: 13px;
+    }
+
 }
+
 </style>
 </head>
 
@@ -254,336 +527,472 @@ select option {
 
 <div class="container">
 
-    <header class="header">
+<header class="header">
 
-        <div class="logo">
-            &lt; CPE_26 /&gt;
-        </div>
+    <div class="logo">
+        &lt; CPE_26 /&gt;
+    </div>
 
-        <h1>
-            NYSC <span>MOBILIZATION</span>
-        </h1>
+    <h1>
+        NYSC <span>MOBILIZATION</span>
+    </h1>
 
-        <p>
-            COMPUTER ENGINEERING — CLASS OF 2026
-        </p>
+    <p>
+        COMPUTER ENGINEERING — CLASS OF 2026
+    </p>
 
-    </header>
-
-
-    <main class="card">
-
-        <div class="notice">
-
-            <strong>⚡ Mobilization Data Collation</strong><br>
-
-            This portal is for the collection of information
-            required for NYSC mobilization processing for
-            Computer Engineering Class of 2026.
-
-            Please ensure that every detail supplied is
-            accurate and corresponds with your official records.
-
-        </div>
+</header>
 
 
-        <form id="registrationForm">
+<main class="card">
+
+    <div class="notice">
+
+        <strong>⚡ Mobilization Data Collation</strong><br>
+
+        This portal is for the collection of information
+        required for NYSC mobilization processing for
+        Computer Engineering Class of 2026.
+
+        Please ensure that every detail supplied is
+        accurate and corresponds with your official records.
+
+    </div>
 
 
-            <!-- PERSONAL -->
+    <!-- ==========================================
+         RESUBMISSION / CORRECTION PANEL
+    =========================================== -->
 
-            <div class="section">
+    <div class="resubmit-panel">
 
-                <div class="section-title">
-                    01 / PERSONAL IDENTITY
-                </div>
+        <div class="resubmit-header">
 
-                <div class="grid">
+            <div class="resubmit-icon">
+                ↻
+            </div>
 
-                    <div>
-                        <label>
-                            First Name <span>*</span>
-                        </label>
+            <div>
 
-                        <input
-                            id="firstName"
-                            type="text"
-                            required
-                            placeholder="First name"
-                        >
-                    </div>
+                <h2>
+                    Already Submitted?
+                </h2>
 
-
-                    <div>
-                        <label>
-                            Middle Name
-                        </label>
-
-                        <input
-                            id="middlename"
-                            type="text"
-                            placeholder="Middle name"
-                        >
-                    </div>
-
-
-                    <div>
-                        <label>
-                            Surname <span>*</span>
-                        </label>
-
-                        <input
-                            id="surname"
-                            type="text"
-                            required
-                            placeholder="Surname"
-                        >
-                    </div>
-
-
-                    <div>
-                        <label>
-                            GSM Number <span>*</span>
-                        </label>
-
-                        <input
-                            id="gsmNo"
-                            type="tel"
-                            required
-                            placeholder="08012345678"
-                        >
-                    </div>
-
-
-                    <div>
-                        <label>
-                            State of Origin <span>*</span>
-                        </label>
-
-                        <select id="stateOfOrigin" required>
-
-                            <option value="">
-                                Select State
-                            </option>
-
-                            <option>Abia</option>
-                            <option>Adamawa</option>
-                            <option>Akwa Ibom</option>
-                            <option>Anambra</option>
-                            <option>Bauchi</option>
-                            <option>Bayelsa</option>
-                            <option>Benue</option>
-                            <option>Borno</option>
-                            <option>Cross River</option>
-                            <option>Delta</option>
-                            <option>Ebonyi</option>
-                            <option>Edo</option>
-                            <option>Ekiti</option>
-                            <option>Enugu</option>
-                            <option>Gombe</option>
-                            <option>Imo</option>
-                            <option>Jigawa</option>
-                            <option>Kaduna</option>
-                            <option>Kano</option>
-                            <option>Katsina</option>
-                            <option>Kebbi</option>
-                            <option>Kogi</option>
-                            <option>Kwara</option>
-                            <option>Lagos</option>
-                            <option>Nasarawa</option>
-                            <option>Niger</option>
-                            <option>Ogun</option>
-                            <option>Ondo</option>
-                            <option>Osun</option>
-                            <option>Oyo</option>
-                            <option>Plateau</option>
-                            <option>Rivers</option>
-                            <option>Sokoto</option>
-                            <option>Taraba</option>
-                            <option>Yobe</option>
-                            <option>Zamfara</option>
-                            <option>FCT</option>
-
-                        </select>
-                    </div>
-
-
-                    <div>
-                        <label>
-                            Gender <span>*</span>
-                        </label>
-
-                        <select id="gender" required>
-
-                            <option value="">
-                                Select Gender
-                            </option>
-
-                            <option>Male</option>
-                            <option>Female</option>
-
-                        </select>
-                    </div>
-
-
-                    <div>
-                        <label>
-                            Marital Status <span>*</span>
-                        </label>
-
-                        <select id="maritalStatus" required>
-
-                            <option value="">
-                                Select Status
-                            </option>
-
-                            <option>Single</option>
-                            <option>Married</option>
-                            <option>Divorced</option>
-                            <option>Widowed</option>
-
-                        </select>
-                    </div>
-
-                </div>
+                <p>
+                    If your submission was rejected,
+                    enter your Submission ID below to
+                    review the reason, correct your
+                    information and resubmit.
+                </p>
 
             </div>
 
-
-            <!-- ACADEMIC -->
-
-            <div class="section">
-
-                <div class="section-title">
-                    02 / ACADEMIC RECORD
-                </div>
-
-                <div class="grid">
-
-                    <div>
-                        <label>
-                            Matriculation Number <span>*</span>
-                        </label>
-
-                        <input
-                            id="matricNo"
-                            type="text"
-                            required
-                            placeholder="Enter matric number"
-                        >
-                    </div>
+        </div>
 
 
-                    <div>
-                        <label>
-                            JAMB Registration Number <span>*</span>
-                        </label>
+        <div class="lookup-row">
 
-                        <input
-                            id="jambRegNo"
-                            type="text"
-                            required
-                            placeholder="Enter JAMB reg. number"
-                        >
-                    </div>
-
-
-                    <div>
-                        <label>
-                            Course of Study <span>*</span>
-                        </label>
-
-                        <input
-                            id="courseOfStudy"
-                            type="text"
-                            value="Computer Engineering"
-                            required
-                        >
-                    </div>
-
-
-                    <div>
-                        <label>
-                            Class of Degree <span>*</span>
-                        </label>
-
-                        <select id="classOfDegree" required>
-
-                            <option value="">
-                                Select Class
-                            </option>
-
-                            <option>First Class</option>
-                            <option>Second Class Upper</option>
-                            <option>Second Class Lower</option>
-                            <option>Third Class</option>
-                            <option>Pass</option>
-
-                        </select>
-                    </div>
-
-
-                    <div class="full">
-
-                        <label>
-                            Date of Graduation <span>*</span>
-                        </label>
-
-                        <input
-                            id="dateOfGraduation"
-                            type="date"
-                            required
-                        >
-
-                    </div>
-
-                </div>
-
-            </div>
-
+            <input
+                id="submissionID"
+                type="text"
+                placeholder="e.g. CPE26-NYSC-0001"
+                autocomplete="off"
+            >
 
             <button
-                class="submit"
-                id="submitButton"
-                type="submit"
+                type="button"
+                class="lookup-button"
+                id="lookupButton"
             >
-                SUBMIT MOBILIZATION DATA →
+                CHECK
             </button>
 
+        </div>
 
-            <div
-                class="loading"
-                id="loading"
-            >
-                TRANSMITTING DATA...
+
+        <!-- Loaded record -->
+
+        <div
+            class="record-box"
+            id="recordBox"
+        ></div>
+
+
+        <!-- Rejection information -->
+
+        <div
+            class="rejection-box"
+            id="rejectionBox"
+        >
+
+            <strong>
+                ⚠ APPLICATION REJECTED
+            </strong>
+
+            <div class="rejection-reason">
+
+                <strong>
+                    Reason for rejection:
+                </strong>
+
+                <div id="rejectionReasonText"></div>
+
             </div>
 
 
             <div
-                class="message"
-                id="message"
-            ></div>
+                class="admin-comment"
+                id="adminCommentContainer"
+            >
 
+                <strong>
+                    Admin comment:
+                </strong>
 
-        </form>
+                <div id="adminCommentText"></div>
 
-
-        <div class="status-link">
-
-            <a href="status.html">
-                Check your submission status →
-            </a>
+            </div>
 
         </div>
 
-    </main>
+    </div>
 
 
-    <footer class="footer">
+    <!-- ==========================================
+         MAIN FORM
+    =========================================== -->
 
-        CPE '26 • COMPUTER ENGINEERING • NYSC MOBILIZATION
+    <form id="registrationForm">
 
-    </footer>
+        <!-- PERSONAL -->
+
+        <div class="section">
+
+            <div class="section-title">
+                01 / PERSONAL IDENTITY
+            </div>
+
+            <div class="grid">
+
+                <div>
+
+                    <label>
+                        First Name <span>*</span>
+                    </label>
+
+                    <input
+                        id="firstName"
+                        type="text"
+                        required
+                        placeholder="First name"
+                    >
+
+                </div>
+
+
+                <div>
+
+                    <label>
+                        Middle Name
+                    </label>
+
+                    <input
+                        id="middlename"
+                        type="text"
+                        placeholder="Middle name"
+                    >
+
+                </div>
+
+
+                <div>
+
+                    <label>
+                        Surname <span>*</span>
+                    </label>
+
+                    <input
+                        id="surname"
+                        type="text"
+                        required
+                        placeholder="Surname"
+                    >
+
+                </div>
+
+
+                <div>
+
+                    <label>
+                        GSM Number <span>*</span>
+                    </label>
+
+                    <input
+                        id="gsmNo"
+                        type="tel"
+                        required
+                        placeholder="08012345678"
+                    >
+
+                </div>
+
+
+                <div>
+
+                    <label>
+                        State of Origin <span>*</span>
+                    </label>
+
+                    <select
+                        id="stateOfOrigin"
+                        required
+                    >
+
+                        <option value="">
+                            Select State
+                        </option>
+
+                        <option>Abia</option>
+                        <option>Adamawa</option>
+                        <option>Akwa Ibom</option>
+                        <option>Anambra</option>
+                        <option>Bauchi</option>
+                        <option>Bayelsa</option>
+                        <option>Benue</option>
+                        <option>Borno</option>
+                        <option>Cross River</option>
+                        <option>Delta</option>
+                        <option>Ebonyi</option>
+                        <option>Edo</option>
+                        <option>Ekiti</option>
+                        <option>Enugu</option>
+                        <option>Gombe</option>
+                        <option>Imo</option>
+                        <option>Jigawa</option>
+                        <option>Kaduna</option>
+                        <option>Kano</option>
+                        <option>Katsina</option>
+                        <option>Kebbi</option>
+                        <option>Kogi</option>
+                        <option>Kwara</option>
+                        <option>Lagos</option>
+                        <option>Nasarawa</option>
+                        <option>Niger</option>
+                        <option>Ogun</option>
+                        <option>Ondo</option>
+                        <option>Osun</option>
+                        <option>Oyo</option>
+                        <option>Plateau</option>
+                        <option>Rivers</option>
+                        <option>Sokoto</option>
+                        <option>Taraba</option>
+                        <option>Yobe</option>
+                        <option>Zamfara</option>
+                        <option>FCT</option>
+
+                    </select>
+
+                </div>
+
+
+                <div>
+
+                    <label>
+                        Gender <span>*</span>
+                    </label>
+
+                    <select
+                        id="gender"
+                        required
+                    >
+
+                        <option value="">
+                            Select Gender
+                        </option>
+
+                        <option>Male</option>
+                        <option>Female</option>
+
+                    </select>
+
+                </div>
+
+
+                <div>
+
+                    <label>
+                        Marital Status <span>*</span>
+                    </label>
+
+                    <select
+                        id="maritalStatus"
+                        required
+                    >
+
+                        <option value="">
+                            Select Status
+                        </option>
+
+                        <option>Single</option>
+                        <option>Married</option>
+                        <option>Divorced</option>
+                        <option>Widowed</option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ACADEMIC -->
+
+        <div class="section">
+
+            <div class="section-title">
+                02 / ACADEMIC RECORD
+            </div>
+
+            <div class="grid">
+
+                <div>
+
+                    <label>
+                        Matriculation Number <span>*</span>
+                    </label>
+
+                    <input
+                        id="matricNo"
+                        type="text"
+                        required
+                        placeholder="Enter matric number"
+                    >
+
+                </div>
+
+
+                <div>
+
+                    <label>
+                        JAMB Registration Number <span>*</span>
+                    </label>
+
+                    <input
+                        id="jambRegNo"
+                        type="text"
+                        required
+                        placeholder="Enter JAMB reg. number"
+                    >
+
+                </div>
+
+
+                <div>
+
+                    <label>
+                        Course of Study <span>*</span>
+                    </label>
+
+                    <input
+                        id="courseOfStudy"
+                        type="text"
+                        value="Computer Engineering"
+                        required
+                    >
+
+                </div>
+
+
+                <div>
+
+                    <label>
+                        Class of Degree <span>*</span>
+                    </label>
+
+                    <select
+                        id="classOfDegree"
+                        required
+                    >
+
+                        <option value="">
+                            Select Class
+                        </option>
+
+                        <option>First Class</option>
+                        <option>Second Class Upper</option>
+                        <option>Second Class Lower</option>
+                        <option>Third Class</option>
+                        <option>Pass</option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="full">
+
+                    <label>
+                        Date of Graduation <span>*</span>
+                    </label>
+
+                    <input
+                        id="dateOfGraduation"
+                        type="date"
+                        required
+                    >
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- SUBMIT -->
+
+        <button
+            class="submit"
+            id="submitButton"
+            type="submit"
+        >
+            SUBMIT MOBILIZATION DATA →
+        </button>
+
+
+        <div
+            class="loading"
+            id="loading"
+        >
+            TRANSMITTING DATA...
+        </div>
+
+
+        <div
+            class="message"
+            id="message"
+        ></div>
+
+    </form>
+
+
+    <div class="status-link">
+
+        <a href="status.html">
+            Check your submission status →
+        </a>
+
+    </div>
+
+</main>
+
+
+<footer class="footer">
+
+    CPE '26 • COMPUTER ENGINEERING • NYSC MOBILIZATION
+
+</footer>
 
 </div>
 
@@ -591,14 +1000,20 @@ select option {
 <script>
 
 /*
-=====================================================
-PASTE YOUR GOOGLE APPS SCRIPT /exec URL HERE
-=====================================================
+=========================================================
+GOOGLE APPS SCRIPT WEB APP URL
+=========================================================
 */
 
 const GOOGLE_SCRIPT_URL =
 "https://script.google.com/macros/s/AKfycbyu5ZMcfGyWk7tXGthr6J9B88HV9G3jGGr3hPCtty4grDXQ86BiYETLXDcJ3JZxUOGg/exec";
 
+
+/*
+=========================================================
+ELEMENTS
+=========================================================
+*/
 
 const form =
 document.getElementById("registrationForm");
@@ -612,150 +1027,845 @@ document.getElementById("loading");
 const message =
 document.getElementById("message");
 
+const submissionIDInput =
+document.getElementById("submissionID");
 
-form.addEventListener(
-"submit",
-async function(event) {
+const lookupButton =
+document.getElementById("lookupButton");
 
-    event.preventDefault();
+const rejectionBox =
+document.getElementById("rejectionBox");
 
+const rejectionReasonText =
+document.getElementById("rejectionReasonText");
+
+const adminCommentContainer =
+document.getElementById("adminCommentContainer");
+
+const adminCommentText =
+document.getElementById("adminCommentText");
+
+const recordBox =
+document.getElementById("recordBox");
+
+
+/*
+=========================================================
+RESUBMISSION MODE
+=========================================================
+*/
+
+let resubmissionMode = false;
+
+let originalSubmissionID = "";
+
+
+/*
+=========================================================
+HELPER: SHOW MESSAGE
+=========================================================
+*/
+
+function showMessage(
+    text,
+    type
+) {
+
+    message.className =
+        "message " + type;
+
+    message.innerHTML =
+        text;
 
     message.style.display =
-    "none";
+        "block";
+
+}
 
 
-    const data = {
+/*
+=========================================================
+HELPER: GET FORM DATA
+=========================================================
+*/
+
+function getFormData() {
+
+    return {
 
         matricNo:
-        document.getElementById("matricNo").value.trim(),
+        document
+        .getElementById("matricNo")
+        .value
+        .trim(),
 
         firstName:
-        document.getElementById("firstName").value.trim(),
+        document
+        .getElementById("firstName")
+        .value
+        .trim(),
 
         middlename:
-        document.getElementById("middlename").value.trim(),
+        document
+        .getElementById("middlename")
+        .value
+        .trim(),
 
         surname:
-        document.getElementById("surname").value.trim(),
+        document
+        .getElementById("surname")
+        .value
+        .trim(),
 
         gsmNo:
-        document.getElementById("gsmNo").value.trim(),
+        document
+        .getElementById("gsmNo")
+        .value
+        .trim(),
 
         stateOfOrigin:
-        document.getElementById("stateOfOrigin").value,
+        document
+        .getElementById("stateOfOrigin")
+        .value,
 
         classOfDegree:
-        document.getElementById("classOfDegree").value,
+        document
+        .getElementById("classOfDegree")
+        .value,
 
         dateOfGraduation:
-        document.getElementById("dateOfGraduation").value,
+        document
+        .getElementById("dateOfGraduation")
+        .value,
 
         gender:
-        document.getElementById("gender").value,
+        document
+        .getElementById("gender")
+        .value,
 
         maritalStatus:
-        document.getElementById("maritalStatus").value,
+        document
+        .getElementById("maritalStatus")
+        .value,
 
         jambRegNo:
-        document.getElementById("jambRegNo").value.trim(),
+        document
+        .getElementById("jambRegNo")
+        .value
+        .trim(),
 
         courseOfStudy:
-        document.getElementById("courseOfStudy").value.trim()
+        document
+        .getElementById("courseOfStudy")
+        .value
+        .trim()
 
     };
 
-
-    button.disabled =
-    true;
-
-    button.innerText =
-    "SUBMITTING...";
-
-    loading.style.display =
-    "block";
+}
 
 
-    try {
+/*
+=========================================================
+HELPER: LOAD DATA INTO FORM
+=========================================================
+*/
 
-        const response =
-        await fetch(
-            GOOGLE_SCRIPT_URL,
-            {
-                method: "POST",
+function loadDataIntoForm(data) {
 
-                headers: {
-                    "Content-Type":
-                    "text/plain;charset=utf-8"
-                },
+    document.getElementById("matricNo").value =
+        data.matricNo || "";
 
-                body:
-                JSON.stringify(data)
-            }
+    document.getElementById("firstName").value =
+        data.firstName || "";
+
+    document.getElementById("middlename").value =
+        data.middlename || "";
+
+    document.getElementById("surname").value =
+        data.surname || "";
+
+    document.getElementById("gsmNo").value =
+        data.gsmNo || "";
+
+    document.getElementById("stateOfOrigin").value =
+        data.stateOfOrigin || "";
+
+    document.getElementById("classOfDegree").value =
+        data.classOfDegree || "";
+
+    document.getElementById("dateOfGraduation").value =
+        formatDateForInput(
+            data.dateOfGraduation
         );
 
+    document.getElementById("gender").value =
+        data.gender || "";
 
-        const result =
-        await response.json();
+    document.getElementById("maritalStatus").value =
+        data.maritalStatus || "";
+
+    document.getElementById("jambRegNo").value =
+        data.jambRegNo || "";
+
+    document.getElementById("courseOfStudy").value =
+        data.courseOfStudy ||
+        "Computer Engineering";
+
+}
 
 
-        if (!result.success) {
+/*
+=========================================================
+HELPER: DATE FORMAT
+=========================================================
+*/
 
-            throw new Error(
-                result.message
+function formatDateForInput(value) {
+
+    if (!value) {
+        return "";
+    }
+
+    /*
+     * Google Apps Script may return a formatted date.
+     * Try to convert it into YYYY-MM-DD.
+     */
+
+    const date =
+        new Date(value);
+
+    if (!isNaN(date.getTime())) {
+
+        const year =
+            date.getFullYear();
+
+        const month =
+            String(
+                date.getMonth() + 1
+            ).padStart(2, "0");
+
+        const day =
+            String(
+                date.getDate()
+            ).padStart(2, "0");
+
+        return (
+            year +
+            "-" +
+            month +
+            "-" +
+            day
+        );
+
+    }
+
+    /*
+     * If already YYYY-MM-DD
+     */
+
+    if (
+        /^\d{4}-\d{2}-\d{2}$/.test(value)
+    ) {
+
+        return value;
+
+    }
+
+    return "";
+
+}
+
+
+/*
+    =========================================================
+CHECK SUBMISSION STATUS
+=========================================================
+*/
+
+lookupButton.addEventListener(
+    "click",
+    async function() {
+
+        const id =
+            submissionIDInput
+            .value
+            .trim();
+
+        if (!id) {
+
+            showMessage(
+                "Please enter your Submission ID.",
+                "error"
+            );
+
+            return;
+
+        }
+
+
+        lookupButton.disabled =
+            true;
+
+        lookupButton.innerText =
+            "CHECKING...";
+
+
+        rejectionBox.style.display =
+            "none";
+
+        recordBox.style.display =
+            "none";
+
+
+        try {
+
+            const url =
+                GOOGLE_SCRIPT_URL +
+                "?action=status&id=" +
+                encodeURIComponent(id);
+
+
+            const response =
+                await fetch(url);
+
+
+            const result =
+                await response.json();
+
+
+            if (!result.success) {
+
+                throw new Error(
+                    result.message ||
+                    "Unable to retrieve submission."
+                );
+
+            }
+
+
+            /*
+             * PENDING
+             */
+
+            if (
+                result.status ===
+                "Pending"
+            ) {
+
+                showMessage(
+
+                    "Your submission <strong>" +
+                    result.submissionID +
+                    "</strong> is currently " +
+                    "<strong>PENDING REVIEW</strong>." +
+                    "<br><br>" +
+                    "You cannot edit the submission " +
+                    "until it has been reviewed.",
+
+                    "warning"
+
+                );
+
+                recordBox.innerHTML =
+                    "Submission ID: <strong>" +
+                    result.submissionID +
+                    "</strong><br>" +
+                    "Name: <strong>" +
+                    result.name +
+                    "</strong><br>" +
+                    "Status: <strong>PENDING</strong>";
+
+                recordBox.style.display =
+                    "block";
+
+                return;
+
+            }
+
+
+            /*
+             * APPROVED
+             */
+
+            if (
+                result.status ===
+                "Approved"
+            ) {
+
+                showMessage(
+
+                    "✓ Your submission <strong>" +
+                    result.submissionID +
+                    "</strong> has been " +
+                    "<strong>APPROVED</strong>." +
+                    "<br><br>" +
+                    "No further correction is required.",
+
+                    "success"
+
+                );
+
+                recordBox.innerHTML =
+                    "Submission ID: <strong>" +
+                    result.submissionID +
+                    "</strong><br>" +
+                    "Name: <strong>" +
+                    result.name +
+                    "</strong><br>" +
+                    "Status: <strong>APPROVED</strong>";
+
+                recordBox.style.display =
+                    "block";
+
+                return;
+
+            }
+
+
+            /*
+             * REJECTED
+             */
+
+            if (
+                result.status ===
+                "Rejected"
+            ) {
+
+                resubmissionMode =
+                    true;
+
+                originalSubmissionID =
+                    result.submissionID;
+
+
+                /*
+                 * Load existing data if supplied
+                 */
+
+                if (result.matricNo) {
+
+                    loadDataIntoForm(result);
+
+                }
+
+
+                /*
+                 * Show record information
+                 */
+
+                recordBox.innerHTML =
+                    "Submission ID: <strong>" +
+                    result.submissionID +
+                    "</strong><br>" +
+                    "Name: <strong>" +
+                    result.name +
+                    "</strong><br>" +
+                    "Status: <strong>REJECTED — CORRECTION REQUIRED</strong>";
+
+                recordBox.style.display =
+                    "block";
+
+
+                /*
+                 * Show rejection reason
+                 */
+
+                rejectionReasonText.innerHTML =
+                    result.rejectionReason ||
+                    "Please review your information carefully.";
+
+                rejectionBox.style.display =
+                    "block";
+
+
+                /*
+                 * Admin comment
+                 */
+
+                if (
+                    result.adminComment &&
+                    result.adminComment.trim() !== ""
+                ) {
+
+                    adminCommentText.innerText =
+                        result.adminComment;
+
+                    adminCommentContainer.style.display =
+                        "block";
+
+                } else {
+
+                    adminCommentContainer.style.display =
+                        "none";
+
+                }
+
+
+                showMessage(
+
+                    "Your submission was rejected. " +
+                    "Please correct the information identified " +
+                    "above and resubmit.",
+
+                    "error"
+
+                );
+
+
+                /*
+                 * Change button
+                 */
+
+                button.innerText =
+                    "RESUBMIT CORRECTED INFORMATION →";
+
+
+                /*
+                 * Scroll to form
+                 */
+
+                setTimeout(
+                    function() {
+
+                        form.scrollIntoView({
+                            behavior: "smooth",
+                            block: "start"
+                        });
+
+                    },
+                    300
+                );
+
+            }
+
+        } catch(error) {
+
+            showMessage(
+                "⚠ " +
+                error.message,
+                "error"
             );
 
         }
 
 
-        message.className =
-        "message success";
+        lookupButton.disabled =
+            false;
 
-        message.innerHTML =
-
-        "✓ MOBILIZATION DATA RECEIVED<br><br>" +
-
-        "Your Submission ID:<br>" +
-
-        "<strong>" +
-        result.submissionID +
-        "</strong><br><br>" +
-
-        "Status: <strong>PENDING REVIEW</strong><br><br>" +
-
-        "Please save your Submission ID. " +
-        "You will need it to check your status.";
-
-        message.style.display =
-        "block";
-
-
-        form.reset();
-
-
-    } catch(error) {
-
-        message.className =
-        "message error";
-
-        message.innerHTML =
-        "⚠ " + error.message;
-
-        message.style.display =
-        "block";
+        lookupButton.innerText =
+            "CHECK";
 
     }
+);
 
 
-    button.disabled =
-    false;
+/*
+=========================================================
+SUBMISSION FORM
+=========================================================
+*/
 
-    button.innerText =
-    "SUBMIT MOBILIZATION DATA →";
+form.addEventListener(
+    "submit",
+    async function(event) {
 
-    loading.style.display =
-    "none";
+        event.preventDefault();
 
-});
+
+        message.style.display =
+            "none";
+
+
+        /*
+         * Browser validation
+         */
+
+        if (!form.checkValidity()) {
+
+            form.reportValidity();
+
+            return;
+
+        }
+
+
+        const formData =
+            getFormData();
+
+
+        /*
+         * Determine action
+         */
+
+        let data;
+
+
+        if (
+            resubmissionMode &&
+            originalSubmissionID
+        ) {
+
+            data = {
+
+                action:
+                    "resubmit",
+
+                originalSubmissionID:
+                    originalSubmissionID,
+
+                ...formData
+
+            };
+
+        } else {
+
+            data = {
+
+                action:
+                    "submit",
+
+                ...formData
+
+            };
+
+        }
+
+
+        /*
+         * Disable button
+         */
+
+        button.disabled =
+            true;
+
+        loading.style.display =
+            "block";
+
+
+        if (resubmissionMode) {
+
+            button.innerText =
+                "RESUBMITTING...";
+
+        } else {
+
+            button.innerText =
+                "SUBMITTING...";
+
+        }
+
+
+        try {
+
+            const response =
+                await fetch(
+                    GOOGLE_SCRIPT_URL,
+                    {
+
+                        method:
+                            "POST",
+
+                        headers: {
+
+                            "Content-Type":
+                                "text/plain;charset=utf-8"
+
+                        },
+
+                        body:
+                            JSON.stringify(data)
+
+                    }
+                );
+
+
+            const result =
+                await response.json();
+
+
+            if (!result.success) {
+
+                throw new Error(
+                    result.message ||
+                    "Submission failed."
+                );
+
+            }
+
+
+            /*
+             * RESUBMISSION SUCCESS
+             */
+
+            if (resubmissionMode) {
+
+                showMessage(
+
+                    "✓ CORRECTION RECEIVED<br><br>" +
+
+                    "Your corrected information has been " +
+                    "successfully resubmitted.<br><br>" +
+
+                    "Submission ID:<br>" +
+
+                    "<strong>" +
+                    result.submissionID +
+                    "</strong><br><br>" +
+
+                    "Status: " +
+                    "<strong>PENDING REVIEW</strong><br><br>" +
+
+                    "Your existing submission has been " +
+                    "updated. A new submission record was " +
+                    "not created.",
+
+                    "success"
+
+                );
+
+
+                /*
+                 * Reset correction mode
+                 */
+
+                resubmissionMode =
+                    false;
+
+                originalSubmissionID =
+                    "";
+
+
+                submissionIDInput.value =
+                    "";
+
+
+                rejectionBox.style.display =
+                    "none";
+
+                recordBox.style.display =
+                    "none";
+
+
+                button.innerText =
+                    "SUBMIT MOBILIZATION DATA →";
+
+
+                /*
+                 * Clear form
+                 */
+
+                form.reset();
+
+
+                document.getElementById(
+                    "courseOfStudy"
+                ).value =
+                    "Computer Engineering";
+
+
+            }
+
+            /*
+             * NEW SUBMISSION SUCCESS
+             */
+
+            else {
+
+                showMessage(
+
+                    "✓ MOBILIZATION DATA RECEIVED<br><br>" +
+
+                    "Your Submission ID:<br>" +
+
+                    "<strong>" +
+                    result.submissionID +
+                    "</strong><br><br>" +
+
+                    "Status: " +
+                    "<strong>PENDING REVIEW</strong><br><br>" +
+
+                    "Please save your Submission ID. " +
+                    "You will need it to check your status.",
+
+                    "success"
+
+                );
+
+
+                form.reset();
+
+
+                document.getElementById(
+                    "courseOfStudy"
+                ).value =
+                    "Computer Engineering";
+
+            }
+
+        } catch(error) {
+
+            showMessage(
+
+                "⚠ " +
+                (
+                    error.message ||
+                    "Unable to submit information."
+                ),
+
+                "error"
+
+            );
+
+        }
+
+
+        button.disabled =
+            false;
+
+        loading.style.display =
+            "none";
+
+
+        if (!resubmissionMode) {
+
+            button.innerText =
+                "SUBMIT MOBILIZATION DATA →";
+
+        } else {
+
+            button.innerText =
+                "RESUBMIT CORRECTED INFORMATION →";
+
+        }
+
+    }
+);
+
+
+/*
+=========================================================
+ENTER KEY FOR SUBMISSION ID
+=========================================================
+*/
+
+submissionIDInput.addEventListener(
+    "keydown",
+    function(event) {
+
+        if (
+            event.key ===
+            "Enter"
+        ) {
+
+            event.preventDefault();
+
+            lookupButton.click();
+
+        }
+
+    }
+);
 
 </script>
 
