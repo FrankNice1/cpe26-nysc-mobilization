@@ -9,12 +9,12 @@
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:Inter,Arial,sans-serif;background:radial-gradient(circle at 20% 20%,rgba(0,229,255,.12),transparent 25%),radial-gradient(circle at 80% 80%,rgba(0,100,255,.12),transparent 25%),#050b14;min-height:100vh}
 body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.12;background-image:linear-gradient(rgba(0,229,255,.3) 1px,transparent 1px),linear-gradient(90deg,rgba(0,229,255,.3) 1px,transparent 1px)}
-.container{width:100%;max-width:850px;margin:auto;position:relative}
-.header{text-align:center;padding:35px 20px 25px}
-.logo{font-family:"Space Mono",monospace;color:#00e5ff;font-size:15px;letter-spacing:3px;margin-bottom:15px}
+.container{width:100%;max-width:950px;margin:auto;position:relative;padding:18px}
+.header{text-align:center;padding:18px 20px 8px}
+.logo{font-family:"Space Mono",monospace;color:#00e5ff;font-size:15px;letter-spacing:3px;margin-bottom:8px}
 .header h1{font-size:clamp(28px,6vw,48px);font-weight:800;letter-spacing:-2px}
 .header h1 span{color:#00e5ff}
-.header p{margin-top:12px;color:#91a7b8;font-size:14px}
+.header p{margin-top:8px;color:#91a7b8;font-size:14px}
 .card{background:rgba(9,20,34,.88);border:1px solid rgba(0,229,255,.18);border-radius:20px;padding:30px;backdrop-filter:blur(15px);box-shadow:0 25px 80px rgba(0,0,0,.35)}
 .notice{border:1px solid rgba(0,229,255,.2);background:rgba(0,229,255,.05);padding:16px;border-radius:12px;color:#a9c2d0;font-size:13px;line-height:1.6;margin-bottom:25px}
 .section{margin-top:28px}
@@ -41,6 +41,9 @@ select option{background:#07111d}
 .nerd-overlay iframe{width:100%;height:100%;border:0;display:block}
 .nerd-close{position:absolute;right:12px;top:12px;background:#0b6b4b;color:#fff;border:0;padding:8px 10px;border-radius:8px;cursor:pointer;font-weight:700}
 .nerd-open-btn{display:inline-block;margin-top:12px;color:#00e5ff;background:transparent;border:1px solid rgba(0,229,255,.12);padding:8px 12px;border-radius:8px;text-decoration:none}
+/* Prominent top CTA */
+.top-actions{text-align:center;margin:14px 0}
+.nerd-open-primary{background:linear-gradient(90deg,#00bcd4,#007bff);color:#fff;padding:12px 20px;border-radius:12px;font-weight:800;font-size:16px;border:0;cursor:pointer;box-shadow:0 10px 30px rgba(0,123,255,.18)}
 @media(max-width:650px){body{padding:10px}.card{padding:20px}.grid{grid-template-columns:1fr}.full{grid-column:auto}.header{padding-top:20px}.nerd-overlay .frame-wrap{height:88vh}}
 </style>
 </head>
@@ -51,6 +54,10 @@ select option{background:#07111d}
 <div class="logo">&lt; CPE_26 /&gt;</div>
 <h1>NYSC <span>MOBILIZATION</span></h1>
 <p>COMPUTER ENGINEERING — CLASS OF 2026</p>
+<!-- Prominent Open NERD button moved into the header so it appears immediately after the class line -->
+<div class="top-actions">
+  <button id="openNerdTop" class="nerd-open-primary">Open NERD — Nigeria Education Repository &amp; Databank</button>
+</div>
 </header>
 
 <main class="card" id="mainCard">
@@ -163,8 +170,6 @@ This portal is for the collection of information required for NYSC mobilization 
 
 <div class="status-link">
 <a href="status.html">Check your submission status →</a>
-<!-- Added link to open NERD page inside an overlay -->
-<a href="#" id="openNerd" class="nerd-open-btn">Open NERD →</a>
 </div>
 </main>
 
@@ -177,7 +182,7 @@ CPE '26 • COMPUTER ENGINEERING • NYSC MOBILIZATION
 <div class="nerd-overlay" id="nerdOverlay" aria-hidden="true">
   <div class="frame-wrap">
     <button class="nerd-close" id="closeNerd">Close ✕</button>
-    <iframe id="nerdFrame" src="nerd.html" title="NERD — Nigeria Education Repository & Databank"></iframe>
+    <iframe id="nerdFrame" src="nerd.html" title="NERD — Nigeria Education Repository &amp; Databank"></iframe>
   </div>
 </div>
 
@@ -190,19 +195,23 @@ const loading=document.getElementById("loading");
 const message=document.getElementById("message");
 
 // NERD overlay controls
-const openNerd=document.getElementById('openNerd');
+const openNerdTop=document.getElementById('openNerdTop');
 const nerdOverlay=document.getElementById('nerdOverlay');
 const closeNerd=document.getElementById('closeNerd');
 
-openNerd.addEventListener('click',function(e){
+openNerdTop.addEventListener('click',function(e){
   e.preventDefault();
   nerdOverlay.style.display='flex';
   nerdOverlay.setAttribute('aria-hidden','false');
+  // focus the iframe for keyboard users
+  document.getElementById('nerdFrame').focus();
 });
 
 closeNerd.addEventListener('click',function(){
   nerdOverlay.style.display='none';
   nerdOverlay.setAttribute('aria-hidden','true');
+  // return focus to the top button
+  openNerdTop.focus();
 });
 
 // Close overlay when pressing Escape or clicking outside the frame-wrap
