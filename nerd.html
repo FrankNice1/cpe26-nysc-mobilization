@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#073b2a">
+<title>NERD | Nigeria Education Repository & Databank</title>
+
+<style>
+*{box-sizing:border-box}
+body{
+ margin:0;
+ font-family:Arial,Helvetica,sans-serif;
+ background:#f4f7f6;
+ color:#1f2937
+}
+header{
+ background:linear-gradient(135deg,#073b2a,#0b6b4b);
+ color:#fff;
+ padding:25px 15px;
+ text-align:center
+}
+header h1{margin:0;font-size:28px}
+header p{margin:7px 0 0;opacity:.9}
+
+.container{
+ max-width:1000px;
+ margin:25px auto;
+ padding:0 15px
+}
+.card{
+ background:#fff;
+ padding:22px;
+ border-radius:12px;
+ box-shadow:0 3px 15px #0001;
+ margin-bottom:20px
+}
+h2,h3{color:#073b2a}
+.notice{
+ background:#eef7f2;
+ border-left:4px solid #0b6b4b;
+ padding:12px;
+ margin-bottom:20px;
+ line-height:1.5
+}
+.grid{
+ display:grid;
+ grid-template-columns:repeat(2,1fr);
+ gap:15px
+}
+.full{grid-column:1/-1}
+label{
+ display:block;
+ font-weight:bold;
+ margin-bottom:5px
+}
+input,select,textarea{
+ width:100%;
+ padding:12px;
+ border:1px solid #cbd5d1;
+ border-radius:7px;
+ outline:none;
+ font-size:15px;
+ background:#fff
+}
+input:focus,select:focus,textarea:focus{
+ border-color:#0b6b4b;
+ box-shadow:0 0 0 2px #0b6b4b22
+}
+textarea{min-height:90px;resize:vertical}
+button{
+ border:0;
+ border-radius:7px;
+ padding:12px 18px;
+ background:#073b2a;
+ color:#fff;
+ font-weight:bold;
+ cursor:pointer
+}
+button:hover{opacity:.9}
+button.secondary{background:#555}
+button.success{background:#087443}
+button.danger{background:#b42318}
+.actions{
+ display:flex;
+ gap:10px;
+ flex-wrap:wrap;
+ margin-top:20px
+}
+.required{color:#b42318}
+.small{
+ font-size:13px;
+ color:#667085;
+ margin-top:5px
+}
+.statusbox{
+ display:none;
+ padding:15px;
+ border-radius:8px;
+ margin-top:15px;
+ line-height:1.6
+}
+.pending{background:#fff4cc}
+.approved{background:#d9f7e8}
+.rejected{background:#ffe0e0}
+.result{
+ display:none;
+ text-align:center;
+ padding:25px;
+ border-radius:10px;
+ background:#eef7f2
+}
+.result h2{margin-top:0}
+.id{
+ font-size:22px;
+ font-weight:bold;
+ color:#073b2a;
+ margin:15px 0
+}
+.spinner{
+ display:none;
+ width:18px;
+ height:18px;
+ border:3px solid #ffffff66;
+ border-top-color:#fff;
+ border-radius:50%;
+ animation:spin .8s linear infinite;
+ vertical-align:middle;
+ margin-right:7px
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+footer{
+ text-align:center;
+ padding:25px;
+ color:#667085;
+ font-size:13px
+}
+@media(max-width:700px){
+ .grid{grid-template-columns:1fr}
+ .full{grid-column:auto}
+ header h1{font-size:23px}
+ .card{padding:16px}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>NERD</h1>
+<p>Nigeria Education Repository & Databank</p>
+</header>
+
+<div class="container">
+
+<div class="card">
+<div class="notice">
+<strong>Important:</strong> Please enter your academic information exactly as it appears
+on your official school records. Check all information carefully before submitting.
+</div>
+
+<form id="nerdForm">
+
+<h2>Student Information</h2>
+
+<div class="grid">
+
+<div>
+<label>NIN <span class="required">*</span></label>
+<input name="NIN" id="NIN" required maxlength="11"
+placeholder="11-digit NIN" inputmode="numeric">
+</div>
+
+<div>
+<label>Matriculation Number <span class="required">*</span></label>
+<input name="MatricNo" id="MatricNo" required
+placeholder="e.g. FOE/22/003172">
+</div>
+
+<div>
+<label>Student Email <span class="required">*</span></label>
+<input type="email" name="StudentEmail" id="StudentEmail" required
+placeholder="student@example.com">
+</div>
+
+<div>
+<label>Phone Number <span class="required">*</span></label>
+<input name="PhoneNumber" id="PhoneNumber" required
+placeholder="08012345678" inputmode="tel">
+</div>
+
+<div>
+<label>First Name <span class="required">*</span></label>
+<input name="FirstName" required>
+</div>
+
+<div>
+<label>Middle Name</label>
+<input name="MiddleName">
+</div>
+
+<div>
+<label>Surname <span class="required">*</span></label>
+<input name="Surname" required>
+</div>
+
+<div>
+<label>Sex <span class="required">*</span></label>
+<select name="Sex" required>
+<option value="">Select</option>
+<option>Male</option>
+<option>Female</option>
+</select>
+</div>
+
+<div>
+<label>Date of Birth <span class="required">*</span></label>
+<input type="date" name="DateOfBirth" required>
+</div>
+
+<div>
+<label>State <span class="required">*</span></label>
+<select name="State" required>
+<option value="">Select State</option>
+<option>Abia</option><option>Adamawa</option>
+<option>Akwa Ibom</option><option>Anambra</option>
+<option>Bauchi</option><option>Bayelsa</option>
+<option>Benue</option><option>Borno</option>
+<option>Cross River</option><option>Delta</option>
+<option>Ebonyi</option><option>Edo</option>
+<option>Ekiti</option><option>Enugu</option>
+<option>Gombe</option><option>Imo</option>
+<option>Jigawa</option><option>Kaduna</option>
+<option>Kano</option><option>Katsina</option>
+<option>Kebbi</option><option>Kogi</option>
+<option>Kwara</option><option>Lagos</option>
+<option>Nasarawa</option><option>Niger</option>
+<option>Ogun</option><option>Ondo</option>
+<option>Osun</option><option>Oyo</option>
+<option>Plateau</option><option>Rivers</option>
+<option>Sokoto</option><option>Taraba</option>
+<option>Yobe</option><option>Zamfara</option>
+<option>FCT</option>
+</select>
+</div>
+
+</div>
+
+<h2>Academic Information</h2>
+
+<div class="grid">
+
+<div>
+<label>Award Short Title <span class="required">*</span></label>
+<input name="AwardShortTitle" required
+placeholder="e.g. B.Eng.">
+</div>
+
+<div>
+<label>Class of Degree <span class="required">*</span></label>
+<select name="ClassOfDegree" required>
+<option value="">Select</option>
+<option>First Class</option>
+<option>Second Class Upper</option>
+<option>Second Class Lower</option>
+<option>Third Class</option>
+<option>Pass</option>
+</select>
+</div>
+
+<div>
+<label>Final CGPA <span class="required">*</span></label>
+<input type="number" name="FinalCGPA" required
+step="0.01" min="0" max="10"
+placeholder="e.g. 4.25">
+</div>
+
+<div>
+<label>Graduation Session <span class="required">*</span></label>
+<input name="GraduationSession" required
+placeholder="e.g. 2025/2026">
+</div>
+
+<div>
+<label>Graduation Date <span class="required">*</span></label>
+<input type="date" name="GraduationDate" required>
+</div>
+
+<div>
+<label>Grade Approval Date <span class="required">*</span></label>
+<input type="date" name="GradeApprovalDate" required>
+</div>
+
+<div>
+<label>Admission Date <span class="required">*</span></label>
+<input type="date" name="AdmissionDate" required>
+</div>
+
+<div>
+<label>Mode of Entry <span class="required">*</span></label>
+<select name="ModeOfEntry" required>
+<option value="">Select</option>
+<option>UTME</option>
+<option>Direct Entry</option>
+<option>Transfer</option>
+<option>Other</option>
+</select>
+</div>
+
+<div>
+<label>Faculty Name <span class="required">*</span></label>
+<input name="FacultyName" required>
+</div>
+
+<div>
+<label>Department Name <span class="required">*</span></label>
+<input name="DepartmentName" required>
+</div>
+
+<div>
+<label>Graduate List Reference</label>
+<input name="GraduateListReference"
+placeholder="Optional">
+</div>
+
+<div class="full">
+<label>Remarks</label>
+<textarea name="Remarks"
+placeholder="Additional academic information, if applicable"></textarea>
+</div>
+
+</div>
+
+<div class="actions">
+<button type="submit" id="submitBtn">
+<span class="spinner" id="spinner"></span>
+<span id="btnText">Submit NERD Record</span>
+</button>
+<button type="reset" class="secondary">Clear Form</button>
+</div>
+
+</form>
+</div>
+
+<div class="card result" id="result">
+<h2>Submission Successful</h2>
+<p>Your NERD record has been submitted successfully.</p>
+<p>Your Submission ID is:</p>
+<div class="id" id="submissionID"></div>
+<p>Please keep this ID for checking your submission status.</p>
+<button onclick="newSubmission()">Submit Another Record</button>
+</div>
+
+<div class="card">
+<h2>Check Submission Status</h2>
+
+<div class="grid">
+<div>
+<label>Submission ID</label>
+<input id="statusID" placeholder="e.g. NERD-2026-00001">
+</div>
+<div style="display:flex;align-items:end">
+<button onclick="checkStatus()">Check Status</button>
+</div>
+</div>
+
+<div id="statusBox" class="statusbox"></div>
+</div>
+
+</div>
+
+<footer>
+NERD — Nigeria Education Repository & Databank
+</footer>
+
+<script>
+
+/* =========================================================
+   PUT YOUR GOOGLE APPS SCRIPT /exec URL HERE
+   ========================================================= */
+
+const GOOGLE_SCRIPT_URL =
+"https://script.google.com/macros/s/AKfycbyu5ZMcfGyWk7tXGthr6J9B88HV9G3jGGr3hPCtty4grDXQ86BiYETLXDcJ3JZxUOGg/exec";
+
+
+const form=document.getElementById("nerdForm");
+const submitBtn=document.getElementById("submitBtn");
+const spinner=document.getElementById("spinner");
+const btnText=document.getElementById("btnText");
+
+
+/* ---------- Submit NERD Record ---------- */
+
+form.addEventListener("submit",async function(e){
+
+ e.preventDefault();
+
+ const data={
+   action:"nerdSubmit"
+ };
+
+ new FormData(form).forEach((value,key)=>{
+   data[key]=String(value).trim();
+ });
+
+ if(data.NIN.length!==11){
+   alert("NIN must contain exactly 11 digits.");
+   return;
+ }
+
+ if(!/^\d{11}$/.test(data.NIN)){
+   alert("NIN must contain numbers only.");
+   return;
+ }
+
+ if(data.FinalCGPA!=="" &&
+    (Number(data.FinalCGPA)<0 || Number(data.FinalCGPA)>10)){
+   alert("Please enter a valid CGPA.");
+   return;
+ }
+
+ if(!confirm(
+   "Please confirm that all information entered is correct before submitting."
+ )){
+   return;
+ }
+
+ submitBtn.disabled=true;
+ spinner.style.display="inline-block";
+ btnText.textContent="Submitting...";
+
+ try{
+
+   const response=await fetch(GOOGLE_SCRIPT_URL,{
+     method:"POST",
+     headers:{
+       "Content-Type":"text/plain;charset=utf-8"
+     },
+     body:JSON.stringify(data)
+   });
+
+   const result=await response.json();
+
+   if(result.success){
+
+     form.parentElement.style.display="none";
+
+     document.getElementById("result").style.display="block";
+
+     document.getElementById("submissionID").textContent=
+       result.submissionID||"Submitted";
+
+     document.getElementById("statusID").value=
+       result.submissionID||"";
+
+     window.scrollTo({
+       top:0,
+       behavior:"smooth"
+     });
+
+   }else{
+
+     alert(result.message||"Submission failed.");
+
+   }
+
+ }catch(err){
+
+   console.error(err);
+
+   alert(
+     "Unable to connect to the NERD server. " +
+     "Please check your internet connection and try again."
+   );
+
+ }finally{
+
+   submitBtn.disabled=false;
+   spinner.style.display="none";
+   btnText.textContent="Submit NERD Record";
+
+ }
+
+});
+
+
+/* ---------- Check Status ---------- */
+
+async function checkStatus(){
+
+ const id=document.getElementById("statusID").value.trim();
+
+ if(!id){
+   alert("Enter your Submission ID.");
+   return;
+ }
+
+ const box=document.getElementById("statusBox");
+
+ box.style.display="block";
+ box.className="statusbox";
+ box.innerHTML="Checking status...";
+
+ try{
+
+   const url=
+     GOOGLE_SCRIPT_URL+
+     "?action=nerdStatus&submissionID="+
+     encodeURIComponent(id);
+
+   const response=await fetch(url);
+   const result=await response.json();
+
+   if(!result.success){
+
+     box.className="statusbox rejected";
+     box.innerHTML=
+       "<strong>Not Found</strong><br>"+
+       escapeHTML(result.message||"Submission not found.");
+
+     return;
+   }
+
+   const status=result.status||"Pending";
+
+   if(status==="Approved"){
+     box.className="statusbox approved";
+     box.innerHTML=
+       "<strong>✓ APPROVED</strong><br>"+
+       "Your NERD record has been approved.";
+   }
+
+   else if(status==="Rejected"){
+
+     box.className="statusbox rejected";
+
+     box.innerHTML=
+       "<strong>✗ REJECTED</strong><br>"+
+       "<strong>Reason:</strong> "+
+       escapeHTML(result.rejectionReason||"No reason provided.")+
+       "<br><strong>Admin Comment:</strong> "+
+       escapeHTML(result.adminComment||"");
+
+   }
+
+   else{
+
+     box.className="statusbox pending";
+
+     box.innerHTML=
+       "<strong>⏳ PENDING</strong><br>"+
+       "Your NERD record has been received and is awaiting review.";
+
+   }
+
+ }catch(err){
+
+   box.className="statusbox rejected";
+   box.innerHTML=
+     "<strong>Error</strong><br>"+
+     "Unable to connect to the NERD server.";
+
+ }
+
+}
+
+
+/* ---------- New Submission ---------- */
+
+function newSubmission(){
+
+ document.getElementById("result").style.display="none";
+ form.parentElement.style.display="block";
+
+ form.reset();
+
+ window.scrollTo({
+   top:0,
+   behavior:"smooth"
+ });
+
+}
+
+
+/* ---------- Escape HTML ---------- */
+
+function escapeHTML(value){
+
+ return String(value||"").replace(/[&<>"']/g,function(m){
+
+   return {
+     "&":"&amp;",
+     "<":"&lt;",
+     ">":"&gt;",
+     '"':"&quot;",
+     "'":"&#039;"
+   }[m];
+
+ });
+
+}
+
+
+/* ---------- Prevent accidental duplicate submission ---------- */
+
+window.addEventListener("beforeunload",function(e){
+
+ if(submitBtn.disabled){
+
+   e.preventDefault();
+   e.returnValue="";
+
+ }
+
+});
+
+</script>
+
+</body>
+</html>
