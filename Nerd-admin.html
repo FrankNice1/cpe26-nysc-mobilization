@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>NERD Admin Console</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#f4f6f8;color:#222}
+header{background:#073b2a;color:#fff;padding:16px;text-align:center}
+.container{max-width:1200px;margin:20px auto;padding:0 15px}
+.card{background:#fff;border-radius:10px;padding:18px;margin-bottom:18px;box-shadow:0 2px 10px #0001}
+input,select,textarea,button{font:inherit;padding:11px;border:1px solid #ccc;border-radius:6px}
+input,select,textarea{width:100%;margin:5px 0 10px}
+button{background:#073b2a;color:#fff;border:0;cursor:pointer}
+button:hover{opacity:.9}.danger{background:#b42318}.success{background:#087443}
+.hidden{display:none}.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.stat{text-align:center;padding:15px;border-radius:8px;background:#eef5f1}.stat b{display:block;font-size:25px}
+.toolbar{display:grid;grid-template-columns:2fr 1fr 1fr;gap:10px}
+.table{overflow:auto}table{width:100%;border-collapse:collapse;background:#fff}
+th,td{padding:10px;border-bottom:1px solid #eee;text-align:left;white-space:nowrap}
+th{background:#f0f3f2}.badge{padding:5px 8px;border-radius:12px;font-size:12px}
+.pending{background:#fff3cd}.approved{background:#d1fae5}.rejected{background:#fee2e2}
+.modal{position:fixed;inset:0;background:#0008;display:none;align-items:center;justify-content:center;padding:15px}
+.modalbox{background:#fff;max-width:700px;width:100%;max-height:90vh;overflow:auto;padding:20px;border-radius:10px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.actions{display:flex;gap:8px;flex-wrap:wrap}
+#msg{margin-top:10px;font-weight:bold}
+@media(max-width:700px){.grid,.toolbar,.row{grid-template-columns:1fr}.table{font-size:13px}}
+</style>
+</head>
+
+<body>
+<header><h2>NERD Admin Console</h2></header>
+
+<div class="container">
+
+<div id="login" class="card">
+<h3>Administrator Login</h3>
+<input id="user" placeholder="Username">
+<input id="pass" type="password" placeholder="Password">
+<button onclick="login()">Login</button>
+<div id="msg"></div>
+</div>
+
+<div id="app" class="hidden">
+
+<div class="actions" style="margin-bottom:15px">
+<button onclick="load()">Refresh</button>
+<button onclick="logout()">Logout</button>
+</div>
+
+<div class="grid">
+<div class="stat">Total<b id="total">0</b></div>
+<div class="stat">Pending<b id="pending">0</b></div>
+<div class="stat">Approved<b id="approved">0</b></div>
+<div class="stat">Rejected<b id="rejected">0</b></div>
+</div>
+
+<div class="card">
+<div class="toolbar">
+<input id="search" placeholder="Search NIN, Matric No., Name..." oninput="draw()">
+<select id="filter" onchange="draw()">
+<option value="">All Status</option>
+<option>Pending</option>
+<option>Approved</option>
+<option>Rejected</option>
+</select>
+<select id="field" onchange="draw()">
+<option value="all">All Fields</option>
+<option value="2">NIN</option>
+<option value="3">Matric No.</option>
+<option value="4">Email</option>
+<option value="6">First Name</option>
+<option value="8">Surname</option>
+</select>
+</div>
+</div>
+
+<div class="card table">
+<table>
+<thead><tr>
+<th>#</th><th>ID</th><th>Name</th><th>Matric No.</th><th>Sex</th><th>Status</th><th>Action</th>
+</tr></thead>
+<tbody id="rows"></tbody>
+</table>
+</div>
+
+</div>
+</div>
+
+<div id="modal" class="modal">
+<div class="modalbox">
+<h3>NERD Submission Review</h3>
+<div id="details"></div>
+<hr>
+<textarea id="reason" placeholder="Rejection reason / admin comment"></textarea>
+<div class="actions">
+<button class="success" onclick="review(true)">Approve</button>
+<button class="danger" onclick="review(false)">Reject</button>
+<button onclick="closeModal()">Close</button>
+</div>
+</div>
+</div>
+
+<script>
+const API="https://script.google.com/macros/s/AKfycbyu5ZMcfGyWk7tXGthr6J9B88HV9G3jGGr3hPCtty4grDXQ86BiYETLXDcJ3JZxUOGg/exec";
+let admins=null,data=[],selected=null;
+
+const HEAD=[
+"SubmissionID","Timestamp","NIN","MatricNo","StudentEmail","PhoneNumber",
+"FirstName","MiddleName","Surname","Sex","DateOfBirth","State",
+"AwardShortTitle","ClassOfDegree","FinalCGPA","GraduationSession",
+"GraduationDate","GradeApprovalDate","AdmissionDate","ModeOfEntry",
+"FacultyName","DepartmentName","GraduateListReference","Remarks",
+"Status","RejectionReason","AdminComment","ReviewedBy","ReviewDate"
+];
+
+function api(action,params={}){
+  let u=API+"?action="+encodeURIComponent(action);
+  Object.keys(params).forEach(k=>u+="&"+encodeURIComponent(k)+"="+encodeURIComponent(params[k]));
+  return fetch(u).then(r=>r.json());
+}
+
+function login(){
+  const u=user.value.trim(),p=pass.value;
+  if(!u||!p)return msg("Enter username and password");
+  api("adminLogin",{username:u,password:p}).then(r=>{
+    if(!r.success)return msg(r.message||"Login failed");
+    admins=r;sessionStorage.nerdAdmin=JSON.stringify(r);
+    document.getElementById("login").classList.add("hidden");
+    document.getElementById("app").classList.remove("hidden");
+    load();
+  }).catch(()=>msg("Connection error"));
+}
+
+function msg(x){document.getElementById("msg").textContent=x}
+
+function load(){
+  /* Uses the NERD data endpoint. Add nerdAdminList to Code.gs if needed. */
+  api("nerdAdminList").then(r=>{
+    if(!r.success)return alert(r.message||"Unable to load records");
+    data=r.records||[];
+    draw();stats();
+  }).catch(()=>alert("Could not connect to NERD server"));
+}
+
+function stats(){
+  total.textContent=data.length;
+  pending.textContent=data.filter(x=>x[24]=="Pending").length;
+  approved.textContent=data.filter(x=>x[24]=="Approved").length;
+  rejected.textContent=data.filter(x=>x[24]=="Rejected").length;
+}
+
+function draw(){
+  const q=search.value.toLowerCase(),f=filter.value,field=fieldEl();
+  const list=data.filter(x=>{
+    const ok=!f||x[24]==f;
+    const text=field=="all"?x.join(" "):x[field]||"";
+    return ok&&String(text).toLowerCase().includes(q);
+  });
+  rows.innerHTML=list.map((x,i)=>{
+    const name=[x[6],x[7],x[8]].filter(Boolean).join(" ");
+    return `<tr>
+    <td>${i+1}</td><td>${esc(x[0])}</td><td>${esc(name)}</td>
+    <td>${esc(x[3])}</td><td>${esc(x[9])}</td>
+    <td><span class="badge ${x[24].toLowerCase()}">${esc(x[24])}</span></td>
+    <td><button onclick="openReview('${esc(x[0])}')">Review</button></td>
+    </tr>`;
+  }).join("");
+}
+
+function fieldEl(){return document.getElementById("field").value}
+
+function openReview(id){
+  selected=data.find(x=>x[0]==id);
+  if(!selected)return;
+  details.innerHTML=HEAD.map((h,i)=>{
+    if(i==25||i==26||i==27||i==28)return "";
+    return `<p><b>${h}:</b> ${esc(selected[i]??"")}</p>`;
+  }).join("");
+  reason.value=selected[25]||selected[26]||"";
+  modal.style.display="flex";
+}
+
+function closeModal(){modal.style.display="none"}
+
+function review(ok){
+  if(!selected)return;
+  const admin=JSON.parse(sessionStorage.nerdAdmin||"{}");
+  api(ok?"nerdApprove":"nerdReject",{
+    submissionID:selected[0],
+    reason:reason.value,
+    admin:admin.username||"Admin"
+  }).then(r=>{
+    alert(r.message||"Done");
+    if(r.success){closeModal();load()}
+  }).catch(()=>alert("Connection error"));
+}
+
+function logout(){
+  sessionStorage.removeItem("nerdAdmin");
+  location.reload();
+}
+
+function esc(v){
+  return String(v??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));
+}
+
+(function(){
+  const a=sessionStorage.nerdAdmin;
+  if(a){
+    admins=JSON.parse(a);
+    login.style.display="none";
+    app.classList.remove("hidden");
+    load();
+  }
+})();
+</script>
+</body>
+</html>
