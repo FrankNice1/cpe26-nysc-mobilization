@@ -1,277 +1,289 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>CPE '26 | NYSC Mobilization Portal</title>
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap');
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:Inter,Arial,sans-serif;background:radial-gradient(circle at 20% 20%,rgba(0,229,255,.12),transparent 25%),radial-gradient(circle at 80% 80%,rgba(0,100,255,.12),transparent 25%),#050b14;min-height:100vh}
-body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.12;background-image:linear-gradient(rgba(0,229,255,.3) 1px,transparent 1px),linear-gradient(90deg,rgba(0,229,255,.3) 1px,transparent 1px)}
-.container{width:100%;max-width:950px;margin:auto;position:relative;padding:18px}
-.header{text-align:center;padding:18px 20px 8px}
-.logo{font-family:"Space Mono",monospace;color:#00e5ff;font-size:15px;letter-spacing:3px;margin-bottom:8px}
-.header h1{font-size:clamp(28px,6vw,48px);font-weight:800;letter-spacing:-2px}
-.header h1 span{color:#00e5ff}
-.header p{margin-top:8px;color:#91a7b8;font-size:14px}
-.card{background:rgba(9,20,34,.88);border:1px solid rgba(0,229,255,.18);border-radius:20px;padding:30px;backdrop-filter:blur(15px);box-shadow:0 25px 80px rgba(0,0,0,.35)}
-.notice{border:1px solid rgba(0,229,255,.2);background:rgba(0,229,255,.05);padding:16px;border-radius:12px;color:#a9c2d0;font-size:13px;line-height:1.6;margin-bottom:25px}
-.section{margin-top:28px}
-.section-title{font-family:"Space Mono",monospace;font-size:13px;color:#00e5ff;letter-spacing:1.5px;margin-bottom:16px}
-.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
-.full{grid-column:1/-1}
-label{display:block;font-size:12px;font-weight:700;color:#b9cbd6;margin-bottom:7px}
-label span{color:#00e5ff}
-input,select{width:100%;padding:13px 14px;border-radius:9px;border:1px solid #263c4d;background:#07111d;color:white;font-size:14px;outline:none}
-input:focus,select:focus{border-color:#00e5ff;box-shadow:0 0 0 3px rgba(0,229,255,.08)}
-select option{background:#07111d}
-.submit{width:100%;border:0;margin-top:28px;padding:16px;border-radius:10px;background:linear-gradient(90deg,#00bcd4,#007bff);color:white;font-size:15px;font-weight:800;cursor:pointer}
-.submit:disabled{opacity:.5;cursor:not-allowed}
-.status-link{text-align:center;margin-top:18px}
-.status-link a{color:#00e5ff;text-decoration:none;font-size:13px}
-.message{display:none;margin-top:20px;padding:16px;border-radius:10px;line-height:1.6;font-size:14px}
-.success{display:block;background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.3);color:#86efac}
-.error{display:block;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.3);color:#fca5a5}
-.loading{display:none;text-align:center;margin-top:15px;color:#00e5ff;font-family:"Space Mono",monospace;font-size:12px}
-.footer{text-align:center;padding:25px 10px;color:#637887;font-size:11px}
-/* Overlay for embedded NERD page */
-.nerd-overlay{position:fixed;inset:0;background:rgba(2,6,23,0.75);display:none;align-items:center;justify-content:center;padding:30px;z-index:9999}
-.nerd-overlay .frame-wrap{width:100%;max-width:1100px;height:80vh;background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.6);position:relative}
-.nerd-overlay iframe{width:100%;height:100%;border:0;display:block}
-.nerd-close{position:absolute;right:12px;top:12px;background:#0b6b4b;color:#fff;border:0;padding:8px 10px;border-radius:8px;cursor:pointer;font-weight:700}
-.nerd-open-btn{display:inline-block;margin-top:12px;color:#00e5ff;background:transparent;border:1px solid rgba(0,229,255,.12);padding:8px 12px;border-radius:8px;text-decoration:none}
-/* Prominent top CTA */
-.top-actions{text-align:center;margin:14px 0}
-.nerd-open-primary{background:linear-gradient(90deg,#00bcd4,#007bff);color:#fff;padding:12px 20px;border-radius:12px;font-weight:800;font-size:16px;border:0;cursor:pointer;box-shadow:0 10px 30px rgba(0,123,255,.18)}
-@media(max-width:650px){body{padding:10px}.card{padding:20px}.grid{grid-template-columns:1fr}.full{grid-column:auto}.header{padding-top:20px}.nerd-overlay .frame-wrap{height:88vh}}
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>CPE '26 | NYSC Mobilization Portal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --brand-1:#0b3d91; /* deep blue */
+      --brand-2:#00bcd4; /* accent teal */
+      --muted:#91a7b8;
+      --bg:#f6f8fb;
+      --card:#ffffff;
+      --radius:12px;
+      --container:1100px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:Inter,system-ui,Segoe UI,Roboto,Arial,sans-serif;
+      background:linear-gradient(180deg,var(--bg),#eef3f9);
+      color:#0f1724;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.45;
+    }
+    .site-header{
+      background:linear-gradient(90deg,var(--brand-1),#083a84);
+      color:#fff;
+      padding:18px 12px;
+      box-shadow:0 6px 18px rgba(7,34,102,0.12);
+      position:sticky;top:0;z-index:60;
+    }
+    .wrap{width:100%;max-width:var(--container);margin:0 auto;padding:0 18px}
+    .header-inner{display:flex;align-items:center;justify-content:space-between;gap:18px}
+    .brand{display:flex;flex-direction:column}
+    .brand .site-title{font-weight:800;font-size:18px;letter-spacing:-0.4px}
+    .brand .site-sub{font-size:12px;color:rgba(255,255,255,0.9);margin-top:4px}
+    nav{display:flex;gap:12px;align-items:center}
+    .nav-link{color:rgba(255,255,255,0.92);text-decoration:none;padding:8px 12px;border-radius:8px;font-weight:600;font-size:14px}
+    .nav-link:hover{background:rgba(255,255,255,0.06)}
+    .cta-nerd{background:linear-gradient(90deg,var(--brand-2),var(--brand-1));color:#fff;border:0;padding:10px 14px;border-radius:10px;font-weight:800;cursor:pointer}
+
+    main{padding:28px 0}
+    .hero{display:flex;align-items:center;gap:28px;margin-bottom:18px}
+    .hero-card{flex:1;background:var(--card);border-radius:var(--radius);padding:22px;box-shadow:0 8px 30px rgba(20,37,80,0.06)}
+    .hero h1{margin:0;font-size:28px;color:var(--brand-1)}
+    .hero p{margin-top:8px;color:var(--muted)}
+
+    .grid{display:grid;grid-template-columns:1fr 360px;gap:20px}
+    .card{background:var(--card);border-radius:var(--radius);padding:20px;box-shadow:0 6px 18px rgba(20,37,80,0.04)}
+    label{display:block;font-size:13px;color:#24303a;margin-bottom:6px;font-weight:600}
+    input,select,textarea{width:100%;padding:12px;border-radius:10px;border:1px solid #e3e9f2;background:#fff;font-size:14px}
+    input:focus,select:focus,textarea:focus{outline:none;box-shadow:0 6px 18px rgba(11,61,145,0.06);border-color:var(--brand-2)}
+    .form-actions{display:flex;gap:12px;margin-top:18px}
+    .btn{background:var(--brand-1);color:#fff;padding:12px 16px;border-radius:10px;border:0;font-weight:700;cursor:pointer}
+    .btn.secondary{background:#f3f6fb;color:#0b3d91;border:1px solid #d7e1f6}
+    .muted{color:var(--muted);font-size:13px}
+
+    footer{padding:28px 0;color:var(--muted);font-size:13px}
+
+    /* overlay iframe (NERD) */
+    .nerd-overlay{position:fixed;inset:0;background:rgba(10,18,30,0.72);display:none;align-items:center;justify-content:center;padding:24px;z-index:999}
+    .nerd-frame{width:100%;max-width:1100px;height:82vh;border-radius:10px;overflow:hidden;background:#fff;box-shadow:0 30px 80px rgba(7,34,102,0.2);position:relative}
+    .nerd-frame iframe{width:100%;height:100%;border:0}
+    .nerd-close{position:absolute;right:12px;top:12px;background:#fff;border:0;padding:8px 10px;border-radius:8px;font-weight:700;cursor:pointer}
+
+    /* responsive */
+    @media (max-width:900px){
+      .grid{grid-template-columns:1fr}
+      .hero{flex-direction:column;align-items:flex-start}
+      nav{display:none}
+      .header-inner{align-items:flex-start}
+    }
+  </style>
 </head>
 <body>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <div class="brand">
+        <div class="site-title">CPE '26 • NYSC Mobilization</div>
+        <div class="site-sub">COMPUTER ENGINEERING — CLASS OF 2026</div>
+      </div>
+      <nav aria-label="Main navigation">
+        <a class="nav-link" href="index.html">Home</a>
+        <a class="nav-link" href="nerd.html">NERD</a>
+        <a class="nav-link" href="status.html">Status</a>
+        <button id="openNerdTop" class="cta-nerd">Open NERD</button>
+      </nav>
+    </div>
+  </header>
 
-<div class="container">
-<header class="header">
-<div class="logo">&lt; CPE_26 /&gt;</div>
-<h1>NYSC <span>MOBILIZATION</span></h1>
-<p>COMPUTER ENGINEERING — CLASS OF 2026</p>
-<!-- Prominent Open NERD button moved into the header so it appears immediately after the class line -->
-<div class="top-actions">
-  <button id="openNerdTop" class="nerd-open-primary">Open NERD — Nigeria Education Repository &amp; Databank</button>
-</div>
-</header>
+  <main class="wrap">
+    <section class="hero-card hero">
+      <div class="hero-card">
+        <h1>NYSC Mobilization — Computer Engineering</h1>
+        <p class="muted">Submit your mobilization details securely for the Class of 2026. Use the NERD registry to submit academic records or check submission status.</p>
+      </div>
+    </section>
 
-<main class="card" id="mainCard">
-<div class="notice">
-<strong>⚡ Mobilization Data Collation</strong><br>
-This portal is for the collection of information required for NYSC mobilization processing for Computer Engineering Class of 2026. Please ensure that every detail supplied is accurate and corresponds with your official records.
-</div>
+    <div class="grid">
+      <section class="card">
+        <h3 style="margin-top:0;color:var(--brand-1)">Submit Mobilization Data</h3>
+        <p class="muted">Fill the form below carefully — information should match your official records.</p>
 
-<form id="registrationForm">
+        <form id="registrationForm">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+            <div>
+              <label for="firstName">First name</label>
+              <input id="firstName" type="text" required placeholder="First name">
+            </div>
+            <div>
+              <label for="middlename">Middle name</label>
+              <input id="middlename" type="text" placeholder="Middle name">
+            </div>
+            <div>
+              <label for="surname">Surname</label>
+              <input id="surname" type="text" required placeholder="Surname">
+            </div>
+            <div>
+              <label for="gsmNo">Phone (GSM)</label>
+              <input id="gsmNo" type="tel" required placeholder="08012345678">
+            </div>
+          </div>
 
-<div class="section">
-<div class="section-title">01 / PERSONAL IDENTITY</div>
-<div class="grid">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px">
+            <div>
+              <label>State of Origin</label>
+              <select id="stateOfOrigin" required>
+                <option value="">Select State</option>
+                <option>Abia</option><option>Adamawa</option><option>Akwa Ibom</option>
+                <option>Anambra</option><option>Bauchi</option><option>Bayelsa</option>
+                <option>Benue</option><option>Borno</option><option>Cross River</option>
+                <option>Delta</option><option>Ebonyi</option><option>Edo</option>
+                <option>Ekiti</option><option>Enugu</option><option>Gombe</option>
+                <option>Imo</option><option>Jigawa</option><option>Kaduna</option>
+                <option>Kano</option><option>Katsina</option><option>Kebbi</option>
+                <option>Kogi</option><option>Kwara</option><option>Lagos</option>
+                <option>Nasarawa</option><option>Niger</option><option>Ogun</option>
+                <option>Ondo</option><option>Osun</option><option>Oyo</option>
+                <option>Plateau</option><option>Rivers</option><option>Sokoto</option>
+                <option>Taraba</option><option>Yobe</option><option>Zamfara</option>
+                <option>FCT</option>
+              </select>
+            </div>
+            <div>
+              <label>Gender</label>
+              <select id="gender" required>
+                <option value="">Select Gender</option>
+                <option>Male</option>
+                <option>Female</option>
+              </select>
+            </div>
+          </div>
 
-<div>
-<label>First Name <span>*</span></label>
-<input id="firstName" type="text" required placeholder="First name">
-</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px">
+            <div>
+              <label for="matricNo">Matriculation Number</label>
+              <input id="matricNo" type="text" required placeholder="Enter matric number">
+            </div>
+            <div>
+              <label for="jambRegNo">JAMB Registration No</label>
+              <input id="jambRegNo" type="text" required placeholder="Enter JAMB reg. number">
+            </div>
+          </div>
 
-<div>
-<label>Middle Name</label>
-<input id="middlename" type="text" placeholder="Middle name">
-</div>
+          <div style="margin-top:12px">
+            <label for="courseOfStudy">Course of Study</label>
+            <input id="courseOfStudy" type="text" value="Computer Engineering" required>
+          </div>
 
-<div>
-<label>Surname <span>*</span></label>
-<input id="surname" type="text" required placeholder="Surname">
-</div>
+          <div style="margin-top:12px">
+            <label for="dateOfGraduation">Date of Graduation</label>
+            <input id="dateOfGraduation" type="date" required>
+          </div>
 
-<div>
-<label>GSM Number <span>*</span></label>
-<input id="gsmNo" type="tel" required placeholder="08012345678">
-</div>
+          <div class="form-actions">
+            <button class="btn" id="submitButton" type="submit">Submit Mobilization Data</button>
+            <button class="btn secondary" type="reset">Clear</button>
+          </div>
 
-<div>
-<label>State of Origin <span>*</span></label>
-<select id="stateOfOrigin" required>
-<option value="">Select State</option>
-<option>Abia</option><option>Adamawa</option><option>Akwa Ibom</option>
-<option>Anambra</option><option>Bauchi</option><option>Bayelsa</option>
-<option>Benue</option><option>Borno</option><option>Cross River</option>
-<option>Delta</option><option>Ebonyi</option><option>Edo</option>
-<option>Ekiti</option><option>Enugu</option><option>Gombe</option>
-<option>Imo</option><option>Jigawa</option><option>Kaduna</option>
-<option>Kano</option><option>Katsina</option><option>Kebbi</option>
-<option>Kogi</option><option>Kwara</option><option>Lagos</option>
-<option>Nasarawa</option><option>Niger</option><option>Ogun</option>
-<option>Ondo</option><option>Osun</option><option>Oyo</option>
-<option>Plateau</option><option>Rivers</option><option>Sokoto</option>
-<option>Taraba</option><option>Yobe</option><option>Zamfara</option>
-<option>FCT</option>
-</select>
-</div>
+          <div id="message" style="margin-top:12px;display:none"></div>
+        </form>
+      </section>
 
-<div>
-<label>Gender <span>*</span></label>
-<select id="gender" required>
-<option value="">Select Gender</option>
-<option>Male</option>
-<option>Female</option>
-</select>
-</div>
+      <aside class="card">
+        <h4 style="margin-top:0;color:var(--brand-1)">NERD Registry</h4>
+        <p class="muted">Use the official NERD page to submit academic records or check the status of existing submissions.</p>
+        <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap">
+          <button id="openNerdSide" class="btn" style="flex:1">Open NERD</button>
+          <a class="btn secondary" href="status.html" style="flex:1;text-align:center">Check Status</a>
+        </div>
 
-<div>
-<label>Marital Status <span>*</span></label>
-<select id="maritalStatus" required>
-<option value="">Select Status</option>
-<option>Single</option>
-<option>Married</option>
-<option>Divorced</option>
-<option>Widowed</option>
-</select>
-</div>
+        <hr style="margin:16px 0;border:none;border-top:1px solid #eef3fb">
+        <h5 style="margin:0 0 8px 0">Contact</h5>
+        <p class="muted" style="margin:0">Mobilization Admin — mobilize@cpe26.example.edu</p>
+      </aside>
+    </div>
 
-</div>
-</div>
+    <footer class="wrap">
+      <div class="card" style="display:flex;justify-content:space-between;align-items:center">
+        <div>
+          <strong>CPE '26</strong> — Computer Engineering • NYSC Mobilization
+          <div class="muted" style="margin-top:6px">Built for the Class of 2026 — Please keep your records safe</div>
+        </div>
+        <div class="muted">© 2026 CPE Dept. • <a href="privacy.html">Privacy</a></div>
+      </div>
+    </footer>
+  </main>
 
-<div class="section">
-<div class="section-title">02 / ACADEMIC RECORD</div>
-<div class="grid">
-
-<div>
-<label>Matriculation Number <span>*</span></label>
-<input id="matricNo" type="text" required placeholder="Enter matric number">
-</div>
-
-<div>
-<label>JAMB Registration Number <span>*</span></label>
-<input id="jambRegNo" type="text" required placeholder="Enter JAMB reg. number">
-</div>
-
-<div>
-<label>Course of Study <span>*</span></label>
-<input id="courseOfStudy" type="text" value="Computer Engineering" required>
-</div>
-
-<div class="full">
-<label>Date of Graduation <span>*</span></label>
-<input id="dateOfGraduation" type="date" required>
-</div>
-
-</div>
-</div>
-
-<button class="submit" id="submitButton" type="submit">SUBMIT MOBILIZATION DATA →</button>
-
-<div class="loading" id="loading">TRANSMITTING DATA...</div>
-<div class="message" id="message"></div>
-</form>
-
-<div class="status-link">
-<a href="status.html">Check your submission status →</a>
-</div>
-</main>
-
-<footer class="footer">
-CPE '26 • COMPUTER ENGINEERING • NYSC MOBILIZATION
-</footer>
-</div>
-
-<!-- Overlay that embeds nerd.html -->
-<div class="nerd-overlay" id="nerdOverlay" aria-hidden="true">
-  <div class="frame-wrap">
-    <button class="nerd-close" id="closeNerd">Close ✕</button>
-    <iframe id="nerdFrame" src="nerd.html" title="NERD — Nigeria Education Repository &amp; Databank"></iframe>
+  <!-- NERD overlay -->
+  <div class="nerd-overlay" id="nerdOverlay" aria-hidden="true">
+    <div class="nerd-frame" role="dialog" aria-label="NERD registry">
+      <button class="nerd-close" id="closeNerd">Close</button>
+      <iframe id="nerdFrame" src="nerd.html" title="NERD Registry"></iframe>
+    </div>
   </div>
-</div>
 
-<script>
-const GOOGLE_SCRIPT_URL="https://script.google.com/macros/s/AKfycbyu5ZMcfGyWk7tXGthr6J9B88HV9G3jGGr3hPCtty4grDXQ86BiYETLXDcJ3JZxUOGg/exec";
+  <script>
+    const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyu5ZMcfGyWk7tXGthr6J9B88HV9G3jGGr3hPCtty4grDXQ86BiYETLXDcJ3JZxUOGg/exec";
 
-const form=document.getElementById("registrationForm");
-const button=document.getElementById("submitButton");
-const loading=document.getElementById("loading");
-const message=document.getElementById("message");
+    const form = document.getElementById('registrationForm');
+    const submitButton = document.getElementById('submitButton');
+    const message = document.getElementById('message');
 
-// NERD overlay controls
-const openNerdTop=document.getElementById('openNerdTop');
-const nerdOverlay=document.getElementById('nerdOverlay');
-const closeNerd=document.getElementById('closeNerd');
+    const openNerdTop = document.getElementById('openNerdTop');
+    const openNerdSide = document.getElementById('openNerdSide');
+    const nerdOverlay = document.getElementById('nerdOverlay');
+    const closeNerd = document.getElementById('closeNerd');
 
-openNerdTop.addEventListener('click',function(e){
-  e.preventDefault();
-  nerdOverlay.style.display='flex';
-  nerdOverlay.setAttribute('aria-hidden','false');
-  // focus the iframe for keyboard users
-  document.getElementById('nerdFrame').focus();
-});
+    function openOverlay(){
+      nerdOverlay.style.display='flex';
+      nerdOverlay.setAttribute('aria-hidden','false');
+      // focus inside frame for keyboard users
+      document.getElementById('nerdFrame').focus();
+    }
+    function closeOverlay(){
+      nerdOverlay.style.display='none';
+      nerdOverlay.setAttribute('aria-hidden','true');
+      openNerdTop.focus();
+    }
 
-closeNerd.addEventListener('click',function(){
-  nerdOverlay.style.display='none';
-  nerdOverlay.setAttribute('aria-hidden','true');
-  // return focus to the top button
-  openNerdTop.focus();
-});
+    openNerdTop.addEventListener('click',e=>{e.preventDefault();openOverlay();});
+    openNerdSide.addEventListener('click',e=>{e.preventDefault();openOverlay();});
+    closeNerd.addEventListener('click',closeOverlay);
+    nerdOverlay.addEventListener('click',e=>{ if(e.target===nerdOverlay) closeOverlay(); });
+    window.addEventListener('keydown',e=>{ if(e.key==='Escape' && nerdOverlay.style.display==='flex') closeOverlay(); });
 
-// Close overlay when pressing Escape or clicking outside the frame-wrap
-nerdOverlay.addEventListener('click',function(e){
-  if(e.target===nerdOverlay) closeNerd.click();
-});
+    form.addEventListener('submit',async e=>{
+      e.preventDefault();
+      message.style.display='none';
 
-window.addEventListener('keydown',function(e){
-  if(e.key==='Escape' && nerdOverlay.style.display==='flex') closeNerd.click();
-});
+      const data = {
+        matricNo:document.getElementById('matricNo').value.trim(),
+        firstName:document.getElementById('firstName').value.trim(),
+        middlename:document.getElementById('middlename').value.trim(),
+        surname:document.getElementById('surname').value.trim(),
+        gsmNo:document.getElementById('gsmNo').value.trim(),
+        stateOfOrigin:document.getElementById('stateOfOrigin').value,
+        dateOfGraduation:document.getElementById('dateOfGraduation').value,
+        gender:document.getElementById('gender').value,
+        jambRegNo:document.getElementById('jambRegNo').value.trim(),
+        courseOfStudy:document.getElementById('courseOfStudy').value.trim()
+      };
 
-form.addEventListener("submit",async e=>{
-  e.preventDefault();
-  message.style.display="none";
+      submitButton.disabled=true;
+      submitButton.textContent='Submitting...';
 
-  const data={
-    matricNo:document.getElementById("matricNo").value.trim(),
-    firstName:document.getElementById("firstName").value.trim(),
-    middlename:document.getElementById("middlename").value.trim(),
-    surname:document.getElementById("surname").value.trim(),
-    gsmNo:document.getElementById("gsmNo").value.trim(),
-    stateOfOrigin:document.getElementById("stateOfOrigin").value,
-    dateOfGraduation:document.getElementById("dateOfGraduation").value,
-    gender:document.getElementById("gender").value,
-    maritalStatus:document.getElementById("maritalStatus").value,
-    jambRegNo:document.getElementById("jambRegNo").value.trim(),
-    courseOfStudy:document.getElementById("courseOfStudy").value.trim()
-  };
-
-  button.disabled=true;
-  button.innerText="SUBMITTING...";
-  loading.style.display="block";
-
-  try{
-    const response=await fetch(GOOGLE_SCRIPT_URL,{
-      method:"POST",
-      headers:{"Content-Type":"text/plain;charset=utf-8"},
-      body:JSON.stringify(data)
+      try{
+        const res = await fetch(GOOGLE_SCRIPT_URL,{
+          method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(data)
+        });
+        const result = await res.json();
+        if(!result.success) throw new Error(result.message||'Submission failed');
+        message.style.display='block';message.className='';message.innerHTML = '<div style="padding:12px;border-radius:8px;background:#e6fffb;border:1px solid #b6f0ea;color:#004d40">✔ Submission received — ID: <strong>'+ (result.submissionID||'—') +'</strong></div>';
+        form.reset();
+      }catch(err){
+        message.style.display='block';message.className='';message.innerHTML = '<div style="padding:12px;border-radius:8px;background:#fff4f4;border:1px solid #ffd1d1;color:#7a1f24">⚠ '+(err.message||'Unable to submit')+'</div>';
+      }finally{
+        submitButton.disabled=false;submitButton.textContent='Submit Mobilization Data';
+      }
     });
-
-    const result=await response.json();
-
-    if(!result.success)throw new Error(result.message);
-
-    message.className="message success";
-    message.innerHTML="✓ MOBILIZATION DATA RECEIVED<br><br>Your Submission ID:<br><strong>"+result.submissionID+"</strong><br><br>Status: <strong>PENDING REVIEW</strong><br><br>Please save your Submission ID for tracking.";
-    message.style.display="block";
-    form.reset();
-    document.getElementById("courseOfStudy").value="Computer Engineering";
-
-  }catch(error){
-    message.className="message error";
-    message.innerHTML="⚠ "+(error.message||'Submission failed');
-    message.style.display="block";
-  }
-
-  button.disabled=false;
-  button.innerText="SUBMIT MOBILIZATION DATA →";
-  loading.style.display="none";
-});
-</script>
+  </script>
 </body>
 </html>
