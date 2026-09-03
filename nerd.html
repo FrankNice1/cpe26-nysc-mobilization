@@ -7,422 +7,403 @@
 <title>NERD | Nigeria Education Repository & Databank</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
 :root{
-  --brand:#0b3d91;
-  --brand-dark:#082f70;
-  --accent:#00bcd4;
-  --bg:#f5f8fc;
-  --card:#fff;
-  --text:#0f1724;
-  --muted:#718096;
-  --border:#e2e8f0;
-  --success:#087443;
-  --danger:#b42318;
-  --warning:#9a6700;
-  --radius:14px;
-  --container:1120px;
+--blue:#0b3d91;--blue2:#082f70;--cyan:#00bcd4;
+--bg:#f5f8fc;--card:#fff;--text:#0f1724;--muted:#718096;
+--border:#e2e8f0;--green:#087443;--red:#b42318;--yellow:#9a6700;
+--radius:14px;--max:1120px
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{
-  margin:0;
-  font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-  background:linear-gradient(180deg,var(--bg),#eef3f9);
-  color:var(--text);
-  line-height:1.5;
-  -webkit-font-smoothing:antialiased;
+margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,Arial,sans-serif;
+background:linear-gradient(180deg,var(--bg),#eef3f9);color:var(--text);
+line-height:1.5
 }
+.wrap{width:100%;max-width:var(--max);margin:auto;padding:0 20px}
+
+/* HEADER */
 .site-header{
-  background:linear-gradient(90deg,var(--brand),var(--brand-dark));
-  color:#fff;
-  position:sticky;
-  top:0;
-  z-index:100;
-  box-shadow:0 6px 22px rgba(7,34,102,.16);
+position:sticky;top:0;z-index:100;color:#fff;
+background:linear-gradient(90deg,var(--blue),var(--blue2));
+box-shadow:0 5px 20px rgba(7,34,102,.16)
 }
-.wrap{width:100%;max-width:var(--container);margin:auto;padding:0 20px}
 .header-inner{
-  min-height:72px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:20px;
+min-height:70px;display:flex;align-items:center;
+justify-content:space-between;gap:20px
 }
-.brand{display:flex;align-items:center;gap:13px}
+.brand{display:flex;align-items:center;gap:12px}
 .logo{
-  width:42px;height:42px;border-radius:11px;
-  display:grid;place-items:center;
-  background:linear-gradient(135deg,var(--accent),#0877a5);
-  font-weight:800;font-size:16px;
-  box-shadow:0 5px 14px rgba(0,0,0,.15);
+width:42px;height:42px;border-radius:11px;display:grid;place-items:center;
+background:linear-gradient(135deg,var(--cyan),#0877a5);
+font-weight:800;box-shadow:0 5px 14px rgba(0,0,0,.15)
 }
-.site-title{font-weight:800;font-size:19px;letter-spacing:-.4px}
-.site-sub{font-size:11px;opacity:.85;margin-top:2px;letter-spacing:.2px}
-nav{display:flex;align-items:center;gap:7px}
-.nav-link{
-  color:#fff;text-decoration:none;padding:9px 12px;
-  border-radius:9px;font-size:13px;font-weight:600;
+.site-title{font-size:19px;font-weight:800;letter-spacing:-.4px}
+.site-sub{font-size:10px;opacity:.86;margin-top:2px}
+nav{display:flex;align-items:center;gap:5px}
+nav a{
+color:#fff;text-decoration:none;padding:9px 12px;border-radius:9px;
+font-size:13px;font-weight:700
 }
-.nav-link:hover,.nav-link.active{background:rgba(255,255,255,.1)}
-.header-btn{
-  border:0;border-radius:10px;padding:10px 14px;
-  background:linear-gradient(90deg,var(--accent),#008eb5);
-  color:#fff;font-weight:800;cursor:pointer;
+nav a:hover,nav a.active{background:rgba(255,255,255,.12)}
+.nav-status{
+background:linear-gradient(90deg,var(--cyan),#008eb5)!important
 }
-main{padding:30px 0 10px}
-.hero{
-  display:grid;
-  grid-template-columns:1.35fr .65fr;
-  gap:20px;
-  margin-bottom:20px;
-}
+.menu{display:none;background:none;border:0;color:#fff;font-size:25px;cursor:pointer}
+
+/* MAIN */
+main{padding:28px 0}
+.hero{display:grid;grid-template-columns:1.35fr .65fr;gap:20px;margin-bottom:20px}
 .hero-card,.card{
-  background:var(--card);
-  border:1px solid rgba(226,232,240,.8);
-  border-radius:var(--radius);
-  box-shadow:0 8px 28px rgba(20,37,80,.055);
+background:var(--card);border:1px solid rgba(226,232,240,.8);
+border-radius:var(--radius);box-shadow:0 8px 28px rgba(20,37,80,.055)
 }
-.hero-main{padding:30px}
-.hero-main h1{
-  margin:0;
-  color:var(--brand);
-  font-size:31px;
-  line-height:1.15;
-  letter-spacing:-.8px;
+.hero-main{padding:29px}
+.badge{
+display:inline-block;padding:6px 10px;border-radius:999px;
+background:#eef7ff;color:var(--blue);font-size:10px;font-weight:800;
+margin-bottom:13px
 }
-.hero-main p{margin:11px 0 0;color:var(--muted);max-width:700px}
-.hero-badge{
-  display:inline-flex;align-items:center;gap:7px;
-  padding:7px 10px;border-radius:999px;
-  background:#eef7ff;color:var(--brand);
-  font-size:11px;font-weight:800;margin-bottom:14px;
-}
-.hero-side{padding:25px;display:flex;flex-direction:column;justify-content:center}
-.stat{font-size:12px;color:var(--muted);margin-bottom:5px}
-.stat strong{display:block;font-size:21px;color:var(--brand)}
+.hero h1{margin:0;color:var(--blue);font-size:30px;line-height:1.15;letter-spacing:-.7px}
+.hero p{margin:10px 0 0;color:var(--muted);font-size:13px}
+.hero-side{padding:24px;display:flex;flex-direction:column;justify-content:center;gap:18px}
+.stat{font-size:11px;color:var(--muted)}
+.stat strong{display:block;color:var(--blue);font-size:19px;margin-top:2px}
+
 .layout{display:grid;grid-template-columns:1fr 320px;gap:20px}
-.card{padding:24px}
-.section-head{margin-bottom:20px}
-.section-head h2{margin:0;color:var(--brand);font-size:21px}
-.section-head p{margin:5px 0 0;color:var(--muted);font-size:13px}
+.card{padding:23px}
+.section-head h2{margin:0;color:var(--blue);font-size:21px}
+.section-head p{margin:5px 0 20px;color:var(--muted);font-size:12px}
 .notice{
-  padding:13px 15px;
-  border-left:4px solid var(--accent);
-  border-radius:9px;
-  background:#effbfe;
-  color:#25404a;
-  font-size:13px;
-  margin-bottom:23px;
+background:#effbfe;border-left:4px solid var(--cyan);border-radius:9px;
+padding:12px 14px;font-size:12px;color:#25404a;margin-bottom:22px
 }
-.form-section{margin-top:27px;padding-top:23px;border-top:1px solid #edf1f6}
-.form-section:first-of-type{margin-top:0;padding-top:0;border-top:0}
-.form-section h3{margin:0 0 15px;color:#243b64;font-size:15px}
+.section{padding-top:23px;margin-top:25px;border-top:1px solid #edf1f6}
+.section:first-of-type{padding-top:0;margin-top:0;border-top:0}
+.section h3{margin:0 0 14px;color:#243b64;font-size:15px}
 .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
 .full{grid-column:1/-1}
-label{display:block;font-size:12px;font-weight:700;color:#24303a;margin-bottom:6px}
-.required{color:var(--danger)}
+label{display:block;font-size:12px;font-weight:700;margin-bottom:6px;color:#24303a}
+.required{color:var(--red)}
 input,select,textarea{
-  width:100%;padding:11px 12px;border:1px solid var(--border);
-  border-radius:10px;background:#fff;color:var(--text);
-  font:inherit;font-size:13px;transition:.18s;
+width:100%;padding:11px 12px;border:1px solid var(--border);
+border-radius:10px;background:#fff;color:var(--text);font:inherit;font-size:13px
 }
 input:focus,select:focus,textarea:focus{
-  outline:none;border-color:var(--accent);
-  box-shadow:0 0 0 3px rgba(0,188,212,.10);
+outline:none;border-color:var(--cyan);box-shadow:0 0 0 3px rgba(0,188,212,.1)
 }
 textarea{min-height:95px;resize:vertical}
-.help{font-size:11px;color:var(--muted);margin-top:4px}
-.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
+.help{font-size:10px;color:var(--muted);margin-top:4px}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:21px}
 .btn{
-  border:0;border-radius:10px;padding:12px 17px;
-  background:var(--brand);color:#fff;font-weight:800;cursor:pointer;
+border:0;border-radius:10px;padding:12px 16px;background:var(--blue);
+color:#fff;font-weight:800;cursor:pointer
 }
-.btn:hover{filter:brightness(.96)}
-.btn.secondary{background:#f4f7fb;color:var(--brand);border:1px solid #d9e2f0}
-.btn.danger{background:var(--danger)}
+.btn.secondary{background:#f4f7fb;color:var(--blue);border:1px solid #d9e2f0}
 .btn:disabled{opacity:.6;cursor:not-allowed}
 .spinner{
-  display:none;width:15px;height:15px;border:2px solid #ffffff66;
-  border-top-color:#fff;border-radius:50%;
-  animation:spin .7s linear infinite;vertical-align:-3px;margin-right:7px;
+display:none;width:14px;height:14px;border:2px solid #ffffff66;
+border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite;
+vertical-align:-2px;margin-right:6px
 }
 @keyframes spin{to{transform:rotate(360deg)}}
-.side-title{margin:0 0 8px;color:var(--brand);font-size:16px}
-.side-text{font-size:12px;color:var(--muted);margin-top:0}
-.info-box{padding:13px;border-radius:10px;background:#f7f9fc;margin-top:13px;font-size:12px}
-.info-box strong{color:#243b64}
+
+/* STATUS */
+.status-card{scroll-margin-top:90px}
+.status-card h2{margin:0;color:var(--blue);font-size:19px}
+.status-card p{font-size:12px;color:var(--muted)}
 .statusbox{
-  display:none;margin-top:15px;padding:14px;border-radius:10px;
-  font-size:13px;line-height:1.55;
+display:none;margin-top:13px;padding:13px;border-radius:10px;
+font-size:12px;line-height:1.6
 }
 .pending{background:#fff7d6;color:#725300;border:1px solid #f1dfa0}
 .approved{background:#e8f8ef;color:#075b35;border:1px solid #bce7ce}
 .rejected{background:#fff0ef;color:#8d2018;border:1px solid #f0c2be}
-.result{
-  display:none;text-align:center;padding:30px;margin-bottom:20px;
+.info{
+background:#f7f9fc;border-radius:10px;padding:12px;margin-top:12px;
+font-size:11px;color:var(--muted)
 }
-.result h2{margin:0;color:var(--success)}
-.result p{color:var(--muted);font-size:13px}
+.info strong{color:#243b64}
+.result{display:none;text-align:center;padding:30px;margin-bottom:20px}
+.result h2{color:var(--green);margin:0}
+.result p{font-size:12px;color:var(--muted)}
 .id{
-  margin:14px auto;padding:13px 18px;max-width:360px;
-  border-radius:10px;background:#eef7ff;color:var(--brand);
-  font-weight:800;font-size:20px;letter-spacing:.4px;
+max-width:370px;margin:14px auto;padding:13px;border-radius:10px;
+background:#eef7ff;color:var(--blue);font-size:20px;font-weight:800
 }
-footer{padding:24px 0 32px;color:var(--muted);font-size:12px;text-align:center}
+footer{padding:22px 0 30px;text-align:center;color:var(--muted);font-size:11px}
+
 @media(max-width:850px){
-  nav{display:none}
-  .hero,.layout{grid-template-columns:1fr}
-  .hero-side{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+nav{display:none}.menu{display:block}
+nav.open{display:flex;position:absolute;top:70px;left:0;right:0;
+background:var(--blue2);padding:10px 20px;flex-direction:column;align-items:stretch}
+.hero,.layout{grid-template-columns:1fr}
+.hero-side{display:grid;grid-template-columns:1fr 1fr}
 }
 @media(max-width:600px){
-  .wrap{padding:0 13px}
-  main{padding-top:18px}
-  .hero-main{padding:22px}
-  .hero-main h1{font-size:25px}
-  .card{padding:18px}
-  .grid{grid-template-columns:1fr}
-  .full{grid-column:auto}
-  .hero-side{grid-template-columns:1fr}
-  .site-sub{font-size:9px}
+.wrap{padding:0 13px}main{padding-top:18px}
+.hero-main{padding:22px}.hero h1{font-size:25px}
+.card{padding:18px}.grid{grid-template-columns:1fr}.full{grid-column:auto}
+.hero-side{grid-template-columns:1fr}
+.site-sub{font-size:8px}
 }
 </style>
 </head>
 
 <body>
+
 <header class="site-header">
-  <div class="wrap header-inner">
-    <div class="brand">
-      <div class="logo">NR</div>
-      <div>
-        <div class="site-title">NERD</div>
-        <div class="site-sub">NIGERIA EDUCATION REPOSITORY &amp; DATABANK</div>
-      </div>
-    </div>
-    <nav aria-label="Main navigation">
-      <a class="nav-link active" href="#record">Academic Record</a>
-      <a class="nav-link" href="#status">Check Status</a>
-      <button class="header-btn" onclick="document.getElementById('record').scrollIntoView()">Submit Record</button>
-    </nav>
-  </div>
+<div class="wrap header-inner">
+<div class="brand">
+<div class="logo">NR</div>
+<div>
+<div class="site-title">NERD</div>
+<div class="site-sub">NIGERIA EDUCATION REPOSITORY &amp; DATABANK</div>
+</div>
+</div>
+
+<button class="menu" onclick="toggleMenu()" aria-label="Open menu">☰</button>
+
+<nav id="mainNav">
+<a href="index.html">Home</a>
+<a href="nerd.html" class="active">NERD</a>
+<a href="#status" class="nav-status">Check Status</a>
+</nav>
+</div>
 </header>
 
 <main class="wrap">
-  <section class="hero">
-    <div class="hero-card hero-main">
-      <div class="hero-badge">● OFFICIAL RECORD SUBMISSION PORTAL</div>
-      <h1>Nigeria Education Repository &amp; Databank</h1>
-      <p>Submit your academic record for verification and inclusion in the NERD registry. Ensure every detail matches your official school records before submission.</p>
-    </div>
-    <div class="hero-card hero-side">
-      <div>
-        <div class="stat">Registry</div>
-        <strong>NERD</strong>
-      </div>
-      <div>
-        <div class="stat">Submission</div>
-        <strong>Secure Review</strong>
-      </div>
-    </div>
-  </section>
 
-  <section class="card result" id="result">
-    <h2>Submission Successful</h2>
-    <p>Your NERD record has been received successfully.</p>
-    <p>Your Submission ID is:</p>
-    <div class="id" id="submissionID"></div>
-    <p>Keep this ID safe. You can use it below to check your record status.</p>
-    <button class="btn" onclick="newSubmission()">Submit Another Record</button>
-  </section>
+<section class="hero">
+<div class="hero-card hero-main">
+<div class="badge">● OFFICIAL RECORD SUBMISSION PORTAL</div>
+<h1>Nigeria Education Repository &amp; Databank</h1>
+<p>
+Submit your academic record for verification and inclusion in the NERD registry.
+Make sure every detail matches your official school records.
+</p>
+</div>
 
-  <div class="layout">
-    <section class="card" id="record">
-      <div class="section-head">
-        <h2>Academic Record Submission</h2>
-        <p>Complete all required fields accurately.</p>
-      </div>
+<div class="hero-card hero-side">
+<div><div class="stat">Registry</div><strong>NERD</strong></div>
+<div><div class="stat">Process</div><strong>Secure Review</strong></div>
+</div>
+</section>
 
-      <div class="notice">
-        <strong>Important:</strong> Please enter your academic information exactly as it appears on your official school records. Check all information carefully before submitting.
-      </div>
+<section class="card result" id="result">
+<h2>Submission Successful</h2>
+<p>Your NERD record has been received successfully.</p>
+<p>Your Submission ID is:</p>
+<div class="id" id="submissionID"></div>
+<p>Keep this ID safe. You can use it to confirm your record status.</p>
+<button class="btn" onclick="newSubmission()">Submit Another Record</button>
+</section>
 
-      <form id="nerdForm">
-        <div class="form-section">
-          <h3>Personal Information</h3>
-          <div class="grid">
-            <div>
-              <label>NIN <span class="required">*</span></label>
-              <input name="NIN" id="NIN" required maxlength="11" inputmode="numeric" placeholder="11-digit NIN">
-              <div class="help">Enter exactly 11 digits.</div>
-            </div>
-            <div>
-              <label>Matriculation Number <span class="required">*</span></label>
-              <input name="MatricNo" id="MatricNo" required placeholder="e.g. FOE/22/003172">
-            </div>
-            <div>
-              <label>Student Email <span class="required">*</span></label>
-              <input type="email" name="StudentEmail" id="StudentEmail" required placeholder="student@example.com">
-            </div>
-            <div>
-              <label>Phone Number <span class="required">*</span></label>
-              <input name="PhoneNumber" id="PhoneNumber" required inputmode="tel" placeholder="08012345678">
-            </div>
-            <div>
-              <label>First Name <span class="required">*</span></label>
-              <input name="FirstName" required placeholder="First name">
-            </div>
-            <div>
-              <label>Middle Name</label>
-              <input name="MiddleName" placeholder="Middle name">
-            </div>
-            <div>
-              <label>Surname <span class="required">*</span></label>
-              <input name="Surname" required placeholder="Surname">
-            </div>
-            <div>
-              <label>Sex <span class="required">*</span></label>
-              <select name="Sex" required>
-                <option value="">Select</option>
-                <option>Male</option>
-                <option>Female</option>
-              </select>
-            </div>
-            <div>
-              <label>Date of Birth <span class="required">*</span></label>
-              <input type="date" name="DateOfBirth" required>
-            </div>
-            <div>
-              <label>State <span class="required">*</span></label>
-              <select name="State" required>
-                <option value="">Select State</option>
-                <option>Abia</option><option>Adamawa</option><option>Akwa Ibom</option>
-                <option>Anambra</option><option>Bauchi</option><option>Bayelsa</option>
-                <option>Benue</option><option>Borno</option><option>Cross River</option>
-                <option>Delta</option><option>Ebonyi</option><option>Edo</option>
-                <option>Ekiti</option><option>Enugu</option><option>Gombe</option>
-                <option>Imo</option><option>Jigawa</option><option>Kaduna</option>
-                <option>Kano</option><option>Katsina</option><option>Kebbi</option>
-                <option>Kogi</option><option>Kwara</option><option>Lagos</option>
-                <option>Nasarawa</option><option>Niger</option><option>Ogun</option>
-                <option>Ondo</option><option>Osun</option><option>Oyo</option>
-                <option>Plateau</option><option>Rivers</option><option>Sokoto</option>
-                <option>Taraba</option><option>Yobe</option><option>Zamfara</option>
-                <option>FCT</option>
-              </select>
-            </div>
-          </div>
-        </div>
+<div class="layout">
 
-        <div class="form-section">
-          <h3>Academic Information</h3>
-          <div class="grid">
-            <div>
-              <label>Award Short Title <span class="required">*</span></label>
-              <input name="AwardShortTitle" required placeholder="e.g. B.Eng.">
-            </div>
-            <div>
-              <label>Class of Degree <span class="required">*</span></label>
-              <select name="ClassOfDegree" required>
-                <option value="">Select</option>
-                <option>First Class</option>
-                <option>Second Class Upper</option>
-                <option>Second Class Lower</option>
-                <option>Third Class</option>
-                <option>Pass</option>
-              </select>
-            </div>
-            <div>
-              <label>Final CGPA <span class="required">*</span></label>
-              <input type="number" name="FinalCGPA" required step="0.01" min="0" max="10" placeholder="e.g. 4.25">
-            </div>
-            <div>
-              <label>Graduation Session <span class="required">*</span></label>
-              <input name="GraduationSession" required placeholder="e.g. 2025/2026">
-            </div>
-            <div>
-              <label>Graduation Date <span class="required">*</span></label>
-              <input type="date" name="GraduationDate" required>
-            </div>
-            <div>
-              <label>Grade Approval Date <span class="required">*</span></label>
-              <input type="date" name="GradeApprovalDate" required>
-            </div>
-            <div>
-              <label>Admission Date <span class="required">*</span></label>
-              <input type="date" name="AdmissionDate" required>
-            </div>
-            <div>
-              <label>Mode of Entry <span class="required">*</span></label>
-              <select name="ModeOfEntry" required>
-                <option value="">Select</option>
-                <option>UTME</option>
-                <option>Direct Entry</option>
-                <option>Transfer</option>
-                <option>Other</option>
-              </select>
-            </div>
-            <div>
-              <label>Faculty Name <span class="required">*</span></label>
-              <input name="FacultyName" required placeholder="Faculty">
-            </div>
-            <div>
-              <label>Department Name <span class="required">*</span></label>
-              <input name="DepartmentName" required placeholder="Department">
-            </div>
-            <div class="full">
-              <label>Graduate List Reference</label>
-              <input name="GraduateListReference" placeholder="Optional reference">
-            </div>
-            <div class="full">
-              <label>Remarks</label>
-              <textarea name="Remarks" placeholder="Additional academic information, if applicable"></textarea>
-            </div>
-          </div>
-        </div>
+<section class="card" id="record">
+<div class="section-head">
+<h2>Academic Record Submission</h2>
+<p>Complete all required fields accurately.</p>
+</div>
 
-        <div class="actions">
-          <button class="btn" type="submit" id="submitBtn">
-            <span class="spinner" id="spinner"></span>
-            <span id="btnText">Submit NERD Record</span>
-          </button>
-          <button class="btn secondary" type="reset">Clear Form</button>
-        </div>
-      </form>
-    </section>
+<div class="notice">
+<strong>Important:</strong> Please enter your academic information exactly as it appears
+on your official school records. Check all information carefully before submitting.
+</div>
 
-    <aside class="card" id="status">
-      <h3 class="side-title">Check Submission Status</h3>
-      <p class="side-text">Enter the Submission ID you received after submitting your record.</p>
+<form id="nerdForm">
 
-      <label for="statusID">Submission ID</label>
-      <input id="statusID" placeholder="e.g. NERD-2026-00001">
+<div class="section">
+<h3>Personal Information</h3>
+<div class="grid">
 
-      <div class="actions" style="margin-top:12px">
-        <button class="btn" style="width:100%" onclick="checkStatus()">Check Status</button>
-      </div>
+<div>
+<label>NIN <span class="required">*</span></label>
+<input name="NIN" id="NIN" required maxlength="11" inputmode="numeric" placeholder="11-digit NIN">
+<div class="help">Enter exactly 11 digits.</div>
+</div>
 
-      <div id="statusBox" class="statusbox"></div>
+<div>
+<label>Matriculation Number <span class="required">*</span></label>
+<input name="MatricNo" id="MatricNo" required placeholder="e.g. FOE/22/003172">
+</div>
 
-      <div class="info-box">
-        <strong>Pending</strong><br>
-        Your record is waiting for administrative review.
-      </div>
-      <div class="info-box">
-        <strong>Approved</strong><br>
-        Your NERD record has passed the review process.
-      </div>
-      <div class="info-box">
-        <strong>Rejected</strong><br>
-        A reason and administrator comment will be displayed where available.
-      </div>
-    </aside>
-  </div>
+<div>
+<label>Student Email <span class="required">*</span></label>
+<input type="email" name="StudentEmail" id="StudentEmail" required placeholder="student@example.com">
+</div>
+
+<div>
+<label>Phone Number <span class="required">*</span></label>
+<input name="PhoneNumber" id="PhoneNumber" required inputmode="tel" placeholder="08012345678">
+</div>
+
+<div>
+<label>First Name <span class="required">*</span></label>
+<input name="FirstName" required placeholder="First name">
+</div>
+
+<div>
+<label>Middle Name</label>
+<input name="MiddleName" placeholder="Middle name">
+</div>
+
+<div>
+<label>Surname <span class="required">*</span></label>
+<input name="Surname" required placeholder="Surname">
+</div>
+
+<div>
+<label>Sex <span class="required">*</span></label>
+<select name="Sex" required>
+<option value="">Select</option><option>Male</option><option>Female</option>
+</select>
+</div>
+
+<div>
+<label>Date of Birth <span class="required">*</span></label>
+<input type="date" name="DateOfBirth" required>
+</div>
+
+<div>
+<label>State <span class="required">*</span></label>
+<select name="State" required>
+<option value="">Select State</option>
+<option>Abia</option><option>Adamawa</option><option>Akwa Ibom</option>
+<option>Anambra</option><option>Bauchi</option><option>Bayelsa</option>
+<option>Benue</option><option>Borno</option><option>Cross River</option>
+<option>Delta</option><option>Ebonyi</option><option>Edo</option>
+<option>Ekiti</option><option>Enugu</option><option>Gombe</option>
+<option>Imo</option><option>Jigawa</option><option>Kaduna</option>
+<option>Kano</option><option>Katsina</option><option>Kebbi</option>
+<option>Kogi</option><option>Kwara</option><option>Lagos</option>
+<option>Nasarawa</option><option>Niger</option><option>Ogun</option>
+<option>Ondo</option><option>Osun</option><option>Oyo</option>
+<option>Plateau</option><option>Rivers</option><option>Sokoto</option>
+<option>Taraba</option><option>Yobe</option><option>Zamfara</option>
+<option>FCT</option>
+</select>
+</div>
+
+</div>
+</div>
+
+<div class="section">
+<h3>Academic Information</h3>
+<div class="grid">
+
+<div>
+<label>Award Short Title <span class="required">*</span></label>
+<input name="AwardShortTitle" required placeholder="e.g. B.Eng.">
+</div>
+
+<div>
+<label>Class of Degree <span class="required">*</span></label>
+<select name="ClassOfDegree" required>
+<option value="">Select</option>
+<option>First Class</option>
+<option>Second Class Upper</option>
+<option>Second Class Lower</option>
+<option>Third Class</option>
+<option>Pass</option>
+</select>
+</div>
+
+<div>
+<label>Final CGPA <span class="required">*</span></label>
+<input type="number" name="FinalCGPA" required step="0.01" min="0" max="10" placeholder="e.g. 4.25">
+</div>
+
+<div>
+<label>Graduation Session <span class="required">*</span></label>
+<input name="GraduationSession" required placeholder="e.g. 2025/2026">
+</div>
+
+<div>
+<label>Graduation Date <span class="required">*</span></label>
+<input type="date" name="GraduationDate" required>
+</div>
+
+<div>
+<label>Grade Approval Date <span class="required">*</span></label>
+<input type="date" name="GradeApprovalDate" required>
+</div>
+
+<div>
+<label>Admission Date <span class="required">*</span></label>
+<input type="date" name="AdmissionDate" required>
+</div>
+
+<div>
+<label>Mode of Entry <span class="required">*</span></label>
+<select name="ModeOfEntry" required>
+<option value="">Select</option>
+<option>UTME</option><option>Direct Entry</option>
+<option>Transfer</option><option>Other</option>
+</select>
+</div>
+
+<div>
+<label>Faculty Name <span class="required">*</span></label>
+<input name="FacultyName" required placeholder="Faculty">
+</div>
+
+<div>
+<label>Department Name <span class="required">*</span></label>
+<input name="DepartmentName" required placeholder="Department">
+</div>
+
+<div class="full">
+<label>Graduate List Reference</label>
+<input name="GraduateListReference" placeholder="Optional reference">
+</div>
+
+<div class="full">
+<label>Remarks</label>
+<textarea name="Remarks" placeholder="Additional academic information, if applicable"></textarea>
+</div>
+
+</div>
+</div>
+
+<div class="actions">
+<button class="btn" type="submit" id="submitBtn">
+<span class="spinner" id="spinner"></span>
+<span id="btnText">Submit NERD Record</span>
+</button>
+<button class="btn secondary" type="reset">Clear Form</button>
+</div>
+
+</form>
+</section>
+
+<aside class="card status-card" id="status">
+<h2>Check Status</h2>
+<p>Confirm the status of a previously submitted NERD document using its Submission ID.</p>
+
+<label for="statusID">Submission ID</label>
+<input id="statusID" placeholder="e.g. NERD-2026-00001">
+
+<div class="actions">
+<button class="btn" style="width:100%" onclick="checkStatus()">Confirm Status</button>
+</div>
+
+<div id="statusBox" class="statusbox"></div>
+
+<div class="info"><strong>Pending</strong><br>Your record is awaiting administrative review.</div>
+<div class="info"><strong>Approved</strong><br>Your record has passed the review process.</div>
+<div class="info"><strong>Rejected</strong><br>The rejection reason and administrator comment will be displayed.</div>
+</aside>
+
+</div>
 </main>
 
-<footer class="wrap">
-  NERD — Nigeria Education Repository &amp; Databank &nbsp;•&nbsp; Academic Record Submission Portal
+<footer>
+NERD — Nigeria Education Repository &amp; Databank • Academic Record Submission Portal
 </footer>
 
 <script>
@@ -432,6 +413,14 @@ const form=document.getElementById("nerdForm");
 const submitBtn=document.getElementById("submitBtn");
 const spinner=document.getElementById("spinner");
 const btnText=document.getElementById("btnText");
+
+function toggleMenu(){
+  document.getElementById("mainNav").classList.toggle("open");
+}
+
+document.querySelectorAll("#mainNav a").forEach(a=>{
+  a.addEventListener("click",()=>document.getElementById("mainNav").classList.remove("open"));
+});
 
 form.addEventListener("submit",async function(e){
   e.preventDefault();
@@ -467,7 +456,7 @@ form.addEventListener("submit",async function(e){
     const result=await response.json();
 
     if(result.success){
-      form.parentElement.parentElement.querySelector("#record").style.display="none";
+      document.getElementById("record").style.display="none";
       document.getElementById("result").style.display="block";
       document.getElementById("submissionID").textContent=result.submissionID||"Submitted";
       document.getElementById("statusID").value=result.submissionID||"";
@@ -487,7 +476,12 @@ form.addEventListener("submit",async function(e){
 
 async function checkStatus(){
   const id=document.getElementById("statusID").value.trim();
-  if(!id){ alert("Enter your Submission ID."); return; }
+
+  if(!id){
+    alert("Enter your Submission ID.");
+    document.getElementById("statusID").focus();
+    return;
+  }
 
   const box=document.getElementById("statusBox");
   box.style.display="block";
@@ -495,13 +489,16 @@ async function checkStatus(){
   box.innerHTML="Checking status...";
 
   try{
-    const url=GOOGLE_SCRIPT_URL+"?action=nerdStatus&submissionID="+encodeURIComponent(id);
+    const url=GOOGLE_SCRIPT_URL+
+      "?action=nerdStatus&submissionID="+encodeURIComponent(id);
+
     const response=await fetch(url);
     const result=await response.json();
 
     if(!result.success){
       box.className="statusbox rejected";
-      box.innerHTML="<strong>Not Found</strong><br>"+escapeHTML(result.message||"Submission not found.");
+      box.innerHTML="<strong>Not Found</strong><br>"+
+        escapeHTML(result.message||"Submission not found.");
       return;
     }
 
@@ -509,19 +506,24 @@ async function checkStatus(){
 
     if(status==="Approved"){
       box.className="statusbox approved";
-      box.innerHTML="<strong>✓ APPROVED</strong><br>Your NERD record has been approved.";
+      box.innerHTML="<strong>✓ APPROVED</strong><br>"+
+        "Your NERD record has been approved.";
     }else if(status==="Rejected"){
       box.className="statusbox rejected";
       box.innerHTML="<strong>✗ REJECTED</strong><br>"+
-        "<strong>Reason:</strong> "+escapeHTML(result.rejectionReason||"No reason provided.")+
-        "<br><strong>Admin Comment:</strong> "+escapeHTML(result.adminComment||"");
+        "<strong>Reason:</strong> "+
+        escapeHTML(result.rejectionReason||"No reason provided.")+
+        "<br><strong>Admin Comment:</strong> "+
+        escapeHTML(result.adminComment||"");
     }else{
       box.className="statusbox pending";
-      box.innerHTML="<strong>⏳ PENDING</strong><br>Your NERD record has been received and is awaiting review.";
+      box.innerHTML="<strong>⏳ PENDING</strong><br>"+
+        "Your NERD record has been received and is awaiting review.";
     }
   }catch(err){
     box.className="statusbox rejected";
-    box.innerHTML="<strong>Error</strong><br>Unable to connect to the NERD server.";
+    box.innerHTML="<strong>Error</strong><br>"+
+      "Unable to connect to the NERD server.";
   }
 }
 
@@ -539,8 +541,12 @@ function escapeHTML(value){
 }
 
 window.addEventListener("beforeunload",function(e){
-  if(submitBtn.disabled){ e.preventDefault(); e.returnValue=""; }
+  if(submitBtn.disabled){
+    e.preventDefault();
+    e.returnValue="";
+  }
 });
 </script>
+
 </body>
 </html>
