@@ -7,8 +7,8 @@
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap');
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:Inter,Arial,sans-serif;background:radial-gradient(circle at 20% 20%,rgba(0,229,255,.12),transparent 25%),radial-gradient(circle at 80% 80%,rgba(0,100,255,.12),transparent 25%),#050b14;color:#eaf7ff;min-height:100vh;padding:20px}
-body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.12;background-image:linear-gradient(rgba(0,229,255,.3) 1px,transparent 1px),linear-gradient(90deg,rgba(0,229,255,.3) 1px,transparent 1px);background-size:40px 40px}
+body{font-family:Inter,Arial,sans-serif;background:radial-gradient(circle at 20% 20%,rgba(0,229,255,.12),transparent 25%),radial-gradient(circle at 80% 80%,rgba(0,100,255,.12),transparent 25%),#050b14;min-height:100vh}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.12;background-image:linear-gradient(rgba(0,229,255,.3) 1px,transparent 1px),linear-gradient(90deg,rgba(0,229,255,.3) 1px,transparent 1px)}
 .container{width:100%;max-width:850px;margin:auto;position:relative}
 .header{text-align:center;padding:35px 20px 25px}
 .logo{font-family:"Space Mono",monospace;color:#00e5ff;font-size:15px;letter-spacing:3px;margin-bottom:15px}
@@ -35,7 +35,13 @@ select option{background:#07111d}
 .error{display:block;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.3);color:#fca5a5}
 .loading{display:none;text-align:center;margin-top:15px;color:#00e5ff;font-family:"Space Mono",monospace;font-size:12px}
 .footer{text-align:center;padding:25px 10px;color:#637887;font-size:11px}
-@media(max-width:650px){body{padding:10px}.card{padding:20px}.grid{grid-template-columns:1fr}.full{grid-column:auto}.header{padding-top:20px}}
+/* Overlay for embedded NERD page */
+.nerd-overlay{position:fixed;inset:0;background:rgba(2,6,23,0.75);display:none;align-items:center;justify-content:center;padding:30px;z-index:9999}
+.nerd-overlay .frame-wrap{width:100%;max-width:1100px;height:80vh;background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.6);position:relative}
+.nerd-overlay iframe{width:100%;height:100%;border:0;display:block}
+.nerd-close{position:absolute;right:12px;top:12px;background:#0b6b4b;color:#fff;border:0;padding:8px 10px;border-radius:8px;cursor:pointer;font-weight:700}
+.nerd-open-btn{display:inline-block;margin-top:12px;color:#00e5ff;background:transparent;border:1px solid rgba(0,229,255,.12);padding:8px 12px;border-radius:8px;text-decoration:none}
+@media(max-width:650px){body{padding:10px}.card{padding:20px}.grid{grid-template-columns:1fr}.full{grid-column:auto}.header{padding-top:20px}.nerd-overlay .frame-wrap{height:88vh}}
 </style>
 </head>
 <body>
@@ -47,7 +53,7 @@ select option{background:#07111d}
 <p>COMPUTER ENGINEERING — CLASS OF 2026</p>
 </header>
 
-<main class="card">
+<main class="card" id="mainCard">
 <div class="notice">
 <strong>⚡ Mobilization Data Collation</strong><br>
 This portal is for the collection of information required for NYSC mobilization processing for Computer Engineering Class of 2026. Please ensure that every detail supplied is accurate and corresponds with your official records.
@@ -157,12 +163,22 @@ This portal is for the collection of information required for NYSC mobilization 
 
 <div class="status-link">
 <a href="status.html">Check your submission status →</a>
+<!-- Added link to open NERD page inside an overlay -->
+<a href="#" id="openNerd" class="nerd-open-btn">Open NERD →</a>
 </div>
 </main>
 
 <footer class="footer">
 CPE '26 • COMPUTER ENGINEERING • NYSC MOBILIZATION
 </footer>
+</div>
+
+<!-- Overlay that embeds nerd.html -->
+<div class="nerd-overlay" id="nerdOverlay" aria-hidden="true">
+  <div class="frame-wrap">
+    <button class="nerd-close" id="closeNerd">Close ✕</button>
+    <iframe id="nerdFrame" src="nerd.html" title="NERD — Nigeria Education Repository & Databank"></iframe>
+  </div>
 </div>
 
 <script>
@@ -173,54 +189,79 @@ const button=document.getElementById("submitButton");
 const loading=document.getElementById("loading");
 const message=document.getElementById("message");
 
-form.addEventListener("submit",async e=>{
-e.preventDefault();
-message.style.display="none";
+// NERD overlay controls
+const openNerd=document.getElementById('openNerd');
+const nerdOverlay=document.getElementById('nerdOverlay');
+const closeNerd=document.getElementById('closeNerd');
 
-const data={
-matricNo:document.getElementById("matricNo").value.trim(),
-firstName:document.getElementById("firstName").value.trim(),
-middlename:document.getElementById("middlename").value.trim(),
-surname:document.getElementById("surname").value.trim(),
-gsmNo:document.getElementById("gsmNo").value.trim(),
-stateOfOrigin:document.getElementById("stateOfOrigin").value,
-dateOfGraduation:document.getElementById("dateOfGraduation").value,
-gender:document.getElementById("gender").value,
-maritalStatus:document.getElementById("maritalStatus").value,
-jambRegNo:document.getElementById("jambRegNo").value.trim(),
-courseOfStudy:document.getElementById("courseOfStudy").value.trim()
-};
-
-button.disabled=true;
-button.innerText="SUBMITTING...";
-loading.style.display="block";
-
-try{
-const response=await fetch(GOOGLE_SCRIPT_URL,{
-method:"POST",
-headers:{"Content-Type":"text/plain;charset=utf-8"},
-body:JSON.stringify(data)
+openNerd.addEventListener('click',function(e){
+  e.preventDefault();
+  nerdOverlay.style.display='flex';
+  nerdOverlay.setAttribute('aria-hidden','false');
 });
 
-const result=await response.json();
+closeNerd.addEventListener('click',function(){
+  nerdOverlay.style.display='none';
+  nerdOverlay.setAttribute('aria-hidden','true');
+});
 
-if(!result.success)throw new Error(result.message);
+// Close overlay when pressing Escape or clicking outside the frame-wrap
+nerdOverlay.addEventListener('click',function(e){
+  if(e.target===nerdOverlay) closeNerd.click();
+});
 
-message.className="message success";
-message.innerHTML="✓ MOBILIZATION DATA RECEIVED<br><br>Your Submission ID:<br><strong>"+result.submissionID+"</strong><br><br>Status: <strong>PENDING REVIEW</strong><br><br>Please save your Submission ID. You will need it to check your status.";
-message.style.display="block";
-form.reset();
-document.getElementById("courseOfStudy").value="Computer Engineering";
+window.addEventListener('keydown',function(e){
+  if(e.key==='Escape' && nerdOverlay.style.display==='flex') closeNerd.click();
+});
 
-}catch(error){
-message.className="message error";
-message.innerHTML="⚠ "+error.message;
-message.style.display="block";
-}
+form.addEventListener("submit",async e=>{
+  e.preventDefault();
+  message.style.display="none";
 
-button.disabled=false;
-button.innerText="SUBMIT MOBILIZATION DATA →";
-loading.style.display="none";
+  const data={
+    matricNo:document.getElementById("matricNo").value.trim(),
+    firstName:document.getElementById("firstName").value.trim(),
+    middlename:document.getElementById("middlename").value.trim(),
+    surname:document.getElementById("surname").value.trim(),
+    gsmNo:document.getElementById("gsmNo").value.trim(),
+    stateOfOrigin:document.getElementById("stateOfOrigin").value,
+    dateOfGraduation:document.getElementById("dateOfGraduation").value,
+    gender:document.getElementById("gender").value,
+    maritalStatus:document.getElementById("maritalStatus").value,
+    jambRegNo:document.getElementById("jambRegNo").value.trim(),
+    courseOfStudy:document.getElementById("courseOfStudy").value.trim()
+  };
+
+  button.disabled=true;
+  button.innerText="SUBMITTING...";
+  loading.style.display="block";
+
+  try{
+    const response=await fetch(GOOGLE_SCRIPT_URL,{
+      method:"POST",
+      headers:{"Content-Type":"text/plain;charset=utf-8"},
+      body:JSON.stringify(data)
+    });
+
+    const result=await response.json();
+
+    if(!result.success)throw new Error(result.message);
+
+    message.className="message success";
+    message.innerHTML="✓ MOBILIZATION DATA RECEIVED<br><br>Your Submission ID:<br><strong>"+result.submissionID+"</strong><br><br>Status: <strong>PENDING REVIEW</strong><br><br>Please save your Submission ID for tracking.";
+    message.style.display="block";
+    form.reset();
+    document.getElementById("courseOfStudy").value="Computer Engineering";
+
+  }catch(error){
+    message.className="message error";
+    message.innerHTML="⚠ "+(error.message||'Submission failed');
+    message.style.display="block";
+  }
+
+  button.disabled=false;
+  button.innerText="SUBMIT MOBILIZATION DATA →";
+  loading.style.display="none";
 });
 </script>
 </body>
