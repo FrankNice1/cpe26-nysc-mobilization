@@ -46,7 +46,7 @@
 
 <div class="container">
     <div class="form-container">
-        <div class="notice"><strong>Important:</strong> Fill all fields carefully. Bank accounts must be standard NUBAN (10 digits). Sort/Branch code must be exactly 6 digits. Submissions are sent to the central mobilization backend.</div>
+        <div class="notice"><strong>Important:</strong> Fill all fields carefully. Bank accounts must be standard NUBAN (10 digits). Sort/Branch code length may vary depending on the bank — enter the full branch code. Submissions are sent to the central mobilization backend.</div>
 
         <form id="studentForm">
             <h3 class="section-title">1. Student Information</h3>
@@ -83,7 +83,7 @@
             <div class="form-group"><label for="bank">Bank Name <span>*</span></label><select id="bank" name="bank" required><option value="">Select Bank</option><option>Access Bank</option><option>GTBank</option><option>Zenith Bank</option><option>UBA</option><option>First Bank of Nigeria</option></select></div>
 
             <div class="grid-2"><div class="form-group"><label for="accountNumber">Account Number (10 digits) <span>*</span></label><input id="accountNumber" name="accountNumber" maxlength="10" inputmode="numeric" required placeholder="10-digit NUBAN"></div>
-            <div class="form-group"><label for="sortCode">Sort Code / Branch Code (6 digits) <span>*</span></label><input id="sortCode" name="sortCode" maxlength="6" inputmode="numeric" required placeholder="6-digit Sort Code"></div></div>
+            <div class="form-group"><label for="sortCode">Sort Code / Branch Code (variable length) <span>*</span></label><input id="sortCode" name="sortCode" maxlength="12" inputmode="numeric" required placeholder="Enter full branch/sort code (3-12 digits)"></div></div>
 
             <button type="submit" class="submit-btn" id="submitBtn">Submit Placement Record</button>
         </form>
@@ -116,7 +116,8 @@ form.addEventListener('submit', async (e)=>{
     const toDate = document.getElementById('toDate').value;
 
     if(!/^\d{10}$/.test(accountNumber)){ showMessage('Account number must contain exactly 10 digits.', 'bad'); document.getElementById('accountNumber').focus(); return; }
-    if(!/^\d{6}$/.test(sortCode)){ showMessage('Sort/Branch code must contain exactly 6 digits.', 'bad'); document.getElementById('sortCode').focus(); return; }
+    // Allow sort/branch codes with variable length: minimum 3 digits, maximum 12 digits
+    if(!/^\d{3,12}$/.test(sortCode)){ showMessage('Sort/Branch code must contain between 3 and 12 digits.', 'bad'); document.getElementById('sortCode').focus(); return; }
     if(fromDate && toDate && new Date(fromDate) > new Date(toDate)){ showMessage('Attachment start date cannot be later than the end date.', 'bad'); return; }
 
     // collect data and map keys to backend-friendly names
