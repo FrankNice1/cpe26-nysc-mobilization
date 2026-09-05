@@ -171,6 +171,7 @@ background:var(--blue2);padding:10px 20px;flex-direction:column;align-items:stre
 <a href="index.html">Home</a>
 <a href="nerd.html" class="active">NERD</a>
 <a href="#status" class="nav-status">Check Status</a>
+<a href="student-dataform.html">Student Dataform</a>
 </nav>
 </div>
 </header>
@@ -512,7 +513,7 @@ async function checkStatus(){
       box.className="statusbox rejected";
       box.innerHTML="<strong>✗ REJECTED</strong><br>"+
         "<strong>Reason:</strong> "+
-        escapeHTML(result.rejectionReason||"No reason provided.")+
+        escapeHTML(result.rejectionReason||"No reason provided.")+ 
         "<br><strong>Admin Comment:</strong> "+
         escapeHTML(result.adminComment||"");
     }else{
@@ -535,8 +536,8 @@ function newSubmission(){
 }
 
 function escapeHTML(value){
-  return String(value||"").replace(/[&<>"']/g,function(m){
-    return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m];
+  return String(value||"").replace(/[&<>\"']/g,function(m){
+    return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#039;"}[m];
   });
 }
 
