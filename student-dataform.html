@@ -6,277 +6,78 @@
     <title>SIWES IT Placement Information Portal</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            font-family: 'Inter', system-ui, -apple-system, sans-serif;
-            background-color: #f1f5f9;
-            color: #1e293b;
-            padding: 30px 15px;
-            line-height: 1.5;
-        }
-
-        .container {
-            width: 100%;
-            max-width: 800px;
-            margin: 0 auto;
-            background: #ffffff;
-            border-radius: 16px;
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01);
-            overflow: hidden;
-            border: 1px solid #e2e8f0;
-        }
-
-        .header {
-            background: linear-gradient(135deg, #1e3a8a 0%, #0b5ed7 100%);
-            color: #ffffff;
-            padding: 35px 30px;
-            text-align: center;
-        }
-
-        .header h1 {
-            font-size: 24px;
-            font-weight: 700;
-            letter-spacing: -0.02em;
-            margin-bottom: 8px;
-            text-transform: uppercase;
-        }
-
-        .header p {
-            font-size: 14px;
-            color: #bfdbfe;
-            font-weight: 400;
-        }
-
-        .form-container {
-            padding: 35px;
-        }
-
-        .notice {
-            background-color: #fff7ed;
-            border: 1px solid #ffedd5;
-            border-left: 4px solid #f97316;
-            padding: 16px;
-            margin-bottom: 30px;
-            border-radius: 8px;
-            font-size: 13.5px;
-            color: #9a3412;
-            line-height: 1.6;
-        }
-
-        .notice strong {
-            color: #c2410c;
-        }
-
-        .section-title {
-            font-size: 16px;
-            font-weight: 700;
-            color: #1e3a8a;
-            margin: 30px 0 18px;
-            padding-bottom: 8px;
-            border-bottom: 2px solid #e2e8f0;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .section-title:first-of-type {
-            margin-top: 0;
-        }
-
-        .grid-2 {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 16px;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        label {
-            display: block;
-            font-weight: 600;
-            font-size: 13px;
-            color: #334155;
-            margin-bottom: 6px;
-            text-transform: uppercase;
-            letter-spacing: 0.03em;
-        }
-
-        label span {
-            color: #ef4444;
-            margin-left: 2px;
-        }
-
-        input,
-        select,
-        textarea {
-            width: 100%;
-            padding: 12px 14px;
-            border: 1px solid #cbd5e1;
-            border-radius: 8px;
-            font-size: 14px;
-            font-family: inherit;
-            color: #0f172a;
-            background-color: #ffffff;
-            transition: all 0.2s ease;
-        }
-
-        textarea {
-            resize: vertical;
-            min-height: 80px;
-        }
-
-        input:focus,
-        select:focus,
-        textarea:focus {
-            outline: none;
-            border-color: #2563eb;
-            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
-        }
-
-        .submit-btn {
-            width: 100%;
-            padding: 16px;
-            margin-top: 20px;
-            background: #1e3a8a;
-            color: #ffffff;
-            border: none;
-            border-radius: 8px;
-            font-size: 15px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background 0.2s ease;
-        }
-
-        .submit-btn:hover {
-            background: #1d4ed8;
-        }
-
-        .submit-btn:disabled {
-            background: #94a3b8;
-            cursor: not-allowed;
-        }
-
-        .message {
-            display: none;
-            padding: 14px 18px;
-            margin-top: 20px;
-            border-radius: 8px;
-            font-size: 14px;
-            font-weight: 500;
-            text-align: center;
-        }
-
-        .success {
-            display: block;
-            background-color: #f0fdf4;
-            border: 1px solid #bbf7d0;
-            color: #166534;
-        }
-
-        .error {
-            display: block;
-            background-color: #fef2f2;
-            border: 1px solid #fecaca;
-            color: #991b1b;
-        }
-
-        .loading {
-            display: none;
-            text-align: center;
-            margin-top: 15px;
-            color: #2563eb;
-            font-weight: 600;
-            font-size: 14px;
-        }
-
-        .footer {
-            text-align: center;
-            padding: 20px;
-            font-size: 12px;
-            color: #64748b;
-            background: #f8fafc;
-            border-top: 1px solid #e2e8f0;
-        }
-
-        @media(max-width: 640px) {
-            body {
-                padding: 10px;
-            }
-
-            .form-container {
-                padding: 20px;
-            }
-
-            .grid-2 {
-                grid-template-columns: 1fr;
-                gap: 0;
-            }
-
-            .header h1 {
-                font-size: 20px;
-            }
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background-color: #f1f5f9; color: #1e293b; padding: 30px 15px; line-height: 1.5; }
+        .container { width: 100%; max-width: 900px; margin: 0 auto; background: #ffffff; border-radius: 12px; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05); overflow: hidden; border: 1px solid #e2e8f0; }
+        .header { background: linear-gradient(135deg, #1e3a8a 0%, #0b5ed7 100%); color: #ffffff; padding: 30px 24px; text-align: center; }
+        .header h1 { font-size: 20px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 6px; text-transform: uppercase; }
+        .header p { font-size: 13px; color: #bfdbfe; }
+        .form-container { padding: 28px; }
+        .notice { background-color: #fff7ed; border: 1px solid #ffedd5; border-left: 4px solid #f97316; padding: 12px; margin-bottom: 18px; border-radius: 8px; font-size: 13px; color: #9a3412; }
+        .section-title { font-size: 15px; font-weight: 700; color: #1e3a8a; margin: 20px 0 12px; display: flex; align-items: center; gap: 8px; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .form-group { margin-bottom: 12px; }
+        label { display: block; font-weight: 600; font-size: 13px; color: #334155; margin-bottom: 6px; text-transform: uppercase; }
+        label span { color: #ef4444; margin-left: 4px; }
+        input, select, textarea { width: 100%; padding: 10px 12px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 14px; font-family: inherit; color: #0f172a; background-color: #ffffff; }
+        textarea { min-height: 80px; resize: vertical; }
+        input:focus, select:focus, textarea:focus { outline: none; border-color: #2563eb; box-shadow: 0 0 0 3px rgba(37,99,235,0.12); }
+        .submit-btn { width: 100%; padding: 14px; margin-top: 12px; background: #1e3a8a; color: #fff; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; }
+        .submit-btn:disabled { background: #94a3b8; cursor: not-allowed; }
+        .message { display: none; padding: 12px; margin-top: 12px; border-radius: 8px; font-size: 14px; }
+        .success { background-color: #f0fdf4; border: 1px solid #bbf7d0; color: #166534; }
+        .error { background-color: #fef2f2; border: 1px solid #fecaca; color: #991b1b; }
+        .meta-box { margin-top: 14px; padding: 12px; border-radius: 8px; background: #f8fafc; border: 1px solid #e2e8f0; font-size: 13px; }
+        .meta-box b { color: #0f172a; }
+        .required-list { margin-top: 12px; font-size: 13px; }
+        @media(max-width: 720px) { .grid-2 { grid-template-columns: 1fr; } .container { padding: 0; } .form-container { padding: 16px; } }
     </style>
 </head>
-
 <body>
-
 <div class="container">
-
     <div class="header">
         <h1>SIWES Placement Information Portal</h1>
-        <p>Students Industrial Work Experience Scheme (Appendix B2 Submission)</p>
+        <p>Students Industrial Work Experience Scheme — Appendix B2 Submission</p>
     </div>
 
     <div class="form-container">
-
         <div class="notice">
-            <strong>Important Notice:</strong> Please ensure all provided details are accurate and verifiable. Bank accounts must be standard traditional accounts. Digital wallets/fintech account[...] 
+            <strong>Important:</strong> Fill all fields carefully. Bank accounts must be standard NUBAN (10 digits). Sort/Branch code must be exactly 6 digits. System-generated fields (Submission ID, Timestamp, Status) are added automatically on submit.
         </div>
 
         <form id="studentForm">
-
-            <!-- Section 1 -->
+            <!-- Student Information -->
             <h3 class="section-title">1. Student Information</h3>
 
             <div class="form-group">
-                <label for="name">Full Name (Surname First) <span>*</span></label>
-                <input type="text" id="name" placeholder="e.g. OKONKWO, Emmanuel Chukwuemeka" required>
+                <label for="name">Full Name — Surname First <span>*</span></label>
+                <input type="text" id="name" name="name" placeholder="e.g. OKONKWO, Emmanuel Chukwuemeka" required>
             </div>
 
             <div class="grid-2">
                 <div class="form-group">
                     <label for="matric">Matriculation Number <span>*</span></label>
-                    <input type="text" id="matric" placeholder="e.g. RUN/CMP/21/10234" required>
+                    <input type="text" id="matric" name="matric" placeholder="e.g. RUN/CMP/21/10234" required>
                 </div>
-
                 <div class="form-group">
                     <label for="course">Course of Study <span>*</span></label>
-                    <input type="text" id="course" placeholder="e.g. Computer Science" required>
+                    <input type="text" id="course" name="course" placeholder="e.g. Computer Science" required>
                 </div>
             </div>
 
             <div class="grid-2">
                 <div class="form-group">
                     <label for="level">Level of Study <span>*</span></label>
-                    <select id="level" required>
+                    <select id="level" name="level" required>
                         <option value="">Select Level</option>
                         <option value="300 Level">300 Level</option>
                         <option value="400 Level">400 Level</option>
                         <option value="500 Level">500 Level</option>
                     </select>
                 </div>
-
                 <div class="form-group">
                     <label for="year">SIWES Year <span>*</span></label>
-                    <select id="year" required>
+                    <select id="year" name="year" required>
                         <option value="">Select Year</option>
                         <option value="2025/2026">2025/2026</option>
                         <option value="2026/2027">2026/2027</option>
@@ -287,51 +88,46 @@
             <div class="grid-2">
                 <div class="form-group">
                     <label for="email">Student Email Address <span>*</span></label>
-                    <input type="email" id="email" placeholder="student@university.edu.ng" required>
+                    <input type="email" id="email" name="email" placeholder="student@university.edu.ng" required>
                 </div>
-
                 <div class="form-group">
                     <label for="phone">Phone Number <span>*</span></label>
-                    <input type="tel" id="phone" placeholder="08012345678" required>
+                    <input type="tel" id="phone" name="phone" placeholder="08012345678" required>
                 </div>
             </div>
 
             <div class="form-group">
                 <label for="nationality">Nationality <span>*</span></label>
-                <input type="text" id="nationality" value="Nigerian" required>
+                <input type="text" id="nationality" name="nationality" value="Nigerian" required>
             </div>
 
-            <!-- Section 2 -->
-            <h3 class="section-title">2. Employer Placement Information</h3>
-
+            <!-- Employer -->
+            <h3 class="section-title">2. Employer / Placement Information</h3>
             <div class="form-group">
-                <label for="employerName">Name of Employer / Organization <span>*</span></label>
-                <input type="text" id="employerName" placeholder="e.g. Chevron Nigeria Limited" required>
+                <label for="employerName">Employer / Organization Name <span>*</span></label>
+                <input type="text" id="employerName" name="employerName" placeholder="e.g. Chevron Nigeria Limited" required>
             </div>
-
             <div class="form-group">
-                <label for="employerAddress">Full Office Address of Employer <span>*</span></label>
-                <textarea id="employerAddress" placeholder="Street address, city, and state" required></textarea>
+                <label for="employerAddress">Employer Office Address <span>*</span></label>
+                <textarea id="employerAddress" name="employerAddress" placeholder="Street, City, State" required></textarea>
             </div>
 
             <div class="grid-2">
                 <div class="form-group">
-                    <label for="fromDate">Period of Attachment (From) <span>*</span></label>
-                    <input type="date" id="fromDate" required>
+                    <label for="fromDate">Attachment Start Date (From) <span>*</span></label>
+                    <input type="date" id="fromDate" name="fromDate" required>
                 </div>
-
                 <div class="form-group">
-                    <label for="toDate">Period of Attachment (To) <span>*</span></label>
-                    <input type="date" id="toDate" required>
+                    <label for="toDate">Attachment End Date (To) <span>*</span></label>
+                    <input type="date" id="toDate" name="toDate" required>
                 </div>
             </div>
 
-            <!-- Section 3 -->
-            <h3 class="section-title">3. Bank Account Details</h3>
-
+            <!-- Bank -->
+            <h3 class="section-title">3. Bank Account Information</h3>
             <div class="form-group">
                 <label for="bank">Bank Name <span>*</span></label>
-                <select id="bank" required>
+                <select id="bank" name="bank" required>
                     <option value="">Select Bank</option>
                     <option>Access Bank</option>
                     <option>Citibank Nigeria</option>
@@ -360,108 +156,141 @@
 
             <div class="grid-2">
                 <div class="form-group">
-                    <label for="accountNumber">Account Number <span>*</span></label>
-                    <input type="text" id="accountNumber" maxlength="10" inputmode="numeric" placeholder="10-digit NUBAN" required>
+                    <label for="accountNumber">Account Number (10 digits) <span>*</span></label>
+                    <input type="text" id="accountNumber" name="accountNumber" maxlength="10" inputmode="numeric" placeholder="10-digit NUBAN" required>
                 </div>
-
                 <div class="form-group">
-                    <label for="sortCode">Sort Code / Branch Code <span>*</span></label>
-                    <input type="text" id="sortCode" inputmode="numeric" placeholder="6-digit Sort Code" required>
+                    <label for="sortCode">Sort Code / Branch Code (6 digits) <span>*</span></label>
+                    <input type="text" id="sortCode" name="sortCode" maxlength="6" inputmode="numeric" placeholder="6-digit Sort Code" required>
                 </div>
             </div>
 
+            <!-- System-generated info will be added on submit -->
             <button type="submit" class="submit-btn" id="submitBtn">Submit Placement Record</button>
 
-            <div class="loading" id="loading">Submitting information to SIWES portal...</div>
             <div class="message" id="message"></div>
 
+            <div id="resultMeta" class="meta-box" style="display:none;">
+                <div><b>Submission ID:</b> <span id="metaId"></span></div>
+                <div><b>Timestamp:</b> <span id="metaTs"></span></div>
+                <div><b>Status:</b> <span id="metaStatus"></span></div>
+                <div><b>Admin Comment:</b> <span id="metaAdmin"></span></div>
+            </div>
+
+            <div class="required-list">
+                <b>Required from student:</b> 15 fields (all required).<br>
+                1 Full Name • 2 Matriculation Number • 3 Course • 4 Level • 5 SIWES Year • 6 Student Email • 7 Phone • 8 Nationality • 9 Employer Name • 10 Employer Address • 11 Attachment From • 12 Attachment To • 13 Bank Name • 14 Account Number • 15 Sort/Branch Code
+            </div>
         </form>
     </div>
 
-    <div class="footer">
-        Students Industrial Work Experience Scheme (SIWES) — Placement Data System
-    </div>
+    <div style="padding:12px;border-top:1px solid #e2e8f0;background:#f8fafc;font-size:12px;color:#64748b;text-align:center;">SIWES — Placement Data System</div>
 </div>
 
 <script>
     const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwIIi6VhfT7XpQaUHI-vutNwtvVgu02lhuIh8KFGP-niLrC8BCUFpeQ47zU_luYhVgX/exec";
 
-    const form = document.getElementById("studentForm");
-    const submitBtn = document.getElementById("submitBtn");
-    const loading = document.getElementById("loading");
-    const message = document.getElementById("message");
+    const form = document.getElementById('studentForm');
+    const submitBtn = document.getElementById('submitBtn');
+    const message = document.getElementById('message');
+    const resultMeta = document.getElementById('resultMeta');
 
-    form.addEventListener("submit", async function(event) {
-        event.preventDefault();
-        message.style.display = "none";
+    function generateSubmissionMetadata() {
+        const id = 'SUB-' + Date.now() + '-' + Math.floor(Math.random() * 9000 + 1000);
+        const ts = new Date().toISOString();
+        return { submissionId: id, submissionTimestamp: ts, status: 'Pending', adminComment: '' };
+    }
 
-        const accountNumber = document.getElementById("accountNumber").value.trim();
-        const fromDate = document.getElementById("fromDate").value;
-        const toDate = document.getElementById("toDate").value;
+    function showMessage(text, type) {
+        message.className = 'message ' + (type === 'success' ? 'success' : 'error');
+        message.style.display = 'block';
+        message.textContent = text;
+    }
+
+    function hideMessage() { message.style.display = 'none'; }
+
+    form.addEventListener('submit', async function (e) {
+        e.preventDefault();
+        hideMessage();
+        resultMeta.style.display = 'none';
+
+        // Basic validations
+        const accountNumber = document.getElementById('accountNumber').value.trim();
+        const sortCode = document.getElementById('sortCode').value.trim();
+        const fromDate = document.getElementById('fromDate').value;
+        const toDate = document.getElementById('toDate').value;
 
         if (!/^\d{10}$/.test(accountNumber)) {
-            showError("Account number must contain exactly 10 digits.");
+            showMessage('Account number must contain exactly 10 digits.', 'error');
+            return;
+        }
+        if (!/^\d{6}$/.test(sortCode)) {
+            showMessage('Sort/Branch code must contain exactly 6 digits.', 'error');
+            return;
+        }
+        if (fromDate && toDate && new Date(fromDate) > new Date(toDate)) {
+            showMessage('Attachment start date cannot be later than the end date.', 'error');
             return;
         }
 
-        if (new Date(fromDate) > new Date(toDate)) {
-            showError("Attachment start date cannot be later than the end date.");
-            return;
-        }
-
+        // Collect form data
         const data = {
-            name: document.getElementById("name").value.trim(),
-            matric: document.getElementById("matric").value.trim(),
-            course: document.getElementById("course").value.trim(),
-            level: document.getElementById("level").value,
-            year: document.getElementById("year").value,
-            email: document.getElementById("email").value.trim(),
-            phone: document.getElementById("phone").value.trim(),
-            nationality: document.getElementById("nationality").value.trim(),
-            employerName: document.getElementById("employerName").value.trim(),
-            employerAddress: document.getElementById("employerAddress").value.trim(),
+            name: document.getElementById('name').value.trim(),
+            matric: document.getElementById('matric').value.trim(),
+            course: document.getElementById('course').value.trim(),
+            level: document.getElementById('level').value,
+            year: document.getElementById('year').value,
+            email: document.getElementById('email').value.trim(),
+            phone: document.getElementById('phone').value.trim(),
+            nationality: document.getElementById('nationality').value.trim(),
+            employerName: document.getElementById('employerName').value.trim(),
+            employerAddress: document.getElementById('employerAddress').value.trim(),
             fromDate: fromDate,
             toDate: toDate,
-            bank: document.getElementById("bank").value,
+            bank: document.getElementById('bank').value,
             accountNumber: accountNumber,
-            sortCode: document.getElementById("sortCode").value.trim()
+            sortCode: sortCode
         };
 
+        // Attach system-generated metadata
+        const meta = generateSubmissionMetadata();
+        data.submissionId = meta.submissionId;
+        data.submissionTimestamp = meta.submissionTimestamp;
+        data.status = meta.status; // 'Pending'
+        data.adminComment = meta.adminComment;
+
+        // UI: disable button
         submitBtn.disabled = true;
-        submitBtn.innerText = "Submitting...";
-        loading.style.display = "block";
+        submitBtn.textContent = 'Submitting...';
 
         try {
+            // Send to backend (Google Script). Using no-cors means we cannot read response; ensure server can accept POST.
             await fetch(GOOGLE_SCRIPT_URL, {
-                method: "POST",
-                mode: "no-cors",
-                headers: { "Content-Type": "text/plain;charset=utf-8" },
+                method: 'POST',
+                mode: 'no-cors',
+                headers: { 'Content-Type': 'application/json;charset=utf-8' },
                 body: JSON.stringify(data)
             });
 
-            showSuccess("Placement record submitted successfully.");
+            showMessage('Placement record submitted successfully. Submission ID: ' + meta.submissionId, 'success');
+
+            // Show system-generated metadata on page for student's reference
+            document.getElementById('metaId').textContent = meta.submissionId;
+            document.getElementById('metaTs').textContent = meta.submissionTimestamp;
+            document.getElementById('metaStatus').textContent = meta.status;
+            document.getElementById('metaAdmin').textContent = meta.adminComment || '—';
+            resultMeta.style.display = 'block';
+
+            // Reset form fields (but keep metadata visible)
             form.reset();
-        } catch (error) {
-            showError("Unable to submit record. Please check your network connection.");
+        } catch (err) {
+            // If fetch throws (network error), show error. With mode:no-cors, fetch usually resolves; catch is for other errors.
+            showMessage('Unable to submit record. Please check your network connection or contact admin.', 'error');
+        } finally {
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Submit Placement Record';
         }
-
-        submitBtn.disabled = false;
-        submitBtn.innerText = "Submit Placement Record";
-        loading.style.display = "none";
     });
-
-    function showSuccess(text) {
-        message.className = "message success";
-        message.innerHTML = "✓ " + text;
-        message.style.display = "block";
-    }
-
-    function showError(text) {
-        message.className = "message error";
-        message.innerHTML = "⚠ " + text;
-        message.style.display = "block";
-    }
 </script>
-
 </body>
 </html>
