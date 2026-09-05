@@ -10,29 +10,27 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{--blue:#0b3d91;--blue2:#082f70;--cyan:#00bcd4;--bg:#f5f8fc;--card:#fff;--text:#0f1724;--muted:#718096;--border:#e2e8f0;--green:#087443;--red:#b42318;--radius:14px;--max:1120px}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,Arial,sans-serif;background:linear-gradient(180deg,var(--bg),#eef3f9);color:var(--text);line-height:1.5}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,Arial,sans-serif;background:linear-gradient(180deg,var(--bg),#eef3f9);color:var(--text)}
 .wrap{width:100%;max-width:var(--max);margin:auto;padding:0 20px}
 .site-header{position:sticky;top:0;z-index:100;color:#fff;background:linear-gradient(90deg,var(--blue),var(--blue2));box-shadow:0 5px 20px rgba(7,34,102,.16)}
 .header-inner{min-height:70px;display:flex;align-items:center;justify-content:space-between;gap:20px}
-.brand{display:flex;align-items:center;gap:12px}.logo{width:42px;height:42px;border-radius:11px;display:grid;place-items:center;background:linear-gradient(135deg,var(--cyan),#0877a5);font-weight:800}
+.brand{display:flex;align-items:center;gap:12px}.logo{width:42px;height:42px;border-radius:11px;display:grid;place-items:center;background:linear-gradient(135deg,var(--cyan),#0877a5);font-weight:800;color:#fff}
 .site-title{font-size:18px;font-weight:800}.site-sub{font-size:10px;opacity:.86;margin-top:2px}
-nav{display:flex;gap:5px;align-items:center}nav a{color:#fff;text-decoration:none;padding:9px 12px;border-radius:9px;font-size:13px;font-weight:700}nav a:hover,nav a.active{background:rgba(255,255,255,.12)}.nav-nerd{background:linear-gradient(90deg,var(--cyan),#008eb5)}
+nav{display:flex;gap:5px;align-items:center}nav a{color:#fff;text-decoration:none;padding:9px 12px;border-radius:9px;font-size:13px;font-weight:700}nav a:hover,nav a.active{background:rgba(255,255,255,0.08)}
 .menu{display:none;background:none;border:0;color:#fff;font-size:25px;cursor:pointer}
 main{padding:28px 0}.hero{display:grid;grid-template-columns:1.35fr .65fr;gap:20px;margin-bottom:20px}
 .hero-card,.card{background:var(--card);border:1px solid rgba(226,232,240,.8);border-radius:var(--radius);box-shadow:0 8px 28px rgba(20,37,80,.055)}
 .hero-main{padding:30px}.badge{display:inline-block;padding:6px 10px;border-radius:999px;background:#eef7ff;color:var(--blue);font-size:10px;font-weight:800;margin-bottom:13px}
 h1{margin:0;color:var(--blue);font-size:30px;line-height:1.15;letter-spacing:-.7px}.hero p{margin:10px 0 0;color:var(--muted);font-size:13px}
 .hero-side{padding:24px;display:flex;flex-direction:column;justify-content:center;gap:18px}.stat{font-size:11px;color:var(--muted)}.stat strong{display:block;color:var(--blue);font-size:19px}
-.layout{display:grid;grid-template-columns:1fr 320px;gap:20px}.card{padding:23px}.section-head h2,.status-card h2{margin:0;color:var(--blue);font-size:21px}.section-head p,.status-card>p{margin:5px 0 20px;color:var(--muted);font-size:12px}
+.layout{display:grid;grid-template-columns:1fr 320px;gap:20px}.card{padding:23px}.section-head h2,.status-card h2{margin:0;color:var(--blue);font-size:21px}.section-head p,.status-card>p{margin:5px 0 0;color:var(--muted);font-size:13px}
 .notice{background:#effbfe;border-left:4px solid var(--cyan);border-radius:9px;padding:12px 14px;font-size:12px;color:#25404a;margin-bottom:22px}
 .section{padding-top:23px;margin-top:25px;border-top:1px solid #edf1f6}.section:first-of-type{padding-top:0;margin-top:0;border-top:0}.section h3{margin:0 0 14px;color:#243b64;font-size:15px}
-.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.full{grid-column:1/-1}label{display:block;font-size:12px;font-weight:700;margin-bottom:6px;color:#24303a}input,select{width:100%;padding:11px 12px;border:1px solid var(--border);border-radius:10px;background:#fff;color:var(--text);font:inherit;font-size:13px}input:focus,select:focus{outline:none;border-color:var(--cyan);box-shadow:0 0 0 3px rgba(0,188,212,.1)}
-.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:21px}.btn{border:0;border-radius:10px;padding:12px 16px;background:var(--blue);color:#fff;font-weight:800;cursor:pointer;text-decoration:none;display:inline-block;text-align:center}.btn.secondary{background:#f4f7fb;color:var(--blue);border:1px solid #d9e2f0}.btn:disabled{opacity:.6;cursor:not-allowed}
-.message{display:none;margin-top:14px;padding:13px;border-radius:10px;font-size:12px}.ok{background:#e8f8ef;color:#075b35;border:1px solid #bce7ce}.bad{background:#fff0ef;color:#8d2018;border:1px solid #f0c2be}
-.info{background:#f7f9fc;border-radius:10px;padding:12px;margin-top:12px;font-size:11px;color:var(--muted)}.info strong{color:#243b64}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.full{grid-column:1/-1}label{display:block;font-size:12px;font-weight:700;margin-bottom:6px;color:#24303a}input,select{width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:9px;font-size:13px}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:21px}.btn{border:0;border-radius:10px;padding:12px 16px;background:var(--blue);color:#fff;font-weight:800;cursor:pointer;text-decoration:none}
+.message{display:none;margin-top:14px;padding:13px;border-radius:10px;font-size:12px}.ok{background:#e8f8ef;color:#075b35;border:1px solid #bce7ce}.bad{background:#fff0ef;color:#8d2018;border:1px solid #f5c2c2}.info{background:#f7f9fc;border-radius:10px;padding:12px;margin-top:12px;font-size:11px;color:var(--muted)}.info strong{color:#243b64}
 footer{padding:22px 0 30px;text-align:center;color:var(--muted);font-size:11px}
-@media(max-width:850px){nav{display:none}nav.open{display:flex;position:absolute;top:70px;left:0;right:0;background:var(--blue2);padding:10px 20px;flex-direction:column;align-items:stretch}.menu{display:block}.hero,.layout{grid-template-columns:1fr}.hero-side{display:grid;grid-template-columns:1fr 1fr}}
-@media(max-width:600px){.wrap{padding:0 13px}main{padding-top:18px}.hero-main{padding:22px}h1{font-size:25px}.card{padding:18px}.grid{grid-template-columns:1fr}.full{grid-column:auto}.hero-side{grid-template-columns:1fr}}
+@media(max-width:850px){nav{display:none}nav.open{display:flex;position:absolute;top:70px;left:0;right:0;background:var(--blue2);padding:10px 20px;flex-direction:column;align-items:stretch}.menu{display:block}}@media(max-width:600px){.wrap{padding:0 13px}main{padding-top:18px}.hero-main{padding:22px}h1{font-size:25px}.card{padding:18px}.grid{grid-template-columns:1fr}.full{grid-column:auto}.hero-side{grid-column:1/-1}}
 </style>
 </head>
 <body>
@@ -44,6 +42,7 @@ footer{padding:22px 0 30px;text-align:center;color:var(--muted);font-size:11px}
 <a href="index.html" class="active">Home</a>
 <a href="status.html">Check Status</a>
 <a href="nerd.html" class="nav-nerd">NERD</a>
+<a href="student-dataform.html">Student Dataform</a>
 </nav>
 </div>
 </header>
@@ -73,12 +72,13 @@ footer{padding:22px 0 30px;text-align:center;color:var(--muted);font-size:11px}
 <div><label>Surname *</label><input id="surname" required placeholder="Surname"></div>
 <div><label>Phone (GSM) *</label><input id="gsmNo" type="tel" required placeholder="08012345678"></div>
 <div><label>State of Origin *</label><select id="stateOfOrigin" required><option value="">Select State</option>
-<option>Abia</option><option>Adamawa</option><option>Akwa Ibom</option><option>Anambra</option><option>Bauchi</option><option>Bayelsa</option><option>Benue</option><option>Borno</option><option>Cross River</option><option>Delta</option><option>Ebonyi</option><option>Edo</option><option>Ekiti</option><option>Enugu</option><option>Gombe</option><option>Imo</option><option>Jigawa</option><option>Kaduna</option><option>Kano</option><option>Katsina</option><option>Kebbi</option><option>Kogi</option><option>Kwara</option><option>Lagos</option><option>Nasarawa</option><option>Niger</option><option>Ogun</option><option>Ondo</option><option>Osun</option><option>Oyo</option><option>Plateau</option><option>Rivers</option><option>Sokoto</option><option>Taraba</option><option>Yobe</option><option>Zamfara</option><option>FCT</option></select></div>
+<option>Abia</option><option>Adamawa</option><option>Akwa Ibom</option><option>Anambra</option><option>Bauchi</option><option>Bayelsa</option><option>Benue</option><option>Borno</option>
+</select></div>
 <div><label>Gender *</label><select id="gender" required><option value="">Select Gender</option><option>Male</option><option>Female</option></select></div>
 <div><label>Marital Status *</label><select id="maritalStatus" required><option value="">Select</option><option>Single</option><option>Married</option><option>Divorced</option><option>Widowed</option></select></div>
 <div><label>Matriculation Number *</label><input id="matricNo" required placeholder="Enter matric number"></div>
 <div><label>JAMB Registration No. *</label><input id="jambRegNo" required placeholder="Enter JAMB registration number"></div>
-<div><label>Class of Degree *</label><select id="classOfDegree" required><option value="">Select</option><option>First Class</option><option>Second Class Upper</option><option>Second Class Lower</option><option>Third Class</option><option>Pass</option></select></div>
+<div><label>Class of Degree *</label><select id="classOfDegree" required><option value="">Select</option><option>First Class</option><option>Second Class Upper</option><option>Second Class Lower</option></select></div>
 <div><label>Date of Graduation *</label><input id="dateOfGraduation" type="date" required></div>
 <div class="full"><label>Course of Study *</label><input id="courseOfStudy" value="Computer Engineering" required></div>
 </div></div>
@@ -141,11 +141,9 @@ if(!result.success)throw new Error(result.message||"Submission failed");
 message.className="message ok";message.style.display="block";
 message.innerHTML="✔ Submission received successfully.<br><strong>Submission ID: "+escapeHTML(result.submissionID||"—")+"</strong><br><br><a href='status.html' style='color:#075b35;font-weight:800'>Check Status</a>";
 form.reset();document.getElementById("courseOfStudy").value="Computer Engineering";
-}catch(err){
-message.className="message bad";message.style.display="block";message.textContent=err.message||"Unable to submit";
-}finally{submitButton.disabled=false;submitButton.textContent="Submit Mobilization Data"}
+}catch(err){message.className="message bad";message.style.display="block";message.textContent=err.message||"Unable to submit";}finally{submitButton.disabled=false;submitButton.textContent="Submit Mobilization Data"}
 });
-function escapeHTML(v){return String(v||"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m])}
+function escapeHTML(v){return String(v||"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#039;"}[m]))}
 </script>
 </body>
 </html>
