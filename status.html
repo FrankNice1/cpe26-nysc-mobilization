@@ -583,6 +583,13 @@ CHECK <span>STATUS</span>
 NYSC MOBILIZATION • COMPUTER ENGINEERING CLASS OF 2026
 </p>
 
+<!-- Header nav links -->
+<div style="margin-top:12px;">
+  <a href="index.html" style="color:#00e5ff;margin-right:12px;text-decoration:none;font-weight:700">Home</a>
+  <a href="nerd.html" style="color:#00e5ff;margin-right:12px;text-decoration:none;font-weight:700">NERD</a>
+  <a href="student-dataform.html" style="color:#00e5ff;font-weight:800">Student Dataform</a>
+</div>
+
 </header>
 
 
@@ -606,7 +613,6 @@ autocomplete="off"
 id="checkButton"
 onclick="checkStatus()"
 >
-
 CHECK MOBILIZATION STATUS →
 
 </button>
@@ -696,416 +702,62 @@ document
 .trim();
 
 
-
 if (!id) {
-
-showError(
-"Please enter your Submission ID."
-);
-
-return;
-
+ showError(
+ "Please enter your Submission ID."
+ );
+ return;
 }
 
-
-
-const button =
-document
-.getElementById(
-"checkButton"
-);
-
-
-button.disabled =
-true;
-
-button.innerText =
-"CHECKING...";
-
-
-
-hideError();
-
-
-document
-.getElementById(
-"result"
-)
-.style
-.display =
-"none";
-
-
+const button = document.getElementById("checkButton");
+button.disabled = true; button.innerText = "CHECKING...";
+hideError(); document.getElementById("result").style.display = "none";
 
 try {
+  // Try backend with submissionID param first (new canonical format)
+  let response = await fetch(GOOGLE_SCRIPT_URL + "?action=status&submissionID=" + encodeURIComponent(id));
+  let data = await response.json();
 
+  // If backend didn't find using submissionID, fall back to legacy 'id' param
+  if (!data.success) {
+    response = await fetch(GOOGLE_SCRIPT_URL + "?action=status&id=" + encodeURIComponent(id));
+    data = await response.json();
+    if (!data.success) throw new Error(data.message || 'Submission not found');
+  }
 
-const response =
-await fetch(
-
-GOOGLE_SCRIPT_URL +
-"?action=status&id=" +
-encodeURIComponent(id)
-
-);
-
-
-
-const data =
-await response.json();
-
-
-
-if (!data.success) {
-
-throw new Error(
-data.message
-);
-
+  showResult(data);
+} catch (error) {
+  showError(error.message || 'Unable to check status');
+} finally {
+  button.disabled = false; button.innerText = "CHECK MOBILIZATION STATUS →";
 }
-
-
-
-showResult(data);
-
-
-
 }
-
-catch(error) {
-
-showError(
-error.message
-);
-
-}
-
-
-
-button.disabled =
-false;
-
-button.innerText =
-"CHECK MOBILIZATION STATUS →";
-
-}
-
-
 
 function showResult(data) {
-
-
-const result =
-document
-.getElementById(
-"result"
-);
-
-
-const box =
-document
-.getElementById(
-"statusBox"
-);
-
-
-const icon =
-document
-.getElementById(
-"statusIcon"
-);
-
-
-const title =
-document
-.getElementById(
-"statusTitle"
-);
-
-
-const info =
-document
-.getElementById(
-"info"
-);
-
-
-
-result.style.display =
-"block";
-
-
-
-box.className =
-"status-box";
-
-
-
-const status =
-data.status
-.toLowerCase();
-
-
-
-if (
-status === "approved"
-) {
-
-
-box.classList.add(
-"approved"
-);
-
-
-icon.innerText =
-"✓";
-
-
-title.innerText =
-"MOBILIZATION APPROVED";
-
-
+ const result = document.getElementById("result");
+ const box = document.getElementById("statusBox");
+ const icon = document.getElementById("statusIcon");
+ const title = document.getElementById("statusTitle");
+ const info = document.getElementById("info");
+ result.style.display = "block";
+ box.className = "status-box";
+ const status = data.status.toLowerCase();
+ if (status === "approved") { box.classList.add("approved"); icon.innerText = "✓"; title.innerText = "MOBILIZATION APPROVED"; }
+ else if (status === "rejected") { box.classList.add("rejected"); icon.innerText = "×"; title.innerText = "CORRECTION REQUIRED"; }
+ else { box.classList.add("pending"); icon.innerText = "⌛"; title.innerText = "PENDING REVIEW"; }
+ let html = "<strong>Submission ID:</strong> " + escapeHTML(data.submissionID) + "<br><strong>Name:</strong> " + escapeHTML(data.name) + "<br><strong>Matric No:</strong> " + escapeHTML(data.matricNo);
+ if (data.reviewDate) html += "<br><strong>Reviewed:</strong> " + escapeHTML(data.reviewDate);
+ if (status === "rejected" && data.rejectionReason) {
+   const reasons = data.rejectionReason.split(";");
+   html += '<div class="reasons"><strong>Issues identified:</strong>';
+   reasons.forEach(function(reason){ html += '<div class="reason">❌ ' + escapeHTML(reason.trim()) + '</div>'; });
+   html += '</div>';
+ }
+ if (data.adminComment) html += '<div class="comment"><strong>Admin comment:</strong><br>' + escapeHTML(data.adminComment) + '</div>';
+ info.innerHTML = html;
 }
 
+function showError(msg){ const err = document.getElementById('error'); err.style.display = 'block'; err.innerText = msg; }
+function hideError(){ const err = document.getElementById('error'); err.style.display = 'none'; err.innerText = ''; }
 
-else if (
-status === "rejected"
-) {
-
-
-box.classList.add(
-"rejected"
-);
-
-
-icon.innerText =
-"×";
-
-
-title.innerText =
-"CORRECTION REQUIRED";
-
-
-}
-
-
-else {
-
-
-box.classList.add(
-"pending"
-);
-
-
-icon.innerText =
-"⌛";
-
-
-title.innerText =
-"PENDING REVIEW";
-
-}
-
-
-
-let html =
-
-"<strong>Submission ID:</strong> " +
-escapeHTML(
-data.submissionID
-) +
-
-"<br>" +
-
-"<strong>Name:</strong> " +
-escapeHTML(
-data.name
-) +
-
-"<br>" +
-
-"<strong>Matric No:</strong> " +
-escapeHTML(
-data.matricNo
-);
-
-
-
-if (
-data.reviewDate
-) {
-
-html +=
-
-"<br>" +
-
-"<strong>Reviewed:</strong> " +
-escapeHTML(
-data.reviewDate
-);
-
-}
-
-
-
-if (
-status === "rejected" &&
-data.rejectionReason
-) {
-
-
-const reasons =
-data.rejectionReason
-.split(";");
-
-
-
-html +=
-
-'<div class="reasons">' +
-
-"<strong>Issues identified:</strong>";
-
-
-
-reasons.forEach(
-function(reason) {
-
-html +=
-
-'<div class="reason">❌ ' +
-
-escapeHTML(
-reason.trim()
-) +
-
-"</div>";
-
-});
-
-
-
-html +=
-"</div>";
-
-}
-
-
-
-if (
-data.adminComment
-) {
-
-
-html +=
-
-'<div class="comment">' +
-
-"<strong>Administrator's comment:</strong><br>" +
-
-escapeHTML(
-data.adminComment
-) +
-
-"</div>";
-
-}
-
-
-
-if (
-status === "rejected"
-) {
-
-
-html +=
-
-'<a class="resubmit" href="index.html">' +
-
-"CORRECT & RESUBMIT →" +
-
-"</a>";
-
-}
-
-
-
-info.innerHTML =
-html;
-
-}
-
-
-
-function showError(message) {
-
-const error =
-document
-.getElementById(
-"error"
-);
-
-
-error.innerText =
-message;
-
-
-error.style.display =
-"block";
-
-}
-
-
-
-function hideError() {
-
-document
-.getElementById(
-"error"
-)
-.style
-.display =
-"none";
-
-}
-
-
-
-function escapeHTML(value) {
-
-return String(value)
-
-.replace(
-/&/g,
-"&amp;"
-)
-
-.replace(
-/</g,
-"&lt;"
-)
-
-.replace(
-/>/g,
-"&gt;"
-)
-
-.replace(
-/"/g,
-"&quot;"
-)
-
-.replace(
-/'/g,
-"&#039;"
-);
-
-}
-
-
-</script>
-
-
-</body>
-
-</html>
+function escapeHTML(v){ return String(v||"").replace(/[&<>\
