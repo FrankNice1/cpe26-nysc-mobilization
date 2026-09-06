@@ -1,763 +1,490 @@
-<!DOCTYPE html>
-<html lang="en">
-
+<!DOCTYPE html><html lang="en">
 <head>
-
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CPE '26 | Check Submission Status</title><style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap');
 
-<meta
-name="viewport"
-content="width=device-width, initial-scale=1.0"
->
+*{box-sizing:border-box;margin:0;padding:0}
 
-<title>
-CPE '26 | Check Mobilization Status
-</title>
-
-
-<style>
-
-@import url(
-'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap'
-);
-
-
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+body{
+font-family:Inter,Arial,sans-serif;
+min-height:100vh;
+background:
+radial-gradient(circle at 20% 20%,rgba(0,229,255,.12),transparent 25%),
+radial-gradient(circle at 80% 80%,rgba(0,100,255,.12),transparent 25%),
+#050b14;
+color:#eaf7ff;
+padding:20px
 }
 
-
-body {
-
-    font-family: Inter, Arial, sans-serif;
-
-    min-height: 100vh;
-
-    background:
-        radial-gradient(
-            circle at 20% 20%,
-            rgba(0,229,255,.12),
-            transparent 25%
-        ),
-        radial-gradient(
-            circle at 80% 80%,
-            rgba(0,100,255,.12),
-            transparent 25%
-        ),
-        #050b14;
-
-    color: #eaf7ff;
-
-    padding: 20px;
-
+body::before{
+content:"";
+position:fixed;
+inset:0;
+pointer-events:none;
+opacity:.12;
+background-image:
+linear-gradient(rgba(0,229,255,.3) 1px,transparent 1px),
+linear-gradient(90deg,rgba(0,229,255,.3) 1px,transparent 1px);
+background-size:40px 40px
 }
 
+.container{max-width:650px;margin:auto;position:relative}
 
-body::before {
+.header{text-align:center;padding:45px 10px 30px}
 
-    content: "";
-
-    position: fixed;
-
-    inset: 0;
-
-    pointer-events: none;
-
-    opacity: .12;
-
-    background-image:
-        linear-gradient(
-            rgba(0,229,255,.3) 1px,
-            transparent 1px
-        ),
-        linear-gradient(
-            90deg,
-            rgba(0,229,255,.3) 1px,
-            transparent 1px
-        );
-
-    background-size: 40px 40px;
-
+.logo{
+font-family:"Space Mono",monospace;
+color:#00e5ff;
+font-size:14px;
+letter-spacing:3px;
+margin-bottom:15px
 }
 
+h1{font-size:clamp(28px,6vw,42px);font-weight:800}
+h1 span{color:#00e5ff}
 
-.container {
+.header p{color:#91a7b8;font-size:13px;margin-top:10px}
 
-    max-width: 650px;
-
-    margin: auto;
-
-    position: relative;
-
+.card{
+background:rgba(9,20,34,.9);
+border:1px solid rgba(0,229,255,.18);
+border-radius:20px;
+padding:30px;
+backdrop-filter:blur(15px);
+box-shadow:0 25px 80px rgba(0,0,0,.35)
 }
 
-
-.header {
-
-    text-align: center;
-
-    padding: 45px 10px 30px;
-
+label{
+display:block;
+color:#b9cbd6;
+font-size:12px;
+font-weight:700;
+margin-bottom:8px
 }
 
-
-.logo {
-
-    font-family:
-        "Space Mono",
-        monospace;
-
-    color: #00e5ff;
-
-    font-size: 14px;
-
-    letter-spacing: 3px;
-
-    margin-bottom: 15px;
-
+input{
+width:100%;
+padding:15px;
+background:#07111d;
+color:white;
+border:1px solid #263c4d;
+border-radius:10px;
+outline:none;
+font-size:15px;
+font-family:"Space Mono",monospace;
+text-transform:uppercase
 }
 
-
-h1 {
-
-    font-size:
-        clamp(
-            28px,
-            6vw,
-            42px
-        );
-
-    font-weight: 800;
-
+input:focus{
+border-color:#00e5ff;
+box-shadow:0 0 0 3px rgba(0,229,255,.08)
 }
 
-
-h1 span {
-
-    color: #00e5ff;
-
+button{
+width:100%;
+border:none;
+margin-top:15px;
+padding:16px;
+border-radius:10px;
+background:linear-gradient(90deg,#00bcd4,#007bff);
+color:white;
+font-weight:800;
+cursor:pointer
 }
 
+button:disabled{opacity:.5}
 
-.header p {
+.result{display:none;margin-top:25px}
 
-    color: #91a7b8;
-
-    font-size: 13px;
-
-    margin-top: 10px;
-
+.status-box{
+padding:20px;
+border-radius:12px;
+margin-bottom:15px;
+text-align:center
 }
 
-
-.card {
-
-    background:
-        rgba(
-            9,
-            20,
-            34,
-            .9
-        );
-
-    border:
-        1px solid
-        rgba(
-            0,
-            229,
-            255,
-            .18
-        );
-
-    border-radius: 20px;
-
-    padding: 30px;
-
-    backdrop-filter: blur(15px);
-
-    box-shadow:
-        0 25px 80px
-        rgba(0,0,0,.35);
-
+.pending{
+background:rgba(234,179,8,.08);
+border:1px solid rgba(234,179,8,.3)
 }
 
-
-label {
-
-    display: block;
-
-    color: #b9cbd6;
-
-    font-size: 12px;
-
-    font-weight: 700;
-
-    margin-bottom: 8px;
-
+.approved{
+background:rgba(34,197,94,.08);
+border:1px solid rgba(34,197,94,.3)
 }
 
-
-input {
-
-    width: 100%;
-
-    padding: 15px;
-
-    background: #07111d;
-
-    color: white;
-
-    border:
-        1px solid
-        #263c4d;
-
-    border-radius: 10px;
-
-    outline: none;
-
-    font-size: 15px;
-
-    font-family:
-        "Space Mono",
-        monospace;
-
-    text-transform: uppercase;
-
+.rejected{
+background:rgba(239,68,68,.08);
+border:1px solid rgba(239,68,68,.3)
 }
 
+.status-icon{font-size:38px;margin-bottom:8px}
+.status-title{font-size:22px;font-weight:800}
 
-input:focus {
-
-    border-color:
-        #00e5ff;
-
-    box-shadow:
-        0 0 0 3px
-        rgba(
-            0,
-            229,
-            255,
-            .08
-        );
-
+.info{
+background:rgba(255,255,255,.03);
+border-radius:12px;
+padding:18px;
+line-height:1.8;
+font-size:14px
 }
 
+.info strong{color:#00e5ff}
 
-button {
+.reasons{margin-top:15px}
 
-    width: 100%;
-
-    border: none;
-
-    margin-top: 15px;
-
-    padding: 16px;
-
-    border-radius: 10px;
-
-    background:
-        linear-gradient(
-            90deg,
-            #00bcd4,
-            #007bff
-        );
-
-    color: white;
-
-    font-weight: 800;
-
-    cursor: pointer;
-
+.reason{
+padding:10px;
+margin-top:7px;
+border-radius:7px;
+background:rgba(239,68,68,.08);
+color:#fca5a5
 }
 
-
-button:disabled {
-
-    opacity: .5;
-
+.comment{
+margin-top:15px;
+padding:15px;
+border-left:3px solid #00e5ff;
+background:rgba(0,229,255,.05);
+color:#b9cbd6
 }
 
-
-.result {
-
-    display: none;
-
-    margin-top: 25px;
-
+.resubmit{
+display:block;
+text-align:center;
+margin-top:20px;
+padding:14px;
+border-radius:9px;
+background:linear-gradient(90deg,#00bcd4,#007bff);
+color:white;
+text-decoration:none;
+font-weight:800
 }
 
-
-.status-box {
-
-    padding: 20px;
-
-    border-radius: 12px;
-
-    margin-bottom: 15px;
-
-    text-align: center;
-
+.error{
+display:none;
+margin-top:20px;
+padding:15px;
+border-radius:10px;
+background:rgba(239,68,68,.08);
+border:1px solid rgba(239,68,68,.3);
+color:#fca5a5
 }
 
+.back{text-align:center;margin-top:20px}
 
-.pending {
-
-    background:
-        rgba(
-            234,
-            179,
-            8,
-            .08
-        );
-
-    border:
-        1px solid
-        rgba(
-            234,
-            179,
-            8,
-            .3
-        );
-
+.back a{
+color:#00e5ff;
+text-decoration:none;
+font-size:13px
 }
 
-
-.approved {
-
-    background:
-        rgba(
-            34,
-            197,
-            94,
-            .08
-        );
-
-    border:
-        1px solid
-        rgba(
-            34,
-            197,
-            94,
-            .3
-        );
-
+.footer{
+text-align:center;
+color:#637887;
+font-size:11px;
+padding:25px
 }
-
-
-.rejected {
-
-    background:
-        rgba(
-            239,
-            68,
-            68,
-            .08
-        );
-
-    border:
-        1px solid
-        rgba(
-            239,
-            68,
-            68,
-            .3
-        );
-
-}
-
-
-.status-icon {
-
-    font-size: 38px;
-
-    margin-bottom: 8px;
-
-}
-
-
-.status-title {
-
-    font-size: 22px;
-
-    font-weight: 800;
-
-}
-
-
-.info {
-
-    background:
-        rgba(
-            255,
-            255,
-            255,
-            .03
-        );
-
-    border-radius: 12px;
-
-    padding: 18px;
-
-    line-height: 1.8;
-
-    font-size: 14px;
-
-}
-
-
-.info strong {
-
-    color: #00e5ff;
-
-}
-
-
-.reasons {
-
-    margin-top: 15px;
-
-}
-
-
-.reason {
-
-    padding: 10px;
-
-    margin-top: 7px;
-
-    border-radius: 7px;
-
-    background:
-        rgba(
-            239,
-            68,
-            68,
-            .08
-        );
-
-    color: #fca5a5;
-
-}
-
-
-.comment {
-
-    margin-top: 15px;
-
-    padding: 15px;
-
-    border-left:
-        3px solid
-        #00e5ff;
-
-    background:
-        rgba(
-            0,
-            229,
-            255,
-            .05
-        );
-
-    color: #b9cbd6;
-
-}
-
-
-.resubmit {
-
-    display: block;
-
-    text-align: center;
-
-    margin-top: 20px;
-
-    padding: 14px;
-
-    border-radius: 9px;
-
-    background:
-        linear-gradient(
-            90deg,
-            #00bcd4,
-            #007bff
-        );
-
-    color: white;
-
-    text-decoration: none;
-
-    font-weight: 800;
-
-}
-
-
-.error {
-
-    display: none;
-
-    margin-top: 20px;
-
-    padding: 15px;
-
-    border-radius: 10px;
-
-    background:
-        rgba(
-            239,
-            68,
-            68,
-            .08
-        );
-
-    border:
-        1px solid
-        rgba(
-            239,
-            68,
-            68,
-            .3
-        );
-
-    color: #fca5a5;
-
-}
-
-
-.back {
-
-    text-align: center;
-
-    margin-top: 20px;
-
-}
-
-
-.back a {
-
-    color: #00e5ff;
-
-    text-decoration: none;
-
-    font-size: 13px;
-
-}
-
-
-.footer {
-
-    text-align: center;
-
-    color: #637887;
-
-    font-size: 11px;
-
-    padding: 25px;
-
-}
-
-
-</style>
-
-</head>
-
-
-<body>
-
-
-<div class="container">
-
-
-<header class="header">
-
-<div class="logo">
-&lt; CPE_26 /&gt;
-</div>
-
-<h1>
-CHECK <span>STATUS</span>
-</h1>
-
-<p>
+</style></head><body><div class="container"><header class="header"><div class="logo">&lt; CPE_26 /&gt;</div><h1>CHECK <span>STATUS</span></h1><p>
 NYSC MOBILIZATION • COMPUTER ENGINEERING CLASS OF 2026
-</p>
-
-<!-- Header nav links -->
-<div style="margin-top:12px;">
-  <a href="index.html" style="color:#00e5ff;margin-right:12px;text-decoration:none;font-weight:700">Home</a>
-  <a href="nerd.html" style="color:#00e5ff;margin-right:12px;text-decoration:none;font-weight:700">NERD</a>
-  <a href="student-dataform.html" style="color:#00e5ff;font-weight:800">Student Dataform</a>
-</div>
-
-</header>
-
-
-
-<div class="card">
-
-
-<label>
-Submission ID
-</label>
-
+</p><div style="margin-top:12px;">
+<a href="index.html" style="color:#00e5ff;margin-right:12px;text-decoration:none;font-weight:700">Home</a>
+<a href="nerd.html" style="color:#00e5ff;margin-right:12px;text-decoration:none;font-weight:700">NERD</a>
+<a href="student-dataform.html" style="color:#00e5ff;font-weight:800">Student Dataform</a>
+</div></header><div class="card"><label>Submission ID</label>
 
 <input
 id="submissionID"
-placeholder="CPE26-NYSC-0001"
+placeholder="IT-2026-00001"
 autocomplete="off"
->
 
+«»
 
-<button
-id="checkButton"
-onclick="checkStatus()"
->
+<button id="checkButton" onclick="checkStatus()">
 CHECK MOBILIZATION STATUS →
-
-</button>
-
-
-<div
-id="error"
-class="error"
-></div>
-
-
-
-<div
-id="result"
-class="result"
->
-
-<div
-id="statusBox"
-class="status-box"
->
-
-<div
-id="statusIcon"
-class="status-icon"
->
-</div>
-
-<div
-id="statusTitle"
-class="status-title"
->
-</div>
-
-</div>
-
-
-<div
-id="info"
-class="info"
->
-</div>
-
-</div>
-
-
-<div class="back">
-
-<a href="index.html">
-← Return to Mobilization Form
+</button><div id="error" class="error"></div><div id="result" class="result"><div id="statusBox" class="status-box"><div id="statusIcon" class="status-icon"></div><div id="statusTitle" class="status-title"></div></div><div id="info" class="info"></div></div><div class="back">
+<a href="student-dataform.html">
+← Return to Student Dataform
 </a>
-
-</div>
-
-
-</div>
-
-
-<footer class="footer">
-
+</div></div><footer class="footer">
 CPE '26 • COMPUTER ENGINEERING • NYSC MOBILIZATION
-
-</footer>
-
-
-</div>
-
-
-
-<script>
-
+</footer></div><script>
 
 const GOOGLE_SCRIPT_URL =
 "https://script.google.com/macros/s/AKfycbyu5ZMcfGyWk7tXGthr6J9B88HV9G3jGGr3hPCtty4grDXQ86BiYETLXDcJ3JZxUOGg/exec";
 
+async function checkStatus(){
 
+const id=document.getElementById("submissionID").value.trim();
 
-async function checkStatus() {
-
-
-const id =
-document
-.getElementById(
-"submissionID"
-)
-.value
-.trim();
-
-
-if (!id) {
- showError(
- "Please enter your Submission ID."
- );
- return;
+if(!id){
+showError("Please enter your Submission ID.");
+return;
 }
 
-const button = document.getElementById("checkButton");
-button.disabled = true; button.innerText = "CHECKING...";
-hideError(); document.getElementById("result").style.display = "none";
+const button=document.getElementById("checkButton");
 
-try {
-  // Try backend with submissionID param first (new canonical format)
-  let response = await fetch(GOOGLE_SCRIPT_URL + "?action=status&submissionID=" + encodeURIComponent(id));
-  let data = await response.json();
+button.disabled=true;
+button.innerText="CHECKING...";
 
-  // If backend didn't find using submissionID, fall back to legacy 'id' param
-  if (!data.success) {
-    response = await fetch(GOOGLE_SCRIPT_URL + "?action=status&id=" + encodeURIComponent(id));
-    data = await response.json();
-    if (!data.success) throw new Error(data.message || 'Submission not found');
-  }
+hideError();
+document.getElementById("result").style.display="none";
 
-  showResult(data);
-} catch (error) {
-  showError(error.message || 'Unable to check status');
-} finally {
-  button.disabled = false; button.innerText = "CHECK MOBILIZATION STATUS →";
-}
-}
+try{
 
-function showResult(data) {
- const result = document.getElementById("result");
- const box = document.getElementById("statusBox");
- const icon = document.getElementById("statusIcon");
- const title = document.getElementById("statusTitle");
- const info = document.getElementById("info");
- result.style.display = "block";
- box.className = "status-box";
- const status = data.status.toLowerCase();
- if (status === "approved") { box.classList.add("approved"); icon.innerText = "✓"; title.innerText = "MOBILIZATION APPROVED"; }
- else if (status === "rejected") { box.classList.add("rejected"); icon.innerText = "×"; title.innerText = "CORRECTION REQUIRED"; }
- else { box.classList.add("pending"); icon.innerText = "⌛"; title.innerText = "PENDING REVIEW"; }
- let html = "<strong>Submission ID:</strong> " + escapeHTML(data.submissionID) + "<br><strong>Name:</strong> " + escapeHTML(data.name) + "<br><strong>Matric No:</strong> " + escapeHTML(data.matricNo);
- if (data.reviewDate) html += "<br><strong>Reviewed:</strong> " + escapeHTML(data.reviewDate);
- if (status === "rejected" && data.rejectionReason) {
-   const reasons = data.rejectionReason.split(";");
-   html += '<div class="reasons"><strong>Issues identified:</strong>';
-   reasons.forEach(function(reason){ html += '<div class="reason">❌ ' + escapeHTML(reason.trim()) + '</div>'; });
-   html += '</div>';
- }
- if (data.adminComment) html += '<div class="comment"><strong>Admin comment:</strong><br>' + escapeHTML(data.adminComment) + '</div>';
- info.innerHTML = html;
+/*
+ NEW IT DATAFORM STATUS ROUTE
+*/
+let url=
+GOOGLE_SCRIPT_URL+
+"?action=itStatus&id="+
+encodeURIComponent(id);
+
+let response=await fetch(url);
+let data=await response.json();
+
+/*
+ If not found, also try submissionID parameter.
+*/
+if(!data.success){
+
+url=
+GOOGLE_SCRIPT_URL+
+"?action=itStatus&submissionID="+
+encodeURIComponent(id);
+
+response=await fetch(url);
+data=await response.json();
+
 }
 
-function showError(msg){ const err = document.getElementById('error'); err.style.display = 'block'; err.innerText = msg; }
-function hideError(){ const err = document.getElementById('error'); err.style.display = 'none'; err.innerText = ''; }
+/*
+ Only if the ID starts with NYSC,
+ try the old NYSC system.
+*/
+if(!data.success && id.toUpperCase().startsWith("NYSC-")){
 
-function escapeHTML(v){ return String(v||"").replace(/[&<>\
+response=await fetch(
+GOOGLE_SCRIPT_URL+
+"?action=status&id="+
+encodeURIComponent(id)
+);
+
+data=await response.json();
+
+}
+
+if(!data.success){
+
+throw new Error(
+data.message||"Submission not found"
+);
+
+}
+
+showResult(data);
+
+}catch(error){
+
+showError(
+error.message||
+"Unable to check status"
+);
+
+}finally{
+
+button.disabled=false;
+button.innerText=
+"CHECK MOBILIZATION STATUS →";
+
+}
+
+}
+
+
+function showResult(data){
+
+const result=document.getElementById("result");
+const box=document.getElementById("statusBox");
+const icon=document.getElementById("statusIcon");
+const title=document.getElementById("statusTitle");
+const info=document.getElementById("info");
+
+result.style.display="block";
+
+box.className="status-box";
+
+const status=
+String(data.status||"Pending").toLowerCase();
+
+if(status==="approved"){
+
+box.classList.add("approved");
+icon.innerText="✓";
+title.innerText="MOBILIZATION APPROVED";
+
+}
+else if(status==="rejected"){
+
+box.classList.add("rejected");
+icon.innerText="×";
+title.innerText="CORRECTION REQUIRED";
+
+}
+else{
+
+box.classList.add("pending");
+icon.innerText="⌛";
+title.innerText="PENDING REVIEW";
+
+}
+
+
+/*
+ NEW IT BACKEND RETURNS:
+ submissionID
+ status
+ rejectionReason
+ adminComment
+ reviewedBy
+ reviewDate
+
+*/
+let html=
+"<strong>Submission ID:</strong> "+
+escapeHTML(data.submissionID||"")+
+"<br><strong>Status:</strong> "+
+escapeHTML(data.status||"Pending");
+
+
+if(data.reviewDate){
+
+html+=
+"<br><strong>Reviewed:</strong> "+
+escapeHTML(
+formatDate(data.reviewDate)
+);
+
+}
+
+
+if(data.reviewedBy){
+
+html+=
+"<br><strong>Reviewed By:</strong> "+
+escapeHTML(data.reviewedBy);
+
+}
+
+
+if(
+status==="rejected" &&
+data.rejectionReason
+){
+
+const reasons=
+String(data.rejectionReason)
+.split(";");
+
+html+=
+'<div class="reasons">'+
+"<strong>Issues identified:</strong>";
+
+reasons.forEach(function(reason){
+
+if(reason.trim()){
+
+html+=
+'<div class="reason">❌ '+
+escapeHTML(reason.trim())+
+"</div>";
+
+}
+
+});
+
+html+="</div>";
+
+}
+
+
+if(data.adminComment){
+
+html+=
+'<div class="comment">'+
+"<strong>Admin comment:</strong><br>"+
+escapeHTML(data.adminComment)+
+"</div>";
+
+}
+
+
+info.innerHTML=html;
+
+}
+
+
+function formatDate(value){
+
+try{
+
+const d=new Date(value);
+
+if(isNaN(d.getTime()))
+return value;
+
+return d.toLocaleString();
+
+}catch(e){
+
+return value;
+
+}
+
+}
+
+
+function showError(msg){
+
+const err=document.getElementById("error");
+
+err.style.display="block";
+err.innerText=msg;
+
+}
+
+
+function hideError(){
+
+const err=document.getElementById("error");
+
+err.style.display="none";
+err.innerText="";
+
+}
+
+
+function escapeHTML(v){
+
+return String(v||"").replace(
+/[&<>"']/g,
+function(m){
+
+return({
+
+"&":"&amp;",
+"<":"&lt;",
+">":"&gt;",
+'"':"&quot;",
+"'":"&#039;"
+
+})[m];
+
+});
+
+}
+
+</script></body>
+</html>
