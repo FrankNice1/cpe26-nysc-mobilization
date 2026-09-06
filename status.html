@@ -1,8 +1,8 @@
 <!DOCTYPE html><html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>CPE '26 | Check Submission Status</title><style>
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>CPE '26 | Check Mobilization Status</title><style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap');
 
 *{box-sizing:border-box;margin:0;padding:0}
@@ -18,7 +18,7 @@ color:#eaf7ff;
 padding:20px
 }
 
-body::before{
+body:before{
 content:"";
 position:fixed;
 inset:0;
@@ -30,9 +30,16 @@ linear-gradient(90deg,rgba(0,229,255,.3) 1px,transparent 1px);
 background-size:40px 40px
 }
 
-.container{max-width:650px;margin:auto;position:relative}
+.container{
+max-width:650px;
+margin:auto;
+position:relative
+}
 
-.header{text-align:center;padding:45px 10px 30px}
+.header{
+text-align:center;
+padding:45px 10px 30px
+}
 
 .logo{
 font-family:"Space Mono",monospace;
@@ -42,10 +49,30 @@ letter-spacing:3px;
 margin-bottom:15px
 }
 
-h1{font-size:clamp(28px,6vw,42px);font-weight:800}
+h1{
+font-size:clamp(28px,6vw,42px);
+font-weight:800
+}
+
 h1 span{color:#00e5ff}
 
-.header p{color:#91a7b8;font-size:13px;margin-top:10px}
+.header p{
+color:#91a7b8;
+font-size:13px;
+margin-top:10px
+}
+
+.nav{
+margin-top:15px
+}
+
+.nav a{
+color:#00e5ff;
+margin:0 6px;
+text-decoration:none;
+font-weight:700;
+font-size:13px
+}
 
 .card{
 background:rgba(9,20,34,.9);
@@ -65,6 +92,7 @@ margin-bottom:8px
 }
 
 input{
+display:block;
 width:100%;
 padding:15px;
 background:#07111d;
@@ -82,21 +110,35 @@ border-color:#00e5ff;
 box-shadow:0 0 0 3px rgba(0,229,255,.08)
 }
 
-button{
+.check-btn{
+display:block;
 width:100%;
-border:none;
+border:0;
 margin-top:15px;
 padding:16px;
 border-radius:10px;
 background:linear-gradient(90deg,#00bcd4,#007bff);
-color:white;
+color:#fff;
 font-weight:800;
-cursor:pointer
+font-size:14px;
+cursor:pointer;
+visibility:visible;
+opacity:1
 }
 
-button:disabled{opacity:.5}
+.check-btn:hover{
+filter:brightness(1.12)
+}
 
-.result{display:none;margin-top:25px}
+.check-btn:disabled{
+opacity:.55;
+cursor:not-allowed
+}
+
+.result{
+display:none;
+margin-top:25px
+}
 
 .status-box{
 padding:20px;
@@ -120,8 +162,15 @@ background:rgba(239,68,68,.08);
 border:1px solid rgba(239,68,68,.3)
 }
 
-.status-icon{font-size:38px;margin-bottom:8px}
-.status-title{font-size:22px;font-weight:800}
+.status-icon{
+font-size:38px;
+margin-bottom:8px
+}
+
+.status-title{
+font-size:22px;
+font-weight:800
+}
 
 .info{
 background:rgba(255,255,255,.03);
@@ -131,9 +180,13 @@ line-height:1.8;
 font-size:14px
 }
 
-.info strong{color:#00e5ff}
+.info strong{
+color:#00e5ff
+}
 
-.reasons{margin-top:15px}
+.reasons{
+margin-top:15px
+}
 
 .reason{
 padding:10px;
@@ -151,18 +204,6 @@ background:rgba(0,229,255,.05);
 color:#b9cbd6
 }
 
-.resubmit{
-display:block;
-text-align:center;
-margin-top:20px;
-padding:14px;
-border-radius:9px;
-background:linear-gradient(90deg,#00bcd4,#007bff);
-color:white;
-text-decoration:none;
-font-weight:800
-}
-
 .error{
 display:none;
 margin-top:20px;
@@ -173,7 +214,10 @@ border:1px solid rgba(239,68,68,.3);
 color:#fca5a5
 }
 
-.back{text-align:center;margin-top:20px}
+.back{
+text-align:center;
+margin-top:20px
+}
 
 .back a{
 color:#00e5ff;
@@ -189,22 +233,32 @@ padding:25px
 }
 </style></head><body><div class="container"><header class="header"><div class="logo">&lt; CPE_26 /&gt;</div><h1>CHECK <span>STATUS</span></h1><p>
 NYSC MOBILIZATION • COMPUTER ENGINEERING CLASS OF 2026
-</p><div style="margin-top:12px;">
-<a href="index.html" style="color:#00e5ff;margin-right:12px;text-decoration:none;font-weight:700">Home</a>
-<a href="nerd.html" style="color:#00e5ff;margin-right:12px;text-decoration:none;font-weight:700">NERD</a>
-<a href="student-dataform.html" style="color:#00e5ff;font-weight:800">Student Dataform</a>
-</div></header><div class="card"><label>Submission ID</label>
-
-<input
+</p><div class="nav">
+<a href="index.html">Home</a>
+<a href="nerd.html">NERD</a>
+<a href="student-dataform.html">Student Dataform</a>
+</div></header><div class="card"><label for="submissionID">
+Submission ID
+</label><input
 id="submissionID"
+type="text"
 placeholder="IT-2026-00001"
 autocomplete="off"
 
 «»
 
-<button id="checkButton" onclick="checkStatus()">
+<button
+type="button"
+id="checkButton"
+class="check-btn"
+onclick="checkStatus()"
+
+«»
+
 CHECK MOBILIZATION STATUS →
-</button><div id="error" class="error"></div><div id="result" class="result"><div id="statusBox" class="status-box"><div id="statusIcon" class="status-icon"></div><div id="statusTitle" class="status-title"></div></div><div id="info" class="info"></div></div><div class="back">
+</button>
+
+<div id="error" class="error"></div><div id="result" class="result"><div id="statusBox" class="status-box"><div id="statusIcon" class="status-icon"></div><div id="statusTitle" class="status-title"></div></div><div id="info" class="info"></div></div><div class="back">
 <a href="student-dataform.html">
 ← Return to Student Dataform
 </a>
@@ -215,9 +269,13 @@ CPE '26 • COMPUTER ENGINEERING • NYSC MOBILIZATION
 const GOOGLE_SCRIPT_URL =
 "https://script.google.com/macros/s/AKfycbyu5ZMcfGyWk7tXGthr6J9B88HV9G3jGGr3hPCtty4grDXQ86BiYETLXDcJ3JZxUOGg/exec";
 
+
 async function checkStatus(){
 
-const id=document.getElementById("submissionID").value.trim();
+const id=document
+.getElementById("submissionID")
+.value
+.trim();
 
 if(!id){
 showError("Please enter your Submission ID.");
@@ -227,44 +285,43 @@ return;
 const button=document.getElementById("checkButton");
 
 button.disabled=true;
-button.innerText="CHECKING...";
+button.textContent="CHECKING...";
 
 hideError();
+
 document.getElementById("result").style.display="none";
 
 try{
 
-/*
- NEW IT DATAFORM STATUS ROUTE
-*/
-let url=
+/* NEW IT DATAFORM */
+let response=await fetch(
 GOOGLE_SCRIPT_URL+
 "?action=itStatus&id="+
-encodeURIComponent(id);
+encodeURIComponent(id)
+);
 
-let response=await fetch(url);
 let data=await response.json();
 
-/*
- If not found, also try submissionID parameter.
-*/
+
+/* Try submissionID parameter too */
 if(!data.success){
 
-url=
+response=await fetch(
 GOOGLE_SCRIPT_URL+
 "?action=itStatus&submissionID="+
-encodeURIComponent(id);
+encodeURIComponent(id)
+);
 
-response=await fetch(url);
 data=await response.json();
 
 }
 
-/*
- Only if the ID starts with NYSC,
- try the old NYSC system.
-*/
-if(!data.success && id.toUpperCase().startsWith("NYSC-")){
+
+/* Old NYSC IDs still supported */
+if(
+!data.success &&
+id.toUpperCase().startsWith("NYSC-")
+){
 
 response=await fetch(
 GOOGLE_SCRIPT_URL+
@@ -275,6 +332,7 @@ encodeURIComponent(id)
 data=await response.json();
 
 }
+
 
 if(!data.success){
 
@@ -290,13 +348,13 @@ showResult(data);
 
 showError(
 error.message||
-"Unable to check status"
+"Unable to check status."
 );
 
 }finally{
 
 button.disabled=false;
-button.innerText=
+button.textContent=
 "CHECK MOBILIZATION STATUS →";
 
 }
@@ -319,39 +377,30 @@ box.className="status-box";
 const status=
 String(data.status||"Pending").toLowerCase();
 
+
 if(status==="approved"){
 
 box.classList.add("approved");
-icon.innerText="✓";
-title.innerText="MOBILIZATION APPROVED";
+icon.textContent="✓";
+title.textContent="MOBILIZATION APPROVED";
 
 }
 else if(status==="rejected"){
 
 box.classList.add("rejected");
-icon.innerText="×";
-title.innerText="CORRECTION REQUIRED";
+icon.textContent="×";
+title.textContent="CORRECTION REQUIRED";
 
 }
 else{
 
 box.classList.add("pending");
-icon.innerText="⌛";
-title.innerText="PENDING REVIEW";
+icon.textContent="⌛";
+title.textContent="PENDING REVIEW";
 
 }
 
 
-/*
- NEW IT BACKEND RETURNS:
- submissionID
- status
- rejectionReason
- adminComment
- reviewedBy
- reviewDate
-
-*/
 let html=
 "<strong>Submission ID:</strong> "+
 escapeHTML(data.submissionID||"")+
@@ -363,9 +412,7 @@ if(data.reviewDate){
 
 html+=
 "<br><strong>Reviewed:</strong> "+
-escapeHTML(
-formatDate(data.reviewDate)
-);
+escapeHTML(formatDate(data.reviewDate));
 
 }
 
@@ -385,8 +432,7 @@ data.rejectionReason
 ){
 
 const reasons=
-String(data.rejectionReason)
-.split(";");
+String(data.rejectionReason).split(";");
 
 html+=
 '<div class="reasons">'+
@@ -428,8 +474,6 @@ info.innerHTML=html;
 
 function formatDate(value){
 
-try{
-
 const d=new Date(value);
 
 if(isNaN(d.getTime()))
@@ -437,50 +481,42 @@ return value;
 
 return d.toLocaleString();
 
-}catch(e){
-
-return value;
-
-}
-
 }
 
 
-function showError(msg){
+function showError(message){
 
-const err=document.getElementById("error");
+const error=document.getElementById("error");
 
-err.style.display="block";
-err.innerText=msg;
+error.textContent=message;
+error.style.display="block";
 
 }
 
 
 function hideError(){
 
-const err=document.getElementById("error");
+const error=document.getElementById("error");
 
-err.style.display="none";
-err.innerText="";
+error.textContent="";
+error.style.display="none";
 
 }
 
 
-function escapeHTML(v){
+function escapeHTML(value){
 
-return String(v||"").replace(
+return String(value||"").replace(
 /[&<>"']/g,
-function(m){
+function(character){
 
-return({
-
+return{
 "&":"&amp;",
 "<":"&lt;",
 ">":"&gt;",
 '"':"&quot;",
 "'":"&#039;"
-
-})[m];
+}[character];
 
 });
 
