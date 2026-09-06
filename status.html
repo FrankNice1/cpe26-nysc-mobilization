@@ -1,604 +1,1094 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>CPE '26 | Check Status</title><style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap');
-
-*{box-sizing:border-box;margin:0;padding:0}
-
-body{
-font-family:Inter,Arial,sans-serif;
-min-height:100vh;
-background:
-radial-gradient(circle at 20% 20%,rgba(0,229,255,.12),transparent 25%),
-radial-gradient(circle at 80% 80%,rgba(0,100,255,.12),transparent 25%),
-#050b14;
-color:#eaf7ff;
-padding:20px
-}
-
-body:before{
-content:"";
-position:fixed;
-inset:0;
-pointer-events:none;
-opacity:.12;
-background-image:
-linear-gradient(rgba(0,229,255,.3) 1px,transparent 1px),
-linear-gradient(90deg,rgba(0,229,255,.3) 1px,transparent 1px);
-background-size:40px 40px
-}
-
-.container{
-max-width:650px;
-margin:auto;
-position:relative
-}
-
-.header{
-text-align:center;
-padding:45px 10px 30px
-}
-
-.logo{
-font-family:"Space Mono",monospace;
-color:#00e5ff;
-font-size:14px;
-letter-spacing:3px;
-margin-bottom:15px
-}
-
-h1{
-font-size:clamp(28px,6vw,42px);
-font-weight:800
-}
-
-h1 span{color:#00e5ff}
-
-.header p{
-color:#91a7b8;
-font-size:13px;
-margin-top:10px
-}
-
-.nav{
-margin-top:15px
-}
-
-.nav a{
-color:#00e5ff;
-margin:0 6px;
-text-decoration:none;
-font-weight:700;
-font-size:13px
-}
-
-.card{
-background:rgba(9,20,34,.9);
-border:1px solid rgba(0,229,255,.18);
-border-radius:20px;
-padding:30px;
-backdrop-filter:blur(15px);
-box-shadow:0 25px 80px rgba(0,0,0,.35)
-}
-
-label{
-display:block;
-color:#b9cbd6;
-font-size:12px;
-font-weight:700;
-margin-bottom:8px
-}
-
-input{
-display:block;
-width:100%;
-height:52px;
-padding:15px;
-background:#07111d;
-color:#fff;
-border:1px solid #263c4d;
-border-radius:10px;
-outline:none;
-font-size:15px;
-font-family:"Space Mono",monospace;
-text-transform:uppercase
-}
-
-input::placeholder{
-color:#637887
-}
-
-input:focus{
-border-color:#00e5ff;
-box-shadow:0 0 0 3px rgba(0,229,255,.08)
-}
-
-button{
-display:block;
-width:100%;
-height:52px;
-margin-top:15px;
-border:0;
-border-radius:10px;
-background:linear-gradient(90deg,#00bcd4,#007bff);
-color:#fff;
-font-weight:800;
-font-size:14px;
-cursor:pointer
-}
-
-button:disabled{
-opacity:.55;
-cursor:not-allowed
-}
-
-.error{
-display:none;
-margin-top:20px;
-padding:15px;
-border-radius:10px;
-background:rgba(239,68,68,.08);
-border:1px solid rgba(239,68,68,.3);
-color:#fca5a5
-}
-
-.result{
-display:none;
-margin-top:25px
-}
-
-.status-box{
-padding:20px;
-border-radius:12px;
-margin-bottom:15px;
-text-align:center
-}
-
-.pending{
-background:rgba(234,179,8,.08);
-border:1px solid rgba(234,179,8,.3)
-}
-
-.approved{
-background:rgba(34,197,94,.08);
-border:1px solid rgba(34,197,94,.3)
-}
-
-.rejected{
-background:rgba(239,68,68,.08);
-border:1px solid rgba(239,68,68,.3)
-}
-
-.status-icon{
-font-size:38px;
-margin-bottom:8px
-}
-
-.status-title{
-font-size:22px;
-font-weight:800
-}
-
-.info{
-background:rgba(255,255,255,.03);
-border-radius:12px;
-padding:18px;
-line-height:1.8;
-font-size:14px
-}
-
-.info strong{
-color:#00e5ff
-}
-
-.reasons{
-margin-top:15px
-}
-
-.reason{
-padding:10px;
-margin-top:7px;
-border-radius:7px;
-background:rgba(239,68,68,.08);
-color:#fca5a5
-}
-
-.comment{
-margin-top:15px;
-padding:15px;
-border-left:3px solid #00e5ff;
-background:rgba(0,229,255,.05);
-color:#b9cbd6
-}
-
-.back{
-text-align:center;
-margin-top:20px
-}
-
-.back a{
-color:#00e5ff;
-text-decoration:none;
-font-size:13px
-}
-
-.footer{
-text-align:center;
-color:#637887;
-font-size:11px;
-padding:25px
-}
-</style></head><body><div class="container"><header class="header"><div class="logo">&lt; CPE_26 /&gt;</div><h1>CHECK <span>STATUS</span></h1><p>
-STUDENT IT / SIWES • COMPUTER ENGINEERING CLASS OF 2026
-</p><div class="nav">
-<a href="index.html">Home</a>
-<a href="nerd.html">NERD</a>
-<a href="student-dataform.html">Student Dataform</a>
-</div></header><div class="card"><label for="submissionID">
-ENTER YOUR SUBMISSION ID
-</label><input
-id="submissionID"
-type="text"
-placeholder="IT-2026-00001"
-autocomplete="off"
-spellcheck="false"
-
-«»
-
-<button
-id="checkButton"
-type="button"
-
-«»
-
-CHECK STATUS →
-</button>
-
-<div id="error" class="error"></div><div id="result" class="result"><div id="statusBox" class="status-box"><div id="statusIcon" class="status-icon"></div><div id="statusTitle" class="status-title"></div></div><div id="info" class="info"></div></div><div class="back">
-<a href="student-dataform.html">
-← Return to Student Dataform
-</a>
-</div></div><footer class="footer">
-CPE '26 • COMPUTER ENGINEERING • STUDENT IT / SIWES
-</footer></div><script>
-
-/* YOUR GOOGLE APPS SCRIPT API */
-const API =
-"https://script.google.com/macros/s/AKfycbyu5ZMcfGyWk7tXGthr6J9B88HV9G3jGGr3hPCtty4grDXQ86BiYETLXDcJ3JZxUOGg/exec";
-
-
-const input =
-document.getElementById("submissionID");
-
-const button =
-document.getElementById("checkButton");
-
-const errorBox =
-document.getElementById("error");
-
-const result =
-document.getElementById("result");
-
-
-/* CONNECT BUTTON DIRECTLY TO FUNCTION */
-button.addEventListener(
-"click",
-checkStatus
-);
-
-
-/* ENTER KEY ALSO CHECKS STATUS */
-input.addEventListener(
-"keydown",
-function(e){
-
-if(e.key==="Enter"){
-checkStatus();
-}
-
-});
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Check Status | CPE '26</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      background: #050b14;
+      color: #ffffff;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    /* ================= HEADER ================= */
+
+    header {
+      width: 100%;
+      border-bottom: 1px solid rgba(0, 229, 255, 0.15);
+      background: rgba(5, 11, 20, 0.96);
+    }
+
+    .header-inner {
+      max-width: 1150px;
+      margin: auto;
+      padding: 20px 24px;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .logo {
+      color: #00e5ff;
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      white-space: nowrap;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 25px;
+    }
+
+    nav a {
+      color: #aab8c7;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+      transition: 0.2s;
+    }
+
+    nav a:hover {
+      color: #00e5ff;
+    }
+
+    nav a.active {
+      color: #00e5ff;
+    }
+
+    /* ================= MAIN ================= */
+
+    main {
+      min-height: calc(100vh - 145px);
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      padding: 70px 20px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 650px;
+    }
+
+    .heading {
+      text-align: center;
+      margin-bottom: 35px;
+    }
+
+    .heading .small-title {
+      color: #00e5ff;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 3px;
+      margin-bottom: 14px;
+      text-transform: uppercase;
+    }
+
+    .heading h1 {
+      font-size: clamp(35px, 7vw, 55px);
+      line-height: 1;
+      font-weight: 900;
+      letter-spacing: -1px;
+    }
+
+    .heading h1 span {
+      color: #00e5ff;
+    }
+
+    .heading p {
+      margin-top: 16px;
+      color: #7f91a3;
+      font-size: 13px;
+      letter-spacing: 1px;
+      line-height: 1.6;
+    }
+
+    /* ================= CARD ================= */
+
+    .card {
+      background: #08111d;
+      border: 1px solid #162a3a;
+      border-radius: 18px;
+      padding: 32px;
+
+      box-shadow:
+        0 20px 60px rgba(0, 0, 0, 0.35),
+        0 0 40px rgba(0, 229, 255, 0.03);
+    }
+
+    .form-title {
+      color: #ffffff;
+      font-size: 16px;
+      font-weight: 800;
+      margin-bottom: 20px;
+    }
+
+    /* ================= FORM ================= */
+
+    .status-form {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .status-form label {
+      color: #8da0b2;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+
+    .status-form input {
+      width: 100%;
+      height: 54px;
+
+      padding: 0 16px;
+
+      background: #050b14;
+      border: 1px solid #20394c;
+      border-radius: 10px;
+
+      color: #ffffff;
+      font-size: 15px;
+      font-weight: 600;
+
+      outline: none;
+      transition: 0.2s;
+    }
+
+    .status-form input::placeholder {
+      color: #536779;
+    }
+
+    .status-form input:focus {
+      border-color: #00e5ff;
+      box-shadow: 0 0 0 3px rgba(0, 229, 255, 0.08);
+    }
+
+    /* ================= BUTTON ================= */
+
+    .status-form button {
+      width: 100%;
+      height: 54px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      border: none;
+      border-radius: 10px;
+
+      background: #00e5ff;
+      color: #001018;
+
+      font-size: 14px;
+      font-weight: 900;
+      letter-spacing: 0.8px;
+
+      cursor: pointer;
+
+      visibility: visible;
+      opacity: 1;
+
+      transition:
+        transform 0.2s,
+        box-shadow 0.2s,
+        opacity 0.2s;
+    }
+
+    .status-form button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(0, 229, 255, 0.2);
+    }
+
+    .status-form button:active {
+      transform: translateY(0);
+    }
+
+    .status-form button:disabled {
+      opacity: 0.65;
+      cursor: wait;
+      transform: none;
+      box-shadow: none;
+    }
+
+    /* ================= ERROR ================= */
+
+    #error {
+      display: none;
+
+      margin-top: 18px;
+      padding: 14px 16px;
+
+      background: rgba(255, 75, 75, 0.08);
+      border: 1px solid rgba(255, 75, 75, 0.3);
+      border-radius: 10px;
+
+      color: #ff8585;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    /* ================= RESULT ================= */
+
+    #result {
+      display: none;
+      margin-top: 25px;
+    }
+
+    .result-box {
+      border: 1px solid #20394c;
+      border-radius: 14px;
+      overflow: hidden;
+      background: #050b14;
+    }
+
+    .result-header {
+      padding: 20px;
+
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+
+      border-bottom: 1px solid #172b3b;
+    }
+
+    .result-header h2 {
+      font-size: 15px;
+      font-weight: 800;
+    }
+
+    .status-badge {
+      padding: 7px 12px;
+      border-radius: 30px;
+
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .status-pending {
+      color: #ffd166;
+      background: rgba(255, 209, 102, 0.1);
+      border: 1px solid rgba(255, 209, 102, 0.25);
+    }
+
+    .status-approved {
+      color: #55efc4;
+      background: rgba(85, 239, 196, 0.1);
+      border: 1px solid rgba(85, 239, 196, 0.25);
+    }
+
+    .status-rejected {
+      color: #ff7675;
+      background: rgba(255, 118, 117, 0.1);
+      border: 1px solid rgba(255, 118, 117, 0.25);
+    }
+
+    .status-unknown {
+      color: #b8c5d0;
+      background: rgba(184, 197, 208, 0.08);
+      border: 1px solid rgba(184, 197, 208, 0.2);
+    }
+
+    .details {
+      padding: 20px;
+    }
+
+    .detail-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+
+      padding: 13px 0;
+      border-bottom: 1px solid #10202e;
+    }
+
+    .detail-row:last-child {
+      border-bottom: none;
+    }
+
+    .detail-label {
+      color: #718496;
+      font-size: 12px;
+    }
+
+    .detail-value {
+      color: #ffffff;
+      font-size: 13px;
+      font-weight: 700;
+      text-align: right;
+      word-break: break-word;
+    }
+
+    .message-box {
+      margin-top: 18px;
+      padding: 16px;
+
+      border-radius: 10px;
+      background: #08111d;
+      border: 1px solid #172b3b;
+    }
+
+    .message-box strong {
+      display: block;
+      margin-bottom: 8px;
+
+      color: #00e5ff;
+      font-size: 11px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .message-box p {
+      color: #b5c2ce;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    /* ================= FOOTER ================= */
+
+    footer {
+      text-align: center;
+      padding: 25px 20px;
+
+      color: #526576;
+      font-size: 11px;
+
+      border-top: 1px solid rgba(0, 229, 255, 0.08);
+    }
+
+    footer span {
+      color: #00e5ff;
+    }
+
+    /* ================= MOBILE ================= */
+
+    @media (max-width: 700px) {
+
+      .header-inner {
+        padding: 17px 18px;
+      }
+
+      .logo {
+        font-size: 18px;
+      }
+
+      nav {
+        gap: 13px;
+      }
+
+      nav a {
+        font-size: 11px;
+      }
+
+      main {
+        padding: 50px 15px;
+        align-items: flex-start;
+      }
+
+      .heading {
+        margin-top: 15px;
+      }
+
+      .heading h1 {
+        font-size: 38px;
+      }
+
+      .heading p {
+        font-size: 11px;
+      }
+
+      .card {
+        padding: 22px;
+        border-radius: 14px;
+      }
+
+      .result-header {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .detail-row {
+        flex-direction: column;
+        gap: 6px;
+      }
+
+      .detail-value {
+        text-align: left;
+      }
+    }
+
+    @media (max-width: 450px) {
+
+      nav a:nth-child(1) {
+        display: none;
+      }
 
+      .header-inner {
+        justify-content: space-between;
+      }
 
-async function checkStatus(){
+      nav {
+        gap: 12px;
+      }
+    }
+  </style>
+</head>
 
-const id =
-input.value.trim();
+<body>
 
+  <!-- ================= HEADER ================= -->
 
-/* VALIDATE INPUT */
-if(!id){
+  <header>
+    <div class="header-inner">
 
-showError(
-"Please enter your Submission ID."
-);
+      <div class="logo">
+        &lt; CPE_26 /&gt;
+      </div>
 
-input.focus();
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="nerd.html">N-E-R-D</a>
+        <a href="dataform.html">Student Dataform</a>
+        <a href="status.html" class="active">Status</a>
+      </nav>
 
-return;
+    </div>
+  </header>
 
-}
 
+  <!-- ================= MAIN ================= -->
 
-/* START LOADING */
-button.disabled=true;
-button.textContent="CHECKING...";
+  <main>
 
-errorBox.style.display="none";
-result.style.display="none";
+    <div class="container">
 
+      <div class="heading">
 
-try{
+        <div class="small-title">
+          Student Portal
+        </div>
 
-/*
-THIS IS THE ACTUAL API REQUEST
+        <h1>
+          CHECK <span>STATUS</span>
+        </h1>
 
-Example:
-https://script.google.com/.../exec
-?action=itStatus
-&id=IT-2026-00001
-*/
+        <p>
+          STUDENT IT / SIWES • COMPUTER ENGINEERING CLASS OF 2026
+        </p>
 
-const requestURL =
-API +
-"?action=itStatus&id=" +
-encodeURIComponent(id);
+      </div>
 
 
-console.log(
-"Checking API:",
-requestURL
-);
+      <!-- ================= CARD ================= -->
 
+      <div class="card">
 
-const response =
-await fetch(
-requestURL,
-{
-method:"GET",
-cache:"no-store"
-}
-);
+        <div class="form-title">
+          Track Your Submission
+        </div>
 
 
-/* CHECK SERVER RESPONSE */
+        <!-- ================= STATUS FORM ================= -->
 
-if(!response.ok){
+        <div class="status-form">
 
-throw new Error(
-"Server returned HTTP "+
-response.status
-);
+          <label for="submissionID">
+            ENTER YOUR SUBMISSION ID
+          </label>
 
-}
+          <input
+            type="text"
+            id="submissionID"
+            placeholder="IT-2026-00001"
+            autocomplete="off"
+            spellcheck="false"
+          >
 
+          <!-- THIS IS THE CHECK STATUS BUTTON -->
 
-/* READ JSON */
+          <button
+            type="button"
+            id="checkButton"
+            onclick="checkStatus()"
+          >
+            CHECK STATUS →
+          </button>
 
-const data =
-await response.json();
+        </div>
 
 
-console.log(
-"API response:",
-data
-);
+        <!-- ================= ERROR ================= -->
 
+        <div id="error"></div>
 
-/* CHECK BACKEND RESULT */
 
-if(!data.success){
+        <!-- ================= RESULT ================= -->
 
-throw new Error(
-data.message ||
-"Submission ID not found."
-);
+        <div id="result"></div>
 
-}
+      </div>
 
+    </div>
 
-/* DISPLAY RESULT */
+  </main>
 
-showResult(data);
 
+  <!-- ================= FOOTER ================= -->
 
-}catch(error){
+  <footer>
+    CPE '26 Student Portal &nbsp;•&nbsp;
+    <span>Computer Engineering</span>
+  </footer>
 
-console.error(
-"Status error:",
-error
-);
 
-showError(
-error.message ||
-"Unable to connect to the backend."
-);
+  <!-- ================= JAVASCRIPT ================= -->
 
-}finally{
+  <script>
 
-button.disabled=false;
-button.textContent=
-"CHECK STATUS →";
+    /* YOUR WORKING GOOGLE APPS SCRIPT API */
 
-}
+    const API =
+      "https://script.google.com/macros/s/AKfycbyu5ZMcfGyWk7tXGthr6J9B88HV9G3jGGr3hPCtty4grDXQ86BiYETLXDcJ3JZxUOGg/exec";
 
-}
 
+    const input =
+      document.getElementById("submissionID");
 
-function showResult(data){
+    const button =
+      document.getElementById("checkButton");
 
-const status =
-String(
-data.status || "Pending"
-).toLowerCase();
+    const errorBox =
+      document.getElementById("error");
 
+    const result =
+      document.getElementById("result");
 
-const box =
-document.getElementById("statusBox");
 
-const icon =
-document.getElementById("statusIcon");
+    /*
+      Allow Enter key to check status
+    */
 
-const title =
-document.getElementById("statusTitle");
+    input.addEventListener("keydown", function(event) {
 
-const info =
-document.getElementById("info");
+      if (event.key === "Enter") {
+        checkStatus();
+      }
 
+    });
 
-box.className="status-box";
 
+    /*
+      CHECK STATUS
+    */
 
-if(status==="approved"){
+    async function checkStatus() {
 
-box.classList.add("approved");
-icon.textContent="✓";
-title.textContent=
-"SUBMISSION APPROVED";
+      const id =
+        input.value.trim();
 
-}
-else if(status==="rejected"){
 
-box.classList.add("rejected");
-icon.textContent="×";
-title.textContent=
-"CORRECTION REQUIRED";
+      /* No ID */
 
-}
-else{
+      if (!id) {
 
-box.classList.add("pending");
-icon.textContent="⌛";
-title.textContent=
-"SUBMISSION PENDING";
+        showError(
+          "Please enter your Submission ID."
+        );
 
-}
+        input.focus();
 
+        return;
+      }
 
-let html =
-"<strong>Submission ID:</strong> " +
-escapeHTML(data.submissionID) +
 
-"<br><strong>Status:</strong> " +
-escapeHTML(data.status);
+      /* Start loading */
 
+      button.disabled = true;
 
-if(data.reviewedBy){
+      button.textContent =
+        "CHECKING...";
 
-html +=
-"<br><strong>Reviewed By:</strong> " +
-escapeHTML(data.reviewedBy);
+      errorBox.style.display =
+        "none";
 
-}
+      result.style.display =
+        "none";
 
 
-if(data.reviewDate){
+      try {
 
-html +=
-"<br><strong>Review Date:</strong> " +
-escapeHTML(
-formatDate(data.reviewDate)
-);
+        /*
+          Build API request
+        */
 
-}
+        const requestURL =
+          API +
+          "?action=itStatus&id=" +
+          encodeURIComponent(id) +
+          "&t=" +
+          Date.now();
 
 
-if(
-status==="rejected" &&
-data.rejectionReason
-){
+        console.log(
+          "Checking:",
+          requestURL
+        );
 
-html +=
-'<div class="reasons">' +
-"<strong>Issues identified:</strong>";
 
-String(
-data.rejectionReason
-)
-.split(";")
-.forEach(
-function(reason){
+        /*
+          Send request to Google Apps Script
+        */
 
-if(reason.trim()){
+        const response =
+          await fetch(
+            requestURL,
+            {
+              method: "GET",
+              cache: "no-store"
+            }
+          );
 
-html +=
-'<div class="reason">❌ ' +
-escapeHTML(
-reason.trim()
-) +
-"</div>";
 
-}
+        /*
+          Check HTTP response
+        */
 
-});
+        if (!response.ok) {
 
-html += "</div>";
+          throw new Error(
+            "Server returned HTTP " +
+            response.status
+          );
 
-}
+        }
 
 
-if(data.adminComment){
+        /*
+          Convert response to JSON
+        */
 
-html +=
-'<div class="comment">' +
-"<strong>Admin Comment:</strong><br>" +
-escapeHTML(data.adminComment) +
-"</div>";
+        const data =
+          await response.json();
 
-}
 
+        console.log(
+          "API Response:",
+          data
+        );
 
-info.innerHTML=html;
 
-result.style.display="block";
+        /*
+          Backend says unsuccessful
+        */
 
-}
+        if (!data.success) {
 
+          throw new Error(
+            data.message ||
+            "Submission ID was not found."
+          );
 
-function showError(message){
+        }
 
-errorBox.textContent=message;
-errorBox.style.display="block";
 
-}
+        /*
+          Display result
+        */
 
+        showResult(data);
 
-function formatDate(value){
 
-const date =
-new Date(value);
+      } catch (error) {
 
-if(
-isNaN(
-date.getTime()
-)
-)
-return value;
+        console.error(
+          "Status Error:",
+          error
+        );
 
-return date.toLocaleString();
 
-}
+        showError(
+          error.message ||
+          "Unable to connect to the backend."
+        );
 
 
-function escapeHTML(value){
+      } finally {
 
-return String(value || "")
-.replace(
-/[&<>"']/g,
-function(char){
+        /*
+          Stop loading
+        */
 
-return {
-"&":"&amp;",
-"<":"&lt;",
-">":"&gt;",
-'"':"&quot;",
-"'":"&#039;"
-}[char];
+        button.disabled = false;
 
-});
+        button.textContent =
+          "CHECK STATUS →";
 
-}
+      }
 
-</script></body>
+    }
+
+
+    /*
+      SHOW STATUS RESULT
+    */
+
+    function showResult(data) {
+
+      const status =
+        String(
+          data.status || "Unknown"
+        );
+
+
+      const normalizedStatus =
+        status.toLowerCase();
+
+
+      let statusClass =
+        "status-unknown";
+
+
+      if (
+        normalizedStatus ===
+        "pending"
+      ) {
+
+        statusClass =
+          "status-pending";
+
+      }
+
+      else if (
+        normalizedStatus ===
+        "approved"
+      ) {
+
+        statusClass =
+          "status-approved";
+
+      }
+
+      else if (
+        normalizedStatus ===
+        "rejected"
+      ) {
+
+        statusClass =
+          "status-rejected";
+
+      }
+
+
+      let html = `
+
+        <div class="result-box">
+
+          <div class="result-header">
+
+            <h2>
+              Submission Status
+            </h2>
+
+            <span class="status-badge ${statusClass}">
+              ${escapeHTML(status)}
+            </span>
+
+          </div>
+
+
+          <div class="details">
+
+            <div class="detail-row">
+
+              <div class="detail-label">
+                Submission ID
+              </div>
+
+              <div class="detail-value">
+                ${escapeHTML(
+                  data.submissionID || "-"
+                )}
+              </div>
+
+            </div>
+
+
+            <div class="detail-row">
+
+              <div class="detail-label">
+                Current Status
+              </div>
+
+              <div class="detail-value">
+                ${escapeHTML(status)}
+              </div>
+
+            </div>
+
+      `;
+
+
+      /*
+        Rejection reason
+      */
+
+      if (data.rejectionReason) {
+
+        html += `
+
+          <div class="message-box">
+
+            <strong>
+              Rejection Reason
+            </strong>
+
+            <p>
+              ${escapeHTML(
+                data.rejectionReason
+              )}
+            </p>
+
+          </div>
+
+        `;
+
+      }
+
+
+      /*
+        Admin comment
+      */
+
+      if (data.adminComment) {
+
+        html += `
+
+          <div class="message-box">
+
+            <strong>
+              Admin Comment
+            </strong>
+
+            <p>
+              ${escapeHTML(
+                data.adminComment
+              )}
+            </p>
+
+          </div>
+
+        `;
+
+      }
+
+
+      /*
+        Reviewed by
+      */
+
+      if (data.reviewedBy) {
+
+        html += `
+
+          <div class="detail-row">
+
+            <div class="detail-label">
+              Reviewed By
+            </div>
+
+            <div class="detail-value">
+              ${escapeHTML(
+                data.reviewedBy
+              )}
+            </div>
+
+          </div>
+
+        `;
+
+      }
+
+
+      /*
+        Review date
+      */
+
+      if (data.reviewDate) {
+
+        html += `
+
+          <div class="detail-row">
+
+            <div class="detail-label">
+              Review Date
+            </div>
+
+            <div class="detail-value">
+              ${formatDate(
+                data.reviewDate
+              )}
+            </div>
+
+          </div>
+
+        `;
+
+      }
+
+
+      /*
+        Close HTML
+      */
+
+      html += `
+
+          </div>
+
+        </div>
+
+      `;
+
+
+      result.innerHTML =
+        html;
+
+      result.style.display =
+        "block";
+
+
+      /*
+        Scroll result into view
+      */
+
+      result.scrollIntoView({
+        behavior: "smooth",
+        block: "nearest"
+      });
+
+    }
+
+
+    /*
+      SHOW ERROR
+    */
+
+    function showError(message) {
+
+      errorBox.textContent =
+        message;
+
+      errorBox.style.display =
+        "block";
+
+      result.style.display =
+        "none";
+
+    }
+
+
+    /*
+      FORMAT DATE
+    */
+
+    function formatDate(value) {
+
+      if (!value) {
+        return "-";
+      }
+
+
+      try {
+
+        const date =
+          new Date(value);
+
+
+        if (
+          Number.isNaN(
+            date.getTime()
+          )
+        ) {
+
+          return escapeHTML(
+            String(value)
+          );
+
+        }
+
+
+        return date.toLocaleString(
+          "en-NG",
+          {
+            dateStyle: "medium",
+            timeStyle: "short"
+          }
+        );
+
+      } catch (error) {
+
+        return escapeHTML(
+          String(value)
+        );
+
+      }
+
+    }
+
+
+    /*
+      SECURITY:
+      Prevent HTML injection
+    */
+
+    function escapeHTML(value) {
+
+      return String(value)
+        .replace(
+          /&/g,
+          "&amp;"
+        )
+        .replace(
+          /</g,
+          "&lt;"
+        )
+        .replace(
+          />/g,
+          "&gt;"
+        )
+        .replace(
+          /"/g,
+          "&quot;"
+        )
+        .replace(
+          /'/g,
+          "&#039;"
+        );
+
+    }
+
+  </script>
+
+</body>
 </html>
