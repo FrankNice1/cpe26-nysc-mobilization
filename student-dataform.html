@@ -4,397 +4,201 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>SIWES IT Placement Information Portal</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-body{
- font-family:Inter,system-ui,sans-serif;
- background:#f1f5f9;color:#1e293b;
- padding:30px 15px;line-height:1.5
-}
-.container{
- width:100%;max-width:900px;margin:auto;
- background:#fff;border-radius:12px;
- box-shadow:0 10px 25px -5px rgba(0,0,0,.05);
- overflow:hidden;border:1px solid #e2e8f0
-}
-.header{
- background:linear-gradient(135deg,#1e3a8a,#0b5ed7);
- color:#fff;padding:20px 24px
-}
-.header-inner{
- display:flex;align-items:center;
- justify-content:space-between;gap:12px
-}
-.brand{display:flex;align-items:center;gap:12px}
-.logo{
- width:38px;height:38px;border-radius:8px;
- display:grid;place-items:center;
- background:linear-gradient(135deg,#00bcd4,#0877a5);
- font-weight:800
-}
-nav{display:flex;gap:4px;flex-wrap:wrap}
-nav a{
- color:#fff;text-decoration:none;padding:8px 10px;
- border-radius:8px;font-weight:700;font-size:13px
-}
-nav a.active,nav a:hover{background:rgba(255,255,255,.12)}
-.form-container{padding:22px}
-.notice{
- background:#fff7ed;border:1px solid #ffedd5;
- border-left:4px solid #f97316;padding:12px;
- margin-bottom:18px;border-radius:8px;
- font-size:13px;color:#9a3412
-}
-.section-title{
- font-size:15px;font-weight:700;color:#1e3a8a;
- margin:18px 0 10px
-}
-.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.form-group{margin-bottom:12px}
-label{
- display:block;font-weight:600;font-size:12px;
- margin-bottom:6px;text-transform:uppercase
-}
-input,select,textarea{
- width:100%;padding:10px 12px;
- border:1px solid #cbd5e1;border-radius:8px;
- font-size:14px;font-family:inherit
-}
-textarea{min-height:80px;resize:vertical}
-input:focus,select:focus,textarea:focus{
- outline:none;border-color:#2563eb;
- box-shadow:0 0 0 3px rgba(37,99,235,.1)
-}
-.submit-btn{
- width:100%;padding:12px;margin-top:10px;
- background:#1e3a8a;color:#fff;border:0;
- border-radius:8px;font-weight:700;cursor:pointer
-}
-.submit-btn:hover{background:#0f1e4d}
-.submit-btn:disabled{opacity:.6;cursor:not-allowed}
-.message{
- display:none;padding:12px;margin-top:12px;
- border-radius:8px;font-size:13px
-}
-.ok{background:#e8f8ef;color:#075b35;border:1px solid #bce7ce}
-.bad{background:#fff0ef;color:#8d2018;border:1px solid #f5c2c2}
-.meta-box{
- display:none;margin-top:12px;padding:12px;
- border-radius:8px;background:#f8fafc;
- border:1px solid #e2e8f0;font-size:13px
-}
-@media(max-width:720px){
- .grid-2{grid-template-columns:1fr}
- .header-inner{flex-direction:column;align-items:stretch}
- nav{justify-content:center}
-}
+*{box-sizing:border-box}body{font-family:Arial,sans-serif;background:#f1f5f9;color:#1e293b;margin:0;padding:25px 12px}
+.container{max-width:850px;margin:auto;background:white;border-radius:12px;overflow:hidden;box-shadow:0 8px 25px #0001}
+.header{background:linear-gradient(135deg,#1e3a8a,#0b5ed7);color:white;padding:20px;text-align:center}
+nav{margin-top:12px}nav a{color:white;text-decoration:none;margin:0 5px;font-weight:bold}
+.form{padding:22px}.title{color:#1e3a8a;margin:18px 0 10px;font-size:16px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.group{margin-bottom:12px}label{display:block;font-weight:bold;font-size:13px;margin-bottom:5px}
+input,select,textarea{width:100%;padding:11px;border:1px solid #cbd5e1;border-radius:7px;font-size:14px}
+textarea{min-height:75px}.btn{width:100%;padding:13px;background:#1e3a8a;color:white;border:0;border-radius:7px;font-weight:bold;cursor:pointer}
+.msg{display:none;padding:12px;margin-top:12px;border-radius:7px}
+.ok{background:#e8f8ef;color:#075b35}.bad{background:#fff0ef;color:#8d2018}
+@media(max-width:650px){.grid{grid-template-columns:1fr}}
 </style>
 </head>
 
 <body>
 
+<div class="container">
 <header class="header">
-<div class="header-inner">
-
-<div class="brand">
-<div class="logo">C26</div>
-<div>
-<div style="font-weight:800">CPE '26 • NYSC Mobilization</div>
-<div style="font-size:12px;opacity:.9">SIWES Placement Portal</div>
-</div>
-</div>
-
+<h2>CPE '26 • NYSC Mobilization</h2>
+<div>SIWES Placement Portal</div>
 <nav>
 <a href="index.html">Home</a>
 <a href="status.html">Check Status</a>
 <a href="nerd.html">NERD</a>
-<a href="student-dataform.html" class="active">Student Dataform</a>
+<a href="student-dataform.html">Student Dataform</a>
 </nav>
-
-</div>
 </header>
 
-<div class="container">
-<div class="form-container">
+<div class="form">
 
-<div class="notice">
-<strong>Important:</strong>
-Fill all information carefully. Bank account numbers must contain
-10 digits. Sort/Branch code must contain 3–12 digits.
-</div>
+<p><b>Important:</b> Fill all information correctly. Bank account must be a valid 10-digit Nigerian account number.</p>
 
-<form id="studentForm">
+<form id="form">
 
-<h3 class="section-title">1. Student Information</h3>
+<h3 class="title">1. Student Information</h3>
 
-<div class="form-group">
+<div class="group">
 <label>Full Name — Surname First *</label>
 <input id="name" required placeholder="e.g. OKONKWO, Emmanuel Chukwuemeka">
 </div>
 
-<div class="grid-2">
-<div class="form-group">
-<label>Matriculation Number *</label>
-<input id="matric" required placeholder="e.g. FOE/22/003172">
+<div class="grid">
+<div class="group"><label>Matriculation Number *</label><input id="matric" required></div>
+<div class="group"><label>Course of Study *</label><input id="course" required></div>
 </div>
 
-<div class="form-group">
-<label>Course of Study *</label>
-<input id="course" required placeholder="e.g. Computer Engineering">
-</div>
-</div>
-
-<div class="grid-2">
-<div class="form-group">
-<label>Level of Study *</label>
+<div class="grid">
+<div class="group">
+<label>Level *</label>
 <select id="level" required>
-<option value="">Select Level</option>
-<option>300 Level</option>
-<option>400 Level</option>
-<option>500 Level</option>
+<option value="">Select</option>
+<option>300 Level</option><option>400 Level</option><option>500 Level</option>
 </select>
 </div>
 
-<div class="form-group">
+<div class="group">
 <label>SIWES Year *</label>
 <select id="year" required>
-<option value="">Select Year</option>
-<option>2025/2026</option>
-<option>2026/2027</option>
+<option value="">Select</option>
+<option>2025/2026</option><option>2026/2027</option>
 </select>
 </div>
 </div>
 
-<div class="grid-2">
-<div class="form-group">
-<label>Student Email *</label>
-<input type="email" id="email" required placeholder="student@university.edu.ng">
+<div class="grid">
+<div class="group"><label>Email *</label><input type="email" id="email" required></div>
+<div class="group"><label>Phone *</label><input type="tel" id="phone" required></div>
 </div>
 
-<div class="form-group">
-<label>Phone Number *</label>
-<input type="tel" id="phone" required placeholder="08012345678">
-</div>
-</div>
+<div class="group"><label>Nationality *</label><input id="nationality" value="Nigerian" required></div>
 
-<div class="form-group">
-<label>Nationality *</label>
-<input id="nationality" value="Nigerian" required>
-</div>
+<h3 class="title">2. Employer / Placement Information</h3>
 
+<div class="group"><label>Employer / Organization Name *</label><input id="employerName" required></div>
 
-<h3 class="section-title">2. Employer / Placement Information</h3>
-
-<div class="form-group">
-<label>Employer / Organization Name *</label>
-<input id="employerName" required placeholder="e.g. Chevron Nigeria Limited">
-</div>
-
-<div class="form-group">
+<div class="group">
 <label>Employer Office Address *</label>
-<textarea id="employerAddress" required placeholder="Street, City, State"></textarea>
+<textarea id="employerAddress" required></textarea>
 </div>
 
-<div class="grid-2">
-<div class="form-group">
-<label>Attachment Start Date *</label>
-<input type="date" id="fromDate" required>
+<div class="grid">
+<div class="group"><label>Attachment Start Date *</label><input type="date" id="fromDate" required></div>
+<div class="group"><label>Attachment End Date *</label><input type="date" id="toDate" required></div>
 </div>
 
-<div class="form-group">
-<label>Attachment End Date *</label>
-<input type="date" id="toDate" required>
-</div>
-</div>
+<h3 class="title">3. Bank Account Information</h3>
 
-
-<h3 class="section-title">3. Bank Account Information</h3>
-
-<div class="form-group">
+<div class="group">
 <label>Bank Name *</label>
 <select id="bank" required>
 <option value="">Select Bank</option>
-<option>Access Bank</option>
-<option>Bank of Agriculture</option>
-<option>Bank of Industry</option>
-<option>Citibank Nigeria</option>
-<option>Ecobank</option>
-<option>Fidelity Bank</option>
-<option>First Bank</option>
-<option>FCMB</option>
-<option>Guaranty Trust Bank</option>
-<option>Jaiz Bank</option>
-<option>Keystone Bank</option>
-<option>Polaris Bank</option>
-<option>Stanbic IBTC Bank</option>
-<option>Standard Chartered Bank</option>
-<option>Sterling Bank</option>
-<option>Suntrust Bank</option>
-<option>Union Bank</option>
-<option>United Bank for Africa</option>
-<option>Unity Bank</option>
-<option>WEMA Bank</option>
-<option>Zenith Bank</option>
+<option>Access Bank</option><option>WEMA Bank</option>
+<option>Ecobank</option><option>Fidelity Bank</option>
+<option>First Bank</option><option>FCMB</option>
+<option>GTBank</option><option>Jaiz Bank</option>
+<option>Keystone Bank</option><option>Polaris Bank</option>
+<option>Stanbic IBTC Bank</option><option>Sterling Bank</option>
+<option>Union Bank</option><option>UBA</option>
+<option>Unity Bank</option><option>Zenith Bank</option>
 <option>Other</option>
 </select>
 </div>
 
-<div class="grid-2">
-<div class="form-group">
-<label>Account Number *</label>
-<input id="accountNumber" maxlength="10"
-inputmode="numeric" required placeholder="0123456789">
+<div class="grid">
+<div class="group"><label>Account Number *</label><input id="accountNumber" maxlength="10" inputmode="numeric" required></div>
+<div class="group"><label>Sort / Branch Code *</label><input id="sortCode" maxlength="12" inputmode="numeric" required></div>
 </div>
 
-<div class="form-group">
-<label>Sort / Branch Code *</label>
-<input id="sortCode" maxlength="12"
-inputmode="numeric" required placeholder="000">
-</div>
-</div>
-
-<button class="submit-btn" id="submitBtn">
-Submit Placement Record
-</button>
-
+<button class="btn" id="btn">Submit Placement Record</button>
 </form>
 
-<div id="message" class="message"></div>
-<div id="metaBox" class="meta-box"></div>
-
+<div id="msg" class="msg"></div>
 </div>
 </div>
 
 <script>
+const API="https://script.google.com/macros/s/AKfycbyu5ZMcfGyWk7tXGthr6J9B88HV9G3jGGr3hPCtty4grDXQ86BiYETLXDcJ3JZxUOGg/exec";
 
-const API_URL =
-"https://script.google.com/macros/s/AKfycbyu5ZMcfGyWk7tXGthr6J9B88HV9G3jGGr3hPCtty4grDXQ86BiYETLXDcJ3JZxUOGg/exec";
+const $=id=>document.getElementById(id);
+const msg=$("msg"),btn=$("btn");
 
-const form=document.getElementById("studentForm");
-const btn=document.getElementById("submitBtn");
-const msg=document.getElementById("message");
-const meta=document.getElementById("metaBox");
-
-function show(text,type){
- msg.className="message "+(type==="ok"?"ok":"bad");
- msg.innerHTML=text;
+function show(t,c){
+ msg.className="msg "+c;
+ msg.innerHTML=t;
  msg.style.display="block";
 }
 
-function esc(v){
- return String(v||"").replace(/[&<>"']/g,m=>({
- "&":"&amp;","<":"&lt;",">":"&gt;",
- '"':"&quot;","'":"&#039;"
- }[m]));
-}
-
-form.addEventListener("submit",async e=>{
-
+$("form").onsubmit=async e=>{
  e.preventDefault();
  msg.style.display="none";
- meta.style.display="none";
 
- const account=document.getElementById("accountNumber").value.trim();
- const sort=document.getElementById("sortCode").value.trim();
- const from=document.getElementById("fromDate").value;
- const to=document.getElementById("toDate").value;
+ let account=$("accountNumber").value.trim();
+ let sort=$("sortCode").value.trim();
+ let from=$("fromDate").value;
+ let to=$("toDate").value;
 
- if(!/^\d{10}$/.test(account)){
-  show("Account number must contain exactly 10 digits.","bad");
-  return;
- }
+ if(!/^\d{10}$/.test(account))
+   return show("Account number must contain exactly 10 digits.","bad");
 
- if(!/^\d{3,12}$/.test(sort)){
-  show("Sort/Branch code must contain 3–12 digits.","bad");
-  return;
- }
+ if(!/^\d{3,12}$/.test(sort))
+   return show("Sort/Branch code must contain 3–12 digits.","bad");
 
- if(new Date(from)>new Date(to)){
-  show("Attachment start date cannot be later than the end date.","bad");
-  return;
- }
+ if(from>to)
+   return show("Start date cannot be later than end date.","bad");
 
- if(!confirm("Please confirm that all information entered is correct."))
-  return;
+ if(!confirm("Please confirm that all information entered is correct."))return;
 
- const data={
-  action:"submit",
-  name:document.getElementById("name").value.trim(),
-  matricNo:document.getElementById("matric").value.trim(),
-  courseOfStudy:document.getElementById("course").value.trim(),
-  level:document.getElementById("level").value,
-  year:document.getElementById("year").value,
-  studentEmail:document.getElementById("email").value.trim(),
-  phone:document.getElementById("phone").value.trim(),
-  nationality:document.getElementById("nationality").value.trim(),
-  employerName:document.getElementById("employerName").value.trim(),
-  employerAddress:document.getElementById("employerAddress").value.trim(),
-  fromDate:from,
-  toDate:to,
-  bank:document.getElementById("bank").value,
-  accountNumber:account,
-  sortCode:sort
+ let data={
+  action:"itSubmit",
+  Name:$("name").value.trim(),
+  MatricNo:$("matric").value.trim(),
+  Course:$("course").value.trim(),
+  Level:$("level").value,
+  SIWESYear:$("year").value,
+  StudentEmail:$("email").value.trim(),
+  Phone:$("phone").value.trim(),
+  Nationality:$("nationality").value.trim(),
+  EmployerName:$("employerName").value.trim(),
+  EmployerAddress:$("employerAddress").value.trim(),
+  FromDate:from,
+  ToDate:to,
+  Bank:$("bank").value,
+  AccountNumber:account,
+  SortCode:sort
  };
 
  btn.disabled=true;
  btn.textContent="Submitting...";
 
  try{
-
-  const body=new URLSearchParams();
-
-  Object.keys(data).forEach(k=>body.append(k,data[k]));
-
-  const res=await fetch(API_URL,{
+  let r=await fetch(API,{
    method:"POST",
-   body:body
+   headers:{"Content-Type":"text/plain;charset=utf-8"},
+   body:JSON.stringify(data)
   });
 
-  const result=await res.json();
+  let x=await r.json();
 
-  if(!result.success)
-   throw new Error(result.message||"Submission failed");
+  if(!x.success)throw Error(x.message);
 
-  show(
-   "✔ Placement record submitted successfully."+
-   "<br><strong>Submission ID: "+
-   esc(result.submissionID)+
-   "</strong>"+
-   '<br><a href="status.html">Check Status →</a>',
-   "ok"
-  );
+  show("✔ Submitted successfully.<br><b>Submission ID: "+
+   x.submissionID+"</b><br><br><a href='status.html'>Check Status →</a>","ok");
 
-  meta.innerHTML=
-   "<strong>Submission ID:</strong> "+
-   esc(result.submissionID)+
-   "<br><strong>Status:</strong> "+
-   esc(result.status);
-
-  meta.style.display="block";
-
-  form.reset();
-  document.getElementById("nationality").value="Nigerian";
+  $("form").reset();
 
  }catch(err){
-
-  console.error(err);
-
-  show(
-   "Unable to submit the record. Please check your internet connection and try again.",
-   "bad"
-  );
-
+  show("Unable to submit: "+err.message,"bad");
  }finally{
-
   btn.disabled=false;
   btn.textContent="Submit Placement Record";
-
  }
-
-});
-
+};
 </script>
+
 </body>
 </html>
