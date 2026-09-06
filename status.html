@@ -2,7 +2,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>CPE '26 | Check Mobilization Status</title><style>
+<title>CPE '26 | Check Status</title><style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap');
 
 *{box-sizing:border-box;margin:0;padding:0}
@@ -15,7 +15,7 @@ radial-gradient(circle at 20% 20%,rgba(0,229,255,.12),transparent 25%),
 radial-gradient(circle at 80% 80%,rgba(0,100,255,.12),transparent 25%),
 #050b14;
 color:#eaf7ff;
-padding:20px
+padding:20px;
 }
 
 body:before{
@@ -27,18 +27,18 @@ opacity:.12;
 background-image:
 linear-gradient(rgba(0,229,255,.3) 1px,transparent 1px),
 linear-gradient(90deg,rgba(0,229,255,.3) 1px,transparent 1px);
-background-size:40px 40px
+background-size:40px 40px;
 }
 
 .container{
 max-width:650px;
 margin:auto;
-position:relative
+position:relative;
 }
 
 .header{
 text-align:center;
-padding:45px 10px 30px
+padding:45px 10px 30px;
 }
 
 .logo{
@@ -46,12 +46,12 @@ font-family:"Space Mono",monospace;
 color:#00e5ff;
 font-size:14px;
 letter-spacing:3px;
-margin-bottom:15px
+margin-bottom:15px;
 }
 
 h1{
 font-size:clamp(28px,6vw,42px);
-font-weight:800
+font-weight:800;
 }
 
 h1 span{color:#00e5ff}
@@ -59,11 +59,11 @@ h1 span{color:#00e5ff}
 .header p{
 color:#91a7b8;
 font-size:13px;
-margin-top:10px
+margin-top:10px;
 }
 
 .nav{
-margin-top:15px
+margin-top:15px;
 }
 
 .nav a{
@@ -71,7 +71,7 @@ color:#00e5ff;
 margin:0 6px;
 text-decoration:none;
 font-weight:700;
-font-size:13px
+font-size:13px;
 }
 
 .card{
@@ -80,7 +80,7 @@ border:1px solid rgba(0,229,255,.18);
 border-radius:20px;
 padding:30px;
 backdrop-filter:blur(15px);
-box-shadow:0 25px 80px rgba(0,0,0,.35)
+box-shadow:0 25px 80px rgba(0,0,0,.35);
 }
 
 label{
@@ -88,120 +88,60 @@ display:block;
 color:#b9cbd6;
 font-size:12px;
 font-weight:700;
-margin-bottom:8px
+margin-bottom:8px;
+}
+
+.input-box{
+width:100%;
 }
 
 input{
 display:block;
 width:100%;
+height:52px;
 padding:15px;
 background:#07111d;
-color:white;
+color:#fff;
 border:1px solid #263c4d;
 border-radius:10px;
 outline:none;
 font-size:15px;
 font-family:"Space Mono",monospace;
-text-transform:uppercase
+text-transform:uppercase;
+}
+
+input::placeholder{
+color:#637887;
+text-transform:none;
 }
 
 input:focus{
 border-color:#00e5ff;
-box-shadow:0 0 0 3px rgba(0,229,255,.08)
+box-shadow:0 0 0 3px rgba(0,229,255,.08);
 }
 
-.check-btn{
+button{
 display:block;
 width:100%;
-border:0;
+height:52px;
 margin-top:15px;
-padding:16px;
+padding:15px;
+border:0;
 border-radius:10px;
 background:linear-gradient(90deg,#00bcd4,#007bff);
 color:#fff;
 font-weight:800;
 font-size:14px;
 cursor:pointer;
-visibility:visible;
-opacity:1
 }
 
-.check-btn:hover{
-filter:brightness(1.12)
+button:hover{
+filter:brightness(1.1);
 }
 
-.check-btn:disabled{
+button:disabled{
 opacity:.55;
-cursor:not-allowed
-}
-
-.result{
-display:none;
-margin-top:25px
-}
-
-.status-box{
-padding:20px;
-border-radius:12px;
-margin-bottom:15px;
-text-align:center
-}
-
-.pending{
-background:rgba(234,179,8,.08);
-border:1px solid rgba(234,179,8,.3)
-}
-
-.approved{
-background:rgba(34,197,94,.08);
-border:1px solid rgba(34,197,94,.3)
-}
-
-.rejected{
-background:rgba(239,68,68,.08);
-border:1px solid rgba(239,68,68,.3)
-}
-
-.status-icon{
-font-size:38px;
-margin-bottom:8px
-}
-
-.status-title{
-font-size:22px;
-font-weight:800
-}
-
-.info{
-background:rgba(255,255,255,.03);
-border-radius:12px;
-padding:18px;
-line-height:1.8;
-font-size:14px
-}
-
-.info strong{
-color:#00e5ff
-}
-
-.reasons{
-margin-top:15px
-}
-
-.reason{
-padding:10px;
-margin-top:7px;
-border-radius:7px;
-background:rgba(239,68,68,.08);
-color:#fca5a5
-}
-
-.comment{
-margin-top:15px;
-padding:15px;
-border-left:3px solid #00e5ff;
-background:rgba(0,229,255,.05);
-color:#b9cbd6
+cursor:not-allowed;
 }
 
 .error{
@@ -211,151 +151,275 @@ padding:15px;
 border-radius:10px;
 background:rgba(239,68,68,.08);
 border:1px solid rgba(239,68,68,.3);
-color:#fca5a5
+color:#fca5a5;
+line-height:1.5;
+}
+
+.result{
+display:none;
+margin-top:25px;
+}
+
+.status-box{
+padding:20px;
+border-radius:12px;
+margin-bottom:15px;
+text-align:center;
+}
+
+.pending{
+background:rgba(234,179,8,.08);
+border:1px solid rgba(234,179,8,.3);
+}
+
+.approved{
+background:rgba(34,197,94,.08);
+border:1px solid rgba(34,197,94,.3);
+}
+
+.rejected{
+background:rgba(239,68,68,.08);
+border:1px solid rgba(239,68,68,.3);
+}
+
+.status-icon{
+font-size:38px;
+margin-bottom:8px;
+}
+
+.status-title{
+font-size:22px;
+font-weight:800;
+}
+
+.info{
+background:rgba(255,255,255,.03);
+border-radius:12px;
+padding:18px;
+line-height:1.8;
+font-size:14px;
+}
+
+.info strong{
+color:#00e5ff;
+}
+
+.reasons{
+margin-top:15px;
+}
+
+.reason{
+padding:10px;
+margin-top:7px;
+border-radius:7px;
+background:rgba(239,68,68,.08);
+color:#fca5a5;
+}
+
+.comment{
+margin-top:15px;
+padding:15px;
+border-left:3px solid #00e5ff;
+background:rgba(0,229,255,.05);
+color:#b9cbd6;
+line-height:1.6;
 }
 
 .back{
 text-align:center;
-margin-top:20px
+margin-top:20px;
 }
 
 .back a{
 color:#00e5ff;
 text-decoration:none;
-font-size:13px
+font-size:13px;
 }
 
 .footer{
 text-align:center;
 color:#637887;
 font-size:11px;
-padding:25px
+padding:25px;
 }
-</style></head><body><div class="container"><header class="header"><div class="logo">&lt; CPE_26 /&gt;</div><h1>CHECK <span>STATUS</span></h1><p>
-NYSC MOBILIZATION • COMPUTER ENGINEERING CLASS OF 2026
+
+@media(max-width:500px){
+.card{
+padding:22px;
+}
+
+.header{
+padding-top:30px;
+}
+
+.status-title{
+font-size:19px;
+}
+}
+</style></head><body><div class="container"><header class="header"><div class="logo">
+&lt; CPE_26 /&gt;
+</div><h1>
+CHECK <span>STATUS</span>
+</h1><p>
+STUDENT IT / SIWES • COMPUTER ENGINEERING CLASS OF 2026
 </p><div class="nav">
 <a href="index.html">Home</a>
 <a href="nerd.html">NERD</a>
 <a href="student-dataform.html">Student Dataform</a>
 </div></header><div class="card"><label for="submissionID">
-Submission ID
-</label><input
-id="submissionID"
+ENTER YOUR SUBMISSION ID
+</label><div class="input-box"><input
 type="text"
-placeholder="IT-2026-00001"
+id="submissionID"
+placeholder="e.g. IT-2026-00001"
 autocomplete="off"
+spellcheck="false"
 
 «»
 
-<button
+</div><button
 type="button"
 id="checkButton"
-class="check-btn"
 onclick="checkStatus()"
 
 «»
 
-CHECK MOBILIZATION STATUS →
+CHECK STATUS →
 </button>
 
-<div id="error" class="error"></div><div id="result" class="result"><div id="statusBox" class="status-box"><div id="statusIcon" class="status-icon"></div><div id="statusTitle" class="status-title"></div></div><div id="info" class="info"></div></div><div class="back">
-<a href="student-dataform.html">
+<div
+id="error"
+class="error"
+></div><div
+id="result"
+class="result"
+><div
+id="statusBox"
+class="status-box"
+><div
+id="statusIcon"
+class="status-icon"
+></div><div
+id="statusTitle"
+class="status-title"
+></div></div><div
+id="info"
+class="info"
+></div></div><div class="back"><a href="student-dataform.html">
 ← Return to Student Dataform
-</a>
-</div></div><footer class="footer">
-CPE '26 • COMPUTER ENGINEERING • NYSC MOBILIZATION
+</a></div></div><footer class="footer">CPE '26 • COMPUTER ENGINEERING • STUDENT IT / SIWES
+
 </footer></div><script>
 
 const GOOGLE_SCRIPT_URL =
 "https://script.google.com/macros/s/AKfycbyu5ZMcfGyWk7tXGthr6J9B88HV9G3jGGr3hPCtty4grDXQ86BiYETLXDcJ3JZxUOGg/exec";
 
 
-async function checkStatus(){
+const input=
+document.getElementById("submissionID");
 
-const id=document
-.getElementById("submissionID")
-.value
-.trim();
+const button=
+document.getElementById("checkButton");
 
-if(!id){
-showError("Please enter your Submission ID.");
-return;
+const errorBox=
+document.getElementById("error");
+
+const result=
+document.getElementById("result");
+
+
+/* Allow ENTER key */
+
+input.addEventListener(
+"keydown",
+function(e){
+
+if(e.key==="Enter"){
+checkStatus();
 }
 
-const button=document.getElementById("checkButton");
+});
+
+
+async function checkStatus(){
+
+const id=input.value.trim();
+
+if(!id){
+
+showError(
+"Please enter your Submission ID."
+);
+
+input.focus();
+
+return;
+
+}
+
 
 button.disabled=true;
 button.textContent="CHECKING...";
 
-hideError();
+errorBox.style.display="none";
+result.style.display="none";
 
-document.getElementById("result").style.display="none";
 
 try{
 
-/* NEW IT DATAFORM */
-let response=await fetch(
+/*
+IMPORTANT:
+New IT DATAFORM route
+*/
+
+const url=
 GOOGLE_SCRIPT_URL+
 "?action=itStatus&id="+
-encodeURIComponent(id)
+encodeURIComponent(id);
+
+
+const response=
+await fetch(url);
+
+
+if(!response.ok){
+
+throw new Error(
+"Unable to connect to the status server."
 );
-
-let data=await response.json();
-
-
-/* Try submissionID parameter too */
-if(!data.success){
-
-response=await fetch(
-GOOGLE_SCRIPT_URL+
-"?action=itStatus&submissionID="+
-encodeURIComponent(id)
-);
-
-data=await response.json();
 
 }
 
 
-/* Old NYSC IDs still supported */
-if(
-!data.success &&
-id.toUpperCase().startsWith("NYSC-")
-){
-
-response=await fetch(
-GOOGLE_SCRIPT_URL+
-"?action=status&id="+
-encodeURIComponent(id)
-);
-
-data=await response.json();
-
-}
+const data=
+await response.json();
 
 
 if(!data.success){
 
 throw new Error(
-data.message||"Submission not found"
+data.message||
+"Submission ID not found."
 );
 
 }
 
+
 showResult(data);
+
 
 }catch(error){
 
 showError(
 error.message||
-"Unable to check status."
+"Unable to check submission status."
 );
 
 }finally{
 
 button.disabled=false;
 button.textContent=
-"CHECK MOBILIZATION STATUS →";
+"CHECK STATUS →";
 
 }
 
@@ -364,39 +428,55 @@ button.textContent=
 
 function showResult(data){
 
-const result=document.getElementById("result");
-const box=document.getElementById("statusBox");
-const icon=document.getElementById("statusIcon");
-const title=document.getElementById("statusTitle");
-const info=document.getElementById("info");
+const status=
+String(data.status||"Pending")
+.toLowerCase();
 
-result.style.display="block";
+
+const box=
+document.getElementById("statusBox");
+
+const icon=
+document.getElementById("statusIcon");
+
+const title=
+document.getElementById("statusTitle");
+
+const info=
+document.getElementById("info");
+
 
 box.className="status-box";
-
-const status=
-String(data.status||"Pending").toLowerCase();
 
 
 if(status==="approved"){
 
 box.classList.add("approved");
+
 icon.textContent="✓";
-title.textContent="MOBILIZATION APPROVED";
+
+title.textContent=
+"SUBMISSION APPROVED";
 
 }
 else if(status==="rejected"){
 
 box.classList.add("rejected");
+
 icon.textContent="×";
-title.textContent="CORRECTION REQUIRED";
+
+title.textContent=
+"CORRECTION REQUIRED";
 
 }
 else{
 
 box.classList.add("pending");
+
 icon.textContent="⌛";
-title.textContent="PENDING REVIEW";
+
+title.textContent=
+"SUBMISSION PENDING";
 
 }
 
@@ -408,20 +488,22 @@ escapeHTML(data.submissionID||"")+
 escapeHTML(data.status||"Pending");
 
 
-if(data.reviewDate){
-
-html+=
-"<br><strong>Reviewed:</strong> "+
-escapeHTML(formatDate(data.reviewDate));
-
-}
-
-
 if(data.reviewedBy){
 
 html+=
 "<br><strong>Reviewed By:</strong> "+
 escapeHTML(data.reviewedBy);
+
+}
+
+
+if(data.reviewDate){
+
+html+=
+"<br><strong>Review Date:</strong> "+
+escapeHTML(
+formatDate(data.reviewDate)
+);
 
 }
 
@@ -432,13 +514,15 @@ data.rejectionReason
 ){
 
 const reasons=
-String(data.rejectionReason).split(";");
+String(data.rejectionReason)
+.split(";");
 
 html+=
 '<div class="reasons">'+
 "<strong>Issues identified:</strong>";
 
-reasons.forEach(function(reason){
+reasons.forEach(
+function(reason){
 
 if(reason.trim()){
 
@@ -460,7 +544,7 @@ if(data.adminComment){
 
 html+=
 '<div class="comment">'+
-"<strong>Admin comment:</strong><br>"+
+"<strong>Admin Comment</strong><br>"+
 escapeHTML(data.adminComment)+
 "</div>";
 
@@ -469,54 +553,49 @@ escapeHTML(data.adminComment)+
 
 info.innerHTML=html;
 
-}
-
-
-function formatDate(value){
-
-const d=new Date(value);
-
-if(isNaN(d.getTime()))
-return value;
-
-return d.toLocaleString();
+result.style.display="block";
 
 }
 
 
 function showError(message){
 
-const error=document.getElementById("error");
+errorBox.textContent=message;
 
-error.textContent=message;
-error.style.display="block";
+errorBox.style.display="block";
 
 }
 
 
-function hideError(){
+function formatDate(value){
 
-const error=document.getElementById("error");
+const date=
+new Date(value);
 
-error.textContent="";
-error.style.display="none";
+if(isNaN(date.getTime()))
+return value;
+
+return date.toLocaleString();
 
 }
 
 
 function escapeHTML(value){
 
-return String(value||"").replace(
+return String(value||"")
+.replace(
 /[&<>"']/g,
-function(character){
+function(char){
 
 return{
+
 "&":"&amp;",
 "<":"&lt;",
 ">":"&gt;",
 '"':"&quot;",
 "'":"&#039;"
-}[character];
+
+}[char];
 
 });
 
